@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import toast from 'react-hot-toast'
+import { toast } from 'sonner'
 
 export default function ChangePasswordPage() {
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
+  const [showCurrent, setShowCurrent] = useState(false)
+  const [showNew, setShowNew] = useState(false)
   const [loading, setLoading] = useState(false)
   const [checking, setChecking] = useState(true)
   const router = useRouter()
@@ -17,20 +20,29 @@ export default function ChangePasswordPage() {
   useEffect(() => {
     const supabase = createClient()
     supabase.auth.getUser().then(({ data: { user } }) => {
-      if (!user) router.replace('/login')
-      else setChecking(false)
+      if (!user) {
+        router.replace('/login')
+      } else {
+        setEmail(user.email ?? '')
+        setChecking(false)
+      }
     })
   }, [router])
 
   const handleChange = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (password.length < 8) {
-      toast.error('Password must be at least 8 characters.')
+    if (newPassword.length < 8) {
+      toast.error('New password must be at least 8 characters.')
       return
     }
 
-    if (password !== confirmPassword) {
+    if (!/\d/.test(newPassword)) {
+      toast.error('New password must contain at least one number.')
+      return
+    }
+
+    if (newPassword !== confirmPassword) {
       toast.error('Passwords do not match.')
       return
     }
@@ -38,7 +50,20 @@ export default function ChangePasswordPage() {
     setLoading(true)
 
     const supabase = createClient()
-    const { error } = await supabase.auth.updateUser({ password })
+
+    // Verify current password by re-authenticating
+    const { error: verifyError } = await supabase.auth.signInWithPassword({
+      email,
+      password: currentPassword,
+    })
+
+    if (verifyError) {
+      toast.error('Current password is incorrect.')
+      setLoading(false)
+      return
+    }
+
+    const { error } = await supabase.auth.updateUser({ password: newPassword })
 
     if (error) {
       toast.error(error.message)
@@ -60,38 +85,78 @@ export default function ChangePasswordPage() {
       <p className="text-gray-400 text-sm mb-8">Update the password for your account.</p>
 
       <form onSubmit={handleChange} className="space-y-5">
+
+        {/* Current password */}
+        <div>
+          <div className="flex justify-between items-center mb-1.5">
+            <label className="block text-xs text-gray-500 uppercase tracking-wide">
+              Current password
+            </label>
+            <Link href="/forgot-password" className="text-xs text-blue hover:underline">
+              Forgot password?
+            </Link>
+          </div>
+          <div className="relative">
+            <input
+              type={showCurrent ? 'text' : 'password'}
+              value={currentPassword}
+              onChange={e => setCurrentPassword(e.target.value)}
+              placeholder="Your current password"
+              required
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 text-sm text-navy placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition"
+            />
+            <button
+              type="button"
+              onClick={() => setShowCurrent(p => !p)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600"
+            >
+              {showCurrent ? 'Hide' : 'Show'}
+            </button>
+          </div>
+        </div>
+
+        {/* New password */}
         <div>
           <label className="block text-xs text-gray-500 mb-1.5 uppercase tracking-wide">
             New password
           </label>
           <div className="relative">
             <input
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              type={showNew ? 'text' : 'password'}
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
               placeholder="Min. 8 characters"
               required
               className="w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 text-sm text-navy placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition"
             />
             <button
               type="button"
-              onClick={() => setShowPassword(p => !p)}
+              onClick={() => setShowNew(p => !p)}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600"
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showNew ? 'Hide' : 'Show'}
             </button>
+          </div>
+          <div className="flex gap-3 mt-2">
+            <span className={`text-xs ${newPassword.length >= 8 ? 'text-green' : 'text-gray-300'}`}>
+              ✓ 8+ characters
+            </span>
+            <span className={`text-xs ${/\d/.test(newPassword) ? 'text-green' : 'text-gray-300'}`}>
+              ✓ one number
+            </span>
           </div>
         </div>
 
+        {/* Confirm new password */}
         <div>
           <label className="block text-xs text-gray-500 mb-1.5 uppercase tracking-wide">
             Confirm new password
           </label>
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={showNew ? 'text' : 'password'}
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
-            placeholder="Repeat your password"
+            placeholder="Repeat your new password"
             required
             className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-navy placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition"
           />

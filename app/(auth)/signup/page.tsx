@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import toast from 'react-hot-toast'
+import { toast } from 'sonner'
 
 export default function SignupPage() {
   const [userType, setUserType] = useState<'student' | 'parent'>('student')

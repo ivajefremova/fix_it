@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Encode_Sans_Expanded } from "next/font/google"
-import { Toaster } from "react-hot-toast"
+import { Toaster } from "sonner"
+import NavbarWrapper from "@/components/layout/NavbarWrapper"
 import "./globals.css"
 
 const encodeSans = Encode_Sans_Expanded({
@@ -22,14 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={encodeSans.variable}>
       <body className="min-h-screen font-sans antialiased">
+        <NavbarWrapper />
         {children}
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            duration: 4000,
-            style: { fontFamily: "inherit", fontSize: "14px" },
-          }}
-        />
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   )
