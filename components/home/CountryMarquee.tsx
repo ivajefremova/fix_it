@@ -4,14 +4,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 const countries = [
-  { slug: 'spain',          name: 'Spain',          flag: '🇪🇸' },
-  { slug: 'austria',        name: 'Austria',        flag: '🇦🇹' },
-  { slug: 'slovenia',       name: 'Slovenia',       flag: '🇸🇮' },
-  { slug: 'hungary',        name: 'Hungary',        flag: '🇭🇺' },
-  { slug: 'netherlands',    name: 'Netherlands',    flag: '🇳🇱' },
-  { slug: 'united-kingdom', name: 'United Kingdom', flag: '🇬🇧' },
-  { slug: 'germany',        name: 'Germany',        flag: '🇩🇪' },
-  { slug: 'italy',          name: 'Italy',          flag: '🇮🇹' },
+  { slug: 'spain',          name: 'Spain' },
+  { slug: 'austria',        name: 'Austria' },
+  { slug: 'slovenia',       name: 'Slovenia' },
+  { slug: 'hungary',        name: 'Hungary' },
+  { slug: 'netherlands',    name: 'Netherlands' },
+  { slug: 'united-kingdom', name: 'United Kingdom' },
+  { slug: 'germany',        name: 'Germany' },
+  { slug: 'italy',          name: 'Italy' },
 ]
 
 const items = [...countries, ...countries]
@@ -68,7 +68,16 @@ export default function CountryMarquee() {
               el.style.boxShadow = '-2px -2px 4px rgba(0,0,0,0.04), 2px 2px 6px rgba(0,0,0,0.04)'
             }}
           >
-            <span style={{ fontSize: '2.25rem', lineHeight: 1 }}>{c.flag}</span>
+            <div
+              style={{
+                width: '36px', height: '36px', borderRadius: '50%',
+                background: '#f0f2f6', display: 'flex', alignItems: 'center',
+                justifyContent: 'center', fontSize: '0.65rem', color: 'rgba(24,24,49,0.4)',
+                fontWeight: 400, letterSpacing: '0.03em',
+              }}
+            >
+              {c.name.substring(0, 2).toUpperCase()}
+            </div>
             <p style={{ fontSize: '0.875rem', color: '#181831', fontWeight: 400, margin: 0 }}>{c.name}</p>
           </Link>
         ))}

@@ -8,7 +8,7 @@ import CountryMarquee from '@/components/home/CountryMarquee'
 const quizQuestions = [
   { text: 'What field do I want to study?',  top: '5%',  left: '215px', delay: '0s'   },
   { text: 'Do I qualify for scholarships?',  top: '28%', left: '210px', delay: '1.1s' },
-  { text: 'Which language suits me?',        top: '52%', left: '218px', delay: '2.1s' },
+  { text: 'Could I get accepted?',        top: '52%', left: '218px', delay: '2.1s' },
   { text: 'What is my budget range?',        top: '76%', left: '213px', delay: '0.6s' },
 ]
 
@@ -27,7 +27,7 @@ export default function HomePage() {
             className="absolute inset-0 pointer-events-none"
             style={{
               backgroundImage: 'url(/images/Group-11-1.png)',
-              backgroundPosition: '75% center',
+              backgroundPosition: '85% center',
               backgroundRepeat: 'no-repeat',
               backgroundSize: '46% auto',
               animation: 'slideInRight 1.1s cubic-bezier(0.22,1,0.36,1) 0.6s both',
@@ -42,11 +42,11 @@ export default function HomePage() {
               style={{ animation: 'fadeInUp 0.7s ease 0.1s both' }}
             >
               <blockquote
-                className="py-5 px-6 text-sm sm:text-base leading-snug w-full lg:w-[52%]"
+                className="py-5 px-6 text-sm sm:text-base leading-snug w-full lg:w-[70%]"
                 style={{
-                  color: '#1d4e89',
+                  color: '#181831',
                   background: 'linear-gradient(rgba(29,78,137,0.08), rgba(29,78,137,0.08))',
-                  borderRight: '8px solid #181831',
+                  borderRight: '0px solid #181831',
                   borderRadius: '20px 0 0 20px',
                   fontWeight: 500,
                   margin: 0,
@@ -63,7 +63,7 @@ export default function HomePage() {
             >
               <h1
                 style={{
-                  color: '#0d4e89',
+                  color: '#181831',
                   fontSize: 'clamp(28px, 4vw, 48px)',
                   fontWeight: 300,
                   lineHeight: 1.15,
@@ -71,8 +71,8 @@ export default function HomePage() {
                 }}
               >
                 Education abroad<br />
-                <span style={{ color: '#51e74c', fontSize: 'clamp(18px, 2.5vw, 28px)', fontWeight: 300 }}>
-                  Fix your future - Fix it.
+                <span style={{ color: '#181831', fontSize: 'clamp(18px, 2.5vw, 28px)', fontWeight: 300 }}>
+                  Fix your future - fix it<span style={{ color: '#51e74c' }}>.</span>
                 </span>
               </h1>
             </div>
@@ -85,9 +85,9 @@ export default function HomePage() {
               <blockquote
                 className="py-5 px-6 text-sm leading-relaxed"
                 style={{
-                  color: '#1d4e89',
+                  color: '#181831',
                   background: 'linear-gradient(rgba(29,78,137,0.06), rgba(29,78,137,0.06))',
-                  borderLeft: '8px solid #181831',
+                  borderLeft: '0px solid #181831',
                   borderRadius: '0 20px 20px 0',
                   fontWeight: 300,
                   margin: 0,
