@@ -58,7 +58,7 @@ function LockedCard({ title, description }: { title: string; description: string
         </p>
         <Link
           href="/services"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm transition hover:opacity-90"
+          className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
           style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
         >
           View packages

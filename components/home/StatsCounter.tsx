@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 
 const stats = [
   { value: 8,    suffix: '',   label: 'Countries covered' },
-  { value: 1000, suffix: '+',  label: 'Universities indexed' },
+  { value: 100,  suffix: '+',  label: 'Universities indexed' },
   { value: 100,  suffix: '+',  label: 'Scholarships tracked' },
 ]
 
@@ -50,7 +50,7 @@ export default function StatsCounter() {
           className="py-8 px-8"
           style={{ borderBottom: i < stats.length - 1 ? '1px solid #eef0f3' : 'none' }}
         >
-          <p className="text-5xl text-navy mb-1" style={{ fontWeight: 100, letterSpacing: '-0.02em' }}>
+          <p className="text-3xl text-navy mb-1" style={{ fontWeight: 100, letterSpacing: '-0.02em' }}>
             <Counter target={s.value} suffix={s.suffix} />
           </p>
           <p className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>

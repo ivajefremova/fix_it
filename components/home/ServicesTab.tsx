@@ -93,11 +93,11 @@ export default function ServicesTab() {
         <div className="mt-8">
           <Link
             href={svc.href}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm transition hover:opacity-90"
-            style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
+            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
+            style={{ background: '#51e74c', color: '#181831' }}
           >
             {svc.cta}
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </Link>
