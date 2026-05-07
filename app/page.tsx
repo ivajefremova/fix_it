@@ -4,6 +4,7 @@ import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import StatsCounter from '@/components/home/StatsCounter'
 import ServicesTab from '@/components/home/ServicesTab'
 import CountryMarquee from '@/components/home/CountryMarquee'
+import HeroSection from '@/components/home/HeroSection'
 
 const quizQuestions = [
   { text: 'What field do I want to study?',  top: '5%',  left: '215px', delay: '0s'   },
@@ -17,89 +18,7 @@ export default function HomePage() {
     <main style={{ background: '#f0f2f5' }}>
 
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white">
-        <div
-          className="max-w-[90%] mx-auto relative"
-          style={{ minHeight: '520px' }}
-        >
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: 'url(/images/Group-11-1.png)',
-              backgroundPosition: '85% center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '46% auto',
-              animation: 'slideInRight 1.1s cubic-bezier(0.22,1,0.36,1) 0.6s both',
-            }}
-          />
-          <div className="relative z-10 py-16 sm:py-24">
-            <div
-              className="flex justify-end mb-8"
-              style={{ animation: 'fadeInUp 0.7s ease 0.1s both' }}
-            >
-              <blockquote
-                className="py-5 px-6 text-sm sm:text-base leading-snug w-[70%] rounded-[20px] lg:rounded-tr-none lg:rounded-br-none"
-                style={{
-                  color: '#181831',
-                  background: 'rgba(255,255,255,0.18)',
-                  border: '1px solid rgba(255,255,255,0.55)',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-                  fontWeight: 500,
-                  margin: 0,
-                }}
-              >
-                Data-backed, alumni curated guides designed to take you from applicant to student.
-              </blockquote>
-            </div>
-            <div
-              className="mb-6 w-full lg:w-[52%]"
-              style={{ animation: 'fadeInUp 0.7s ease 0.25s both' }}
-            >
-              <h1
-                style={{
-                  color: '#181831',
-                  fontSize: 'clamp(28px, 4vw, 48px)',
-                  fontWeight: 300,
-                  lineHeight: 1.15,
-                  margin: 0,
-                }}
-              >
-                Education abroad<br />
-                <span style={{ color: '#181831', fontSize: 'clamp(18px, 2.5vw, 28px)', fontWeight: 300 }}>
-                  Fix your future - fix it<span style={{ color: '#51e74c' }}>.</span>
-                </span>
-              </h1>
-            </div>
-            <div
-              className="w-[52%] mb-8"
-              style={{ animation: 'fadeInUp 0.7s ease 0.4s both' }}
-            >
-              <blockquote
-                className="py-5 px-6 text-sm leading-relaxed rounded-[20px] lg:rounded-tl-none lg:rounded-bl-none"
-                style={{
-                  color: '#181831',
-                  background: 'rgba(255,255,255,0.18)',
-                  border: '1px solid rgba(255,255,255,0.55)',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-                  fontWeight: 300,
-                  margin: 0,
-                }}
-              >
-                Access curated, step-by-step guides for scholarships, university admissions, and relocation in 8 countries—all in one secure platform.
-              </blockquote>
-            </div>
-            <div style={{ animation: 'fadeInUp 0.7s ease 0.55s both' }}>
-              <Link
-                href="/signup"
-                className="inline-flex items-center justify-center px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
-                style={{ background: '#51e74c', color: '#181831' }}
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Divider */}
       <div style={{ height: '1px', background: '#e4ebf3' }} />
