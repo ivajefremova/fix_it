@@ -80,23 +80,23 @@ export default function HeroSection() {
             </blockquote>
           </div>
 
-          {/* Cycling phrase + heading */}
+          {/* Cycling phrase — large, no static heading */}
           <div
             className="mb-6 w-full lg:w-[52%]"
             style={{ animation: 'fadeInUp 0.7s ease 0.25s both' }}
           >
-            {/* Animated phrase */}
-            <div style={{ minHeight: '2.2rem', marginBottom: '0.6rem', overflow: 'hidden' }}>
+            <div style={{ height: '10rem', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
               <p
                 style={{
                   margin: 0,
-                  fontSize: 'clamp(16px, 2vw, 26px)',
+                  fontSize: 'clamp(36px, 5.5vw, 68px)',
                   fontWeight: 200,
                   color: '#181831',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.02em',
                   opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(-6px)',
+                  transform: visible ? 'translateY(0)' : 'translateY(-8px)',
                   transition: 'opacity 0.3s ease, transform 0.3s ease',
-                  letterSpacing: '-0.01em',
                 }}
               >
                 {done
@@ -105,22 +105,6 @@ export default function HeroSection() {
                 }
               </p>
             </div>
-
-            {/* Static heading */}
-            <h1
-              style={{
-                color: '#181831',
-                fontSize: 'clamp(28px, 4vw, 48px)',
-                fontWeight: 300,
-                lineHeight: 1.15,
-                margin: 0,
-              }}
-            >
-              Education abroad<br />
-              <span style={{ color: '#181831', fontSize: 'clamp(18px, 2.5vw, 28px)', fontWeight: 300 }}>
-                Fix your future - fix it<span style={{ color: '#51e74c' }}>.</span>
-              </span>
-            </h1>
           </div>
 
           {/* Description blockquote */}
