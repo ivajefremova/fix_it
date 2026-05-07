@@ -53,20 +53,13 @@ export default function HeroSection() {
         preserveAspectRatio="none"
         style={{ top: 0, left: 0, width: '100%', height: '100%', zIndex: 20, overflow: 'visible' }}
       >
-        <defs>
-          <marker id="heroArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-            <path d="M0,0.5 L7.5,3 L0,5.5 Z" fill="#181831" />
-          </marker>
-        </defs>
-
-        {/* Two swirls: first above fix it. text, second in map area — clean 45° arrival at X */}
+        {/* Two swirls: first above fix it. text, second in map area */}
         <path
           d="M 8 8 C 120 60, 250 90, 280 130 C 310 170, 220 185, 290 185 C 360 185, 490 210, 555 262 C 630 315, 555 365, 645 362 C 700 362, 748 312, 775 338"
           fill="none"
           stroke="#181831"
           strokeWidth="2"
           strokeLinecap="round"
-          markerEnd="url(#heroArrow)"
           style={{
             strokeDasharray: 1250,
             strokeDashoffset: 1250,
