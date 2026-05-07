@@ -67,12 +67,12 @@ export default function Navbar() {
     : user?.email?.[0].toUpperCase() ?? '?'
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <nav className="sticky top-0 z-50" style={{ background: '#181831', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+      <div className="max-w-[90%] mx-auto h-16 flex items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
-          <span className="text-navy font-light text-xl tracking-wide">
+          <span className="font-light text-xl tracking-wide" style={{ color: '#fff' }}>
             fix it<span style={{ color: '#51e74c' }}>.</span>
           </span>
         </Link>
@@ -84,8 +84,9 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`text-sm transition-colors ${
-                pathname === link.href ? 'text-navy' : 'text-gray-400 hover:text-navy'
+                pathname === link.href ? 'text-white' : 'hover:text-white'
               }`}
+              style={{ color: pathname === link.href ? '#fff' : 'rgba(255,255,255,0.5)' }}
             >
               {link.label}
             </Link>
@@ -99,12 +100,14 @@ export default function Navbar() {
             <div ref={dropdownRef} className="relative">
               <button
                 onClick={() => setDropdownOpen(p => !p)}
-                className="hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5 hover:bg-gray-50 transition"
+                className="hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5 transition"
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
               >
                 <div className="w-8 h-8 rounded-full bg-navy flex items-center justify-center text-white text-xs flex-shrink-0">
                   {initials}
                 </div>
-                <span className="text-sm text-navy max-w-[120px] truncate">
+                <span className="text-sm max-w-[120px] truncate" style={{ color: 'rgba(255,255,255,0.85)' }}>
                   {fullName || user.email}
                 </span>
                 <svg className="w-3 h-3 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -132,7 +135,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-2">
-              <Link href="/login" className="text-sm text-gray-500 hover:text-navy transition px-3 py-2">
+              <Link href="/login" className="text-sm transition px-3 py-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 Log in
               </Link>
               <Link href="/signup"
@@ -144,7 +147,7 @@ export default function Navbar() {
 
           {/* Hamburger — mobile only */}
           <button onClick={() => setMobileMenuOpen(p => !p)}
-            className="md:hidden p-2 text-navy">
+            className="md:hidden p-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
             {mobileMenuOpen ? (
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -160,10 +163,10 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white px-4 pb-4 pt-2">
+        <div className="md:hidden px-4 pb-4 pt-2" style={{ background: '#181831', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
           {navLinks.map(link => (
             <Link key={link.href} href={link.href}
-              className="block py-3 text-sm text-navy border-b border-gray-50 last:border-0">
+              className="block py-3 text-sm" style={{ color: 'rgba(255,255,255,0.7)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               {link.label}
             </Link>
           ))}
@@ -174,25 +177,25 @@ export default function Navbar() {
                 <div className="w-7 h-7 rounded-full bg-navy flex items-center justify-center text-white text-xs flex-shrink-0">
                   {initials}
                 </div>
-                <span className="text-sm text-navy truncate">{fullName || user.email}</span>
+                <span className="text-sm truncate" style={{ color: 'rgba(255,255,255,0.7)' }}>{fullName || user.email}</span>
               </div>
               <Link href="/profile" onClick={() => setMobileMenuOpen(false)}
-                className="block py-2.5 text-sm text-navy border-t border-gray-50">
+                className="block py-2.5 text-sm" style={{ color: 'rgba(255,255,255,0.7)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                 My Profile
               </Link>
               <Link href="/change-password" onClick={() => setMobileMenuOpen(false)}
-                className="block py-2.5 text-sm text-navy border-t border-gray-50">
+                className="block py-2.5 text-sm" style={{ color: 'rgba(255,255,255,0.7)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                 Change Password
               </Link>
               <button onClick={() => { setMobileMenuOpen(false); handleSignOut() }}
-                className="block w-full text-left py-2.5 text-sm text-red-400 border-t border-gray-50">
+                className="block w-full text-left py-2.5 text-sm text-red-400" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                 Sign out
               </button>
             </div>
           ) : (
             <div className="flex gap-2 pt-3">
               <Link href="/login"
-                className="flex-1 text-center text-sm border border-gray-200 text-navy py-2.5 rounded-xl">
+                className="flex-1 text-center text-sm py-2.5 rounded-xl" style={{ border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.7)' }}>
                 Log in
               </Link>
               <Link href="/signup"
