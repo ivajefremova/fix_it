@@ -1,17 +1,18 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const countries = [
-  { slug: 'spain',          name: 'Spain' },
-  { slug: 'austria',        name: 'Austria' },
-  { slug: 'slovenia',       name: 'Slovenia' },
-  { slug: 'hungary',        name: 'Hungary' },
-  { slug: 'netherlands',    name: 'Netherlands' },
-  { slug: 'united-kingdom', name: 'United Kingdom' },
-  { slug: 'germany',        name: 'Germany' },
-  { slug: 'italy',          name: 'Italy' },
+  { slug: 'spain',          name: 'Spain',           img: '/images/countries/spain.png' },
+  { slug: 'austria',        name: 'Austria',         img: '/images/countries/austria.png' },
+  { slug: 'slovenia',       name: 'Slovenia',        img: '/images/countries/slovenia.png' },
+  { slug: 'hungary',        name: 'Hungary',         img: '/images/countries/hungary.png' },
+  { slug: 'netherlands',    name: 'Netherlands',     img: '/images/countries/netherlands.png' },
+  { slug: 'united-kingdom', name: 'United Kingdom',  img: '/images/countries/uk.png' },
+  { slug: 'germany',        name: 'Germany',         img: '/images/countries/germany.png' },
+  { slug: 'italy',          name: 'Italy',           img: '/images/countries/italy.png' },
 ]
 
 const items = [...countries, ...countries]
@@ -47,7 +48,7 @@ export default function CountryMarquee() {
               justifyContent: 'center',
               gap: '10px',
               margin: '0 10px',
-              padding: '28px 24px',
+              padding: '20px 24px',
               width: '140px',
               height: '130px',
               borderRadius: '16px',
@@ -68,17 +69,14 @@ export default function CountryMarquee() {
               el.style.boxShadow = '-2px -2px 4px rgba(0,0,0,0.04), 2px 2px 6px rgba(0,0,0,0.04)'
             }}
           >
-            <div
-              style={{
-                width: '36px', height: '36px', borderRadius: '50%',
-                background: '#f0f2f6', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', fontSize: '0.65rem', color: 'rgba(24,24,49,0.4)',
-                fontWeight: 400, letterSpacing: '0.03em',
-              }}
-            >
-              {c.name.substring(0, 2).toUpperCase()}
-            </div>
-            <p style={{ fontSize: '0.875rem', color: '#181831', fontWeight: 400, margin: 0 }}>{c.name}</p>
+            <Image
+              src={c.img}
+              alt={c.name}
+              width={48}
+              height={48}
+              style={{ objectFit: 'contain', width: '48px', height: '48px' }}
+            />
+            <p style={{ fontSize: '0.75rem', color: '#181831', fontWeight: 400, margin: 0, textAlign: 'center' }}>{c.name}</p>
           </Link>
         ))}
       </div>
