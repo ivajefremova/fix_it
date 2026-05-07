@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Encode_Sans_Expanded } from "next/font/google"
 import { Toaster } from "sonner"
 import NavbarWrapper from "@/components/layout/NavbarWrapper"
+import FooterWrapper from "@/components/layout/FooterWrapper"
 import "./globals.css"
 
 const encodeSans = Encode_Sans_Expanded({
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className="min-h-screen font-sans antialiased">
         <NavbarWrapper />
         {children}
+        <FooterWrapper />
         <Toaster richColors position="top-center" />
       </body>
     </html>

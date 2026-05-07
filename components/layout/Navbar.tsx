@@ -71,8 +71,10 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="text-navy font-light text-xl tracking-wide flex-shrink-0">
-          fix it<span style={{ color: '#51e74c' }}>.</span>
+        <Link href="/" className="flex-shrink-0">
+          <span className="text-navy font-light text-xl tracking-wide">
+            fix it<span style={{ color: '#51e74c' }}>.</span>
+          </span>
         </Link>
 
         {/* Desktop nav */}
