@@ -3,6 +3,7 @@ import Link from 'next/link'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import CountriesInteractive from '@/components/countries/CountriesInteractive'
 import CountryPackageTabs from '@/components/countries/CountryPackageTabs'
+import DocumentsPackageTabs from '@/components/countries/DocumentsPackageTabs'
 import PhotoGallery from '@/components/countries/PhotoGallery'
 
 export const metadata = {
@@ -36,7 +37,7 @@ export default async function CountriesPage() {
               className="mb-3"
               style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}
             >
-              Uninformed about a country?
+              Want to study abroad?
             </h2>
             <p className="text-sm mb-10 max-w-lg leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
               Pick a country and see exactly what you get — a paid, alumni-compiled guide covering everything you need to apply, get funded, and move there.
@@ -44,6 +45,29 @@ export default async function CountriesPage() {
           </RevealOnScroll>
           <RevealOnScroll delay={80}>
             <CountryPackageTabs countries={list} />
+          </RevealOnScroll>
+        </div>
+      </section>
+
+      <div style={{ height: '1px', background: '#e4ebf3' }} />
+
+      {/* ─── DOCUMENTS PACKAGE TABS ───────────────────────────────────────── */}
+      <section className="py-16 sm:py-24">
+        <div className="max-w-[90%] mx-auto">
+          <RevealOnScroll>
+            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Moving abroad</p>
+            <h2
+              className="mb-3"
+              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}
+            >
+              Need help moving there?
+            </h2>
+            <p className="text-sm mb-10 max-w-lg leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+              Visas, documents, bank accounts, arrival checklists — our Documents & Relocation package walks you through every step of actually moving abroad.
+            </p>
+          </RevealOnScroll>
+          <RevealOnScroll delay={80}>
+            <DocumentsPackageTabs countries={list} />
           </RevealOnScroll>
         </div>
       </section>

@@ -62,7 +62,7 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
               className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-normal transition-all hover:opacity-90"
               style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
             >
-              View {c.name} guide
+              Why {c.name}
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>

@@ -5,13 +5,8 @@ import StatsCounter from '@/components/home/StatsCounter'
 import ServicesTab from '@/components/home/ServicesTab'
 import CountryMarquee from '@/components/home/CountryMarquee'
 import HeroSection from '@/components/home/HeroSection'
+import HomepageSearch from '@/components/home/HomepageSearch'
 
-const quizQuestions = [
-  { text: 'What field do I want to study?',  top: '5%',  left: '215px', delay: '0s'   },
-  { text: 'Do I qualify for scholarships?',  top: '28%', left: '210px', delay: '1.1s' },
-  { text: 'Could I get accepted?',           top: '52%', left: '218px', delay: '2.1s' },
-  { text: 'What is my budget range?',        top: '76%', left: '213px', delay: '0.6s' },
-]
 
 export default function HomePage() {
   return (
@@ -35,6 +30,9 @@ export default function HomePage() {
         </div>
         <CountryMarquee />
       </section>
+
+      {/* ─── SEARCH ───────────────────────────────────────────────────────── */}
+      <HomepageSearch />
 
       {/* Divider */}
       <div style={{ height: '1px', background: '#e4ebf3' }} />
@@ -96,71 +94,44 @@ export default function HomePage() {
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
       {/* ─── QUIZ ─────────────────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 relative overflow-hidden bg-white">
-        {/* Subtle dot grid */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-        <div className="relative max-w-[90%] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <RevealOnScroll direction="left">
-              <p className="text-xs uppercase tracking-widest mb-5" style={{ color: '#51e74c' }}>
-                Find your path
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-[90%] mx-auto">
+          <RevealOnScroll>
+            <div className="flex flex-col items-center text-center">
+              <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#51e74c' }}>
+                Fix your path
               </p>
               <h3
-                className="text-3xl sm:text-4xl mb-4"
-                style={{ color: '#181831', fontWeight: 300, lineHeight: 1.25 }}
+                className="mb-3 leading-tight"
+                style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(24px, 3.5vw, 42px)' }}
               >
-                Dont know where<br />to start?
+                Don&apos;t know where to start?
               </h3>
-              <div className="flex items-baseline gap-1.5 flex-wrap mb-8">
-                <span className="text-lg" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>Try our</span>
-                <span className="text-lg font-medium" style={{ color: '#51e74c' }}>quiz!</span>
-                <span className="text-lg" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>Find the right destination for you!</span>
-              </div>
+              <p className="text-sm mb-8 max-w-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                Answer 5 quick questions and we&apos;ll match you with the right country and universities for your goals.
+              </p>
+
+              <Image
+                src="/images/Slice-5.png"
+                alt="Find your path"
+                width={140}
+                height={180}
+                className="mb-8"
+                style={{ height: 'auto', opacity: 0.92 }}
+              />
+
               <Link
                 href="/quiz"
-                className="inline-flex items-center justify-center px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
+                className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
                 style={{ background: '#51e74c', color: '#181831' }}
               >
-                Quiz here!
+                Take the quiz
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
               </Link>
-            </RevealOnScroll>
-
-            <RevealOnScroll direction="right" className="flex justify-center">
-              <div className="relative" style={{ width: 'min(400px, 100%)', height: '280px' }}>
-                <Image
-                  src="/images/Slice-5.png"
-                  alt="Find your path"
-                  width={200}
-                  height={260}
-                  style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 10, height: 'auto' }}
-                />
-                {quizQuestions.map((q, i) => (
-                  <div
-                    key={i}
-                    className="absolute hidden lg:flex items-center gap-2 px-3 py-2 rounded-full text-xs whitespace-nowrap"
-                    style={{
-                      top: q.top,
-                      left: q.left,
-                      background: 'rgba(12,77,134,0.07)',
-                      border: '1px solid rgba(12,77,134,0.14)',
-                      color: '#1d4e89',
-                      animation: `float 3.5s ease-in-out ${q.delay} infinite`,
-                      zIndex: 20,
-                    }}
-                  >
-                    <span style={{ color: '#51e74c', fontSize: '8px' }}>●</span>
-                    {q.text}
-                  </div>
-                ))}
-              </div>
-            </RevealOnScroll>
-          </div>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
 
