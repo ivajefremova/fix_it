@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from 'react'
 
 const stats = [
-  { value: 8,    suffix: '',   label: 'Countries covered' },
+  { value: 10,   suffix: '',   label: 'Countries covered' },
   { value: 100,  suffix: '+',  label: 'Universities indexed' },
   { value: 100,  suffix: '+',  label: 'Scholarships tracked' },
 ]

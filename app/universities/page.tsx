@@ -16,7 +16,9 @@ export default async function UniversitiesPage({
   const sp = await searchParams
   const supabase = await createClient()
 
-  const [{ data: raw }, { data: scholarshipsRaw }] = await Promise.all([
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const [{ data: raw }, { data: scholarshipsRaw }, { data: favRows }] = await Promise.all([
     supabase
       .from('universities')
       .select('slug, name, country, country_slug, city, type, quick_summary, tuition_range, tags, ranking_summary, scholarships, subject_rankings')
@@ -25,7 +27,12 @@ export default async function UniversitiesPage({
       .from('scholarships')
       .select('id, country_slug, country, name, description, amount, eligibility, deadline, university_slugs')
       .order('name'),
+    user
+      ? supabase.from('favorites').select('item_slug').eq('user_id', user.id)
+      : Promise.resolve({ data: [] }),
   ])
+
+  const favouritedSlugs = new Set((favRows ?? []).map(f => f.item_slug))
 
   const universities = (raw ?? []).map(u => ({
     slug: u.slug,
@@ -85,6 +92,8 @@ export default async function UniversitiesPage({
             initialLevel={sp.level}
             initialType={sp.type}
             initialScholarship={sp.scholarship === 'true'}
+            favouritedSlugs={Array.from(favouritedSlugs)}
+            isLoggedIn={!!user}
           />
         </div>
       </section>

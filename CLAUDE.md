@@ -693,9 +693,9 @@ toast.error('Please log in first')
 
 ---
 
-## Countries Covered (8)
+## Countries Covered (10)
 
-Spain, Austria, Slovenia, Hungary, Netherlands, United Kingdom, Germany, Italy
+Spain, Austria, Slovenia, Hungary, Netherlands, United Kingdom, Germany, Italy, France, Greece
 
 Schema supports unlimited countries — just add rows.
 
@@ -763,7 +763,9 @@ insert into countries (slug, name, flag_emoji, tagline, overview_free, tuition_r
 ('austria', 'Austria', '🇦🇹', 'Central Europe quality, at Central Europe prices.', 'Austria offers excellent public universities in stunning cities.', '€700–€1,500/year', '€8,000–€15,000/year', '€800–€1,300/month'),
 ('hungary', 'Hungary', '🇭🇺', 'Affordable, international, and underrated.', 'Hungary offers affordable tuition with a growing international student community.', '€2,000–€6,000/year', '€4,000–€10,000/year', '€500–€900/month'),
 ('slovenia', 'Slovenia', '🇸🇮', 'Europe''s hidden gem for international students.', 'Slovenia offers low costs and high quality of life.', '€3,000–€6,000/year', '€4,000–€8,000/year', '€600–€1,000/month'),
-('uk', 'United Kingdom', '🇬🇧', 'World-class universities. Global recognition.', 'The UK is home to some of the world''s most prestigious universities.', '£9,000–£25,000/year', '£15,000–£40,000/year', '£900–£1,800/month');
+('uk', 'United Kingdom', '🇬🇧', 'World-class universities. Global recognition.', 'The UK is home to some of the world''s most prestigious universities.', '£9,000–£25,000/year', '£15,000–£40,000/year', '£900–£1,800/month'),
+('france', 'France', '🇫🇷', 'World-class education at European prices.', 'France is home to some of Europe''s most prestigious institutions, with public universities offering world-class education at surprisingly low tuition fees.', '€170–€3,770/year', '€5,000–€20,000/year', '€900–€1,500/month'),
+('greece', 'Greece', '🇬🇷', 'Ancient culture. Modern opportunities. Low costs.', 'Greece offers affordable education at established public universities, combined with one of Europe''s most affordable student lifestyles and a rich cultural experience.', '€1,500–€6,000/year', '€3,000–€8,000/year', '€600–€1,000/month');
 
 insert into universities (slug, name, country, country_slug, city, type, overview_free, quick_summary, tuition_range, tags, ranking_summary) values
 ('luiss', 'LUISS Guido Carli', 'Italy', 'italy', 'Rome', 'Private', 'Located in the heart of Rome, LUISS is one of Italy''s top private universities, known for economics, business, law, and political science.', '#1 private university in Italy', '€12,000–€17,000/year', ARRAY['business','economics','law','political science'], '#1 large private university in Italy (CENSIS 2025/2026)'),

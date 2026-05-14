@@ -5,7 +5,7 @@ import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 
 const GEO_URL = '/countries-110m.json'
 
-const FIXIT = new Set([724, 380, 276, 528, 40, 348, 705, 826])
+const FIXIT = new Set([724, 380, 276, 528, 40, 348, 705, 826, 250, 300])
 
 const W = 500
 const H = 520

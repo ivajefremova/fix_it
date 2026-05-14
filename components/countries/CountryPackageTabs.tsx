@@ -9,13 +9,13 @@ type Country = {
 }
 
 const included = [
-  'Full admission requirements for EU and non-EU students',
+  'Why this country — honest breakdown from alumni',
+  'Full admission guide for EU and non-EU students',
   'All English-taught programmes with direct application links',
-  'Named scholarships with amounts and eligibility criteria',
+  'Scholarship landscape — named grants with amounts and eligibility',
   'Student accommodation options and housing guide',
-  'City breakdown — where to live and why',
-  'Visa application steps and required documents',
-  'Moving guide, bank account setup, and arrival tips',
+  'City guide — where to study and why',
+  'Career prospects and post-study opportunities',
 ]
 
 export default function CountryPackageTabs({ countries }: { countries: Country[] }) {
@@ -85,7 +85,7 @@ export default function CountryPackageTabs({ countries }: { countries: Country[]
             </div>
 
             <Link
-              href="/services"
+              href={`/services/${c.slug}/country`}
               className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-normal transition-all hover:opacity-90"
               style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
             >

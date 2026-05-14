@@ -14,6 +14,8 @@ const SLUG_COORDS: Record<string, [number, number]> = {
   uk:          [-0.1,  51.5],
   germany:     [13.4,  52.5],
   italy:       [12.5,  41.9],
+  france:      [2.3,   46.2],
+  greece:      [21.8,  39.1],
 }
 
 type Props = {

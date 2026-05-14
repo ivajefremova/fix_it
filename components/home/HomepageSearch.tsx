@@ -12,6 +12,8 @@ const COUNTRIES = [
   { slug: 'hungary',        name: 'Hungary',        flag: '🇭🇺' },
   { slug: 'slovenia',       name: 'Slovenia',       flag: '🇸🇮' },
   { slug: 'united-kingdom', name: 'United Kingdom', flag: '🇬🇧' },
+  { slug: 'france',         name: 'France',         flag: '🇫🇷' },
+  { slug: 'greece',         name: 'Greece',         flag: '🇬🇷' },
 ]
 
 const FIELDS   = ['Business', 'Engineering', 'Medicine', 'Law', 'Sciences', 'Humanities']

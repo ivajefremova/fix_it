@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/countries', label: 'Countries' },
   { href: '/universities', label: 'Universities' },
+  { href: '/services/scholarship', label: 'Scholarships' },
   { href: '/services', label: 'Services' },
 ]
 

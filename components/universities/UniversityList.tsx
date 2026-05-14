@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import FavouriteButton from './FavouriteButton'
 
 type University = {
   slug: string
@@ -38,79 +39,81 @@ const FIELD_RANKING_KEY: Record<string, string> = {
 
 // ─── Full card — used in filtered grid view ────────────────────────────────────
 
-function UniversityCard({ u, rankingLabel }: { u: University; rankingLabel?: string }) {
+function UniversityCard({ u, rankingLabel, isFavourited, isLoggedIn }: { u: University; rankingLabel?: string; isFavourited: boolean; isLoggedIn: boolean }) {
   return (
-    <Link href={`/universities/${u.slug}`} className="block group">
-      <div
-        className="bg-white rounded-2xl p-6 h-full flex flex-col transition-all duration-300 group-hover:shadow-md"
-        style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)' }}
-      >
-        <div className="flex items-center justify-between gap-2 mb-4">
-          <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
-            {[u.city, u.country].filter(Boolean).join(' · ')}
-          </p>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            {rankingLabel && (
-              <span
-                className="text-xs px-2.5 py-1 rounded-full"
-                style={{ background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 300 }}
-              >
-                {rankingLabel}
-              </span>
-            )}
-            {u.type && (
-              <span
-                className="text-xs px-2.5 py-1 rounded-full"
-                style={{
-                  background: u.type === 'Public' ? 'rgba(12,77,134,0.07)' : 'rgba(81,231,76,0.1)',
-                  color: u.type === 'Public' ? '#0c4d86' : '#181831',
-                  fontWeight: 300,
-                }}
-              >
-                {u.type}
-              </span>
-            )}
+    <div className="relative group">
+      <Link href={`/universities/${u.slug}`} className="block">
+        <div
+          className="bg-white rounded-2xl p-6 h-full flex flex-col transition-all duration-300 group-hover:shadow-md"
+          style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)' }}
+        >
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+              {[u.city, u.country].filter(Boolean).join(' · ')}
+            </p>
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              {rankingLabel && (
+                <span
+                  className="text-xs px-2.5 py-1 rounded-full"
+                  style={{ background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 300 }}
+                >
+                  {rankingLabel}
+                </span>
+              )}
+              {u.type && (
+                <span
+                  className="text-xs px-2.5 py-1 rounded-full"
+                  style={{
+                    background: u.type === 'Public' ? 'rgba(12,77,134,0.07)' : 'rgba(81,231,76,0.1)',
+                    color: u.type === 'Public' ? '#0c4d86' : '#181831',
+                    fontWeight: 300,
+                  }}
+                >
+                  {u.type}
+                </span>
+              )}
+            </div>
+          </div>
+          <h2 className="text-base text-navy mb-1.5 leading-snug" style={{ fontWeight: 300 }}>{u.name}</h2>
+          {u.quick_summary && (
+            <p className="text-xs mb-4" style={{ color: '#0c4d86', fontWeight: 300 }}>{u.quick_summary}</p>
+          )}
+          {u.tags && u.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {u.tags.filter(t => !['english','bachelor','master','doctorate'].includes(t)).slice(0, 4).map(tag => (
+                <span key={tag} className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          <div className="mt-auto pt-4 flex items-center justify-between" style={{ borderTop: '1px solid #f0f2f5' }}>
+            {u.tuition_range
+              ? <p className="text-xs text-navy" style={{ fontWeight: 400 }}>{u.tuition_range}</p>
+              : <span />
+            }
+            <span className="flex items-center gap-1 text-xs transition-all duration-200 group-hover:gap-2" style={{ color: '#0c4d86', fontWeight: 300 }}>
+              View guide
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </span>
           </div>
         </div>
-        <h2 className="text-base text-navy mb-1.5 leading-snug" style={{ fontWeight: 300 }}>{u.name}</h2>
-        {u.quick_summary && (
-          <p className="text-xs mb-4" style={{ color: '#0c4d86', fontWeight: 300 }}>{u.quick_summary}</p>
-        )}
-        {u.tags && u.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {u.tags.filter(t => !['english','bachelor','master','doctorate'].includes(t)).slice(0, 4).map(tag => (
-              <span key={tag} className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-        <div className="mt-auto pt-4 flex items-center justify-between" style={{ borderTop: '1px solid #f0f2f5' }}>
-          {u.tuition_range
-            ? <p className="text-xs text-navy" style={{ fontWeight: 400 }}>{u.tuition_range}</p>
-            : <span />
-          }
-          <span className="flex items-center gap-1 text-xs transition-all duration-200 group-hover:gap-2" style={{ color: '#0c4d86', fontWeight: 300 }}>
-            View guide
-            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </span>
-        </div>
+      </Link>
+      <div style={{ position: 'absolute', top: 12, right: 12 }}>
+        <FavouriteButton slug={u.slug} initialFavourited={isFavourited} isLoggedIn={isLoggedIn} size="sm" />
       </div>
-    </Link>
+    </div>
   )
 }
 
 // ─── Compact row — used in tabbed country view ─────────────────────────────────
 
-function UniversityRow({ u }: { u: University }) {
+function UniversityRow({ u, isFavourited, isLoggedIn }: { u: University; isFavourited: boolean; isLoggedIn: boolean }) {
   return (
-    <Link href={`/universities/${u.slug}`} className="block group">
-      <div
-        className="flex items-center gap-4 px-5 py-4 rounded-xl transition-all hover:bg-gray-50"
-        style={{ borderBottom: '1px solid #f4f5f7' }}
-      >
+    <div className="group flex items-center gap-2 px-5 transition-all hover:bg-gray-50" style={{ borderBottom: '1px solid #f4f5f7' }}>
+      <Link href={`/universities/${u.slug}`} className="flex-1 flex items-center gap-4 py-4 min-w-0">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5 flex-wrap">
             <h3 className="text-sm text-navy" style={{ fontWeight: 300 }}>{u.name}</h3>
@@ -139,8 +142,9 @@ function UniversityRow({ u }: { u: University }) {
         <svg className="w-3.5 h-3.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#0c4d86' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
-      </div>
-    </Link>
+      </Link>
+      <FavouriteButton slug={u.slug} initialFavourited={isFavourited} isLoggedIn={isLoggedIn} size="sm" />
+    </div>
   )
 }
 
@@ -151,6 +155,8 @@ type Props = {
   initialLevel?: string
   initialType?: string
   initialScholarship?: boolean
+  favouritedSlugs?: string[]
+  isLoggedIn?: boolean
 }
 
 // ─── Main component ────────────────────────────────────────────────────────────
@@ -162,7 +168,10 @@ export default function UniversityList({
   initialLevel,
   initialType,
   initialScholarship,
+  favouritedSlugs = [],
+  isLoggedIn = false,
 }: Props) {
+  const favSet = useMemo(() => new Set(favouritedSlugs), [favouritedSlugs])
   const [search, setSearch]                     = useState('')
   const [typeFilter, setTypeFilter]             = useState(initialType ?? 'all')
   const [fieldFilter, setFieldFilter]           = useState(initialField ?? 'All')
@@ -336,7 +345,7 @@ export default function UniversityList({
                 const key = fieldFilter !== 'All' ? FIELD_RANKING_KEY[fieldFilter] : null
                 const rank = key ? u.subject_rankings[key] : undefined
                 const rankingLabel = rank ? `#${rank} QS ${fieldFilter}` : undefined
-                return <UniversityCard key={u.slug} u={u} rankingLabel={rankingLabel} />
+                return <UniversityCard key={u.slug} u={u} rankingLabel={rankingLabel} isFavourited={favSet.has(u.slug)} isLoggedIn={isLoggedIn} />
               })}
             </div>
           )}
@@ -381,7 +390,7 @@ export default function UniversityList({
               className="overflow-y-auto"
               style={{ maxHeight: '440px', scrollbarWidth: 'thin', scrollbarColor: '#e4ebf3 transparent' }}
             >
-              {activeCountry.unis.map(u => <UniversityRow key={u.slug} u={u} />)}
+              {activeCountry.unis.map(u => <UniversityRow key={u.slug} u={u} isFavourited={favSet.has(u.slug)} isLoggedIn={isLoggedIn} />)}
             </div>
             {activeCountry.unis.length > 5 && (
               <div

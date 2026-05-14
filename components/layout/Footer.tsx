@@ -15,7 +15,7 @@ const account = [
   { href: '/profile', label: 'My profile' },
 ]
 
-const countries = ['Italy', 'Germany', 'Netherlands', 'Spain', 'Austria', 'Hungary', 'Slovenia', 'United Kingdom']
+const countries = ['Italy', 'Germany', 'Netherlands', 'Spain', 'Austria', 'Hungary', 'Slovenia', 'United Kingdom', 'France', 'Greece']
 
 export default function Footer() {
   return (

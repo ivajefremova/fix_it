@@ -13,6 +13,8 @@ const countries = [
   { slug: 'united-kingdom', name: 'United Kingdom',  img: '/images/countries/uk.png' },
   { slug: 'germany',        name: 'Germany',         img: '/images/countries/germany.png' },
   { slug: 'italy',          name: 'Italy',           img: '/images/countries/italy.png' },
+  { slug: 'france',         name: 'France',          img: '/images/countries/france.png' },
+  { slug: 'greece',         name: 'Greece',          img: '/images/countries/greece.png' },
 ]
 
 const items = [...countries, ...countries]
