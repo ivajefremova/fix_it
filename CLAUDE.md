@@ -415,6 +415,29 @@ create table deadlines (
 
 ---
 
+### Table: `personal_deadlines`
+
+User-created deadlines in the calendar. Stored per-user in Supabase (not localStorage).
+
+```sql
+create table personal_deadlines (
+  id        uuid primary key default gen_random_uuid(),
+  user_id   uuid references profiles(id) on delete cascade,
+  label     text not null,
+  date      date not null,
+  notes     text,
+  color     text default '#51e74c',
+  created_at timestamptz default now()
+);
+
+alter table personal_deadlines enable row level security;
+create policy "Users manage own personal deadlines" on personal_deadlines using (auth.uid() = user_id);
+```
+
+**Calendar colour preferences** (per-country and per-date) are stored in `localStorage` as cosmetic-only data — no Supabase table needed.
+
+---
+
 ### Table: `profiles`
 
 ```sql
@@ -723,10 +746,10 @@ toast.error('Please log in first')
 
 ## Profile Dashboard Features
 
-1. **Favourited universities** — grid with status tracking (Researching / Planning to apply / Applied / Got in!), notes per university, compare modal
+1. **Favourited universities** — grid with status tracking (Researching / Planning to apply / Applied / Got in!), notes per university, compare modal (up to 3 unis)
 2. **Checklist** — 7 hardcoded application items, stored in `localStorage` keyed by user ID (not Supabase). No database table needed.
-3. **Wishlist** — packages the user has saved but not yet purchased, links to checkout
-4. **Deadline calendar** — not built yet
+3. **Wishlist (Guides tab)** — packages the user has saved but not yet purchased, links to checkout
+4. **Deadline calendar** — fully built. Shows deadlines from purchased country packages + user's personal deadlines. Features: month navigation with pop-in animations, click any date to add a personal deadline (pre-filled), click a deadline date to view details and pick a colour, per-country and per-date colour overrides (stored in `localStorage`), personal deadlines stored in `personal_deadlines` Supabase table (add / edit / remove with optimistic updates).
 5. **Profile picture** — not built yet
 6. **Notifications bell** — not built yet
 
@@ -778,19 +801,21 @@ All posts moderated (`is_approved = true`) before showing. Messages between user
 11. ✅ Dynamic country page `/countries/[slug]` + content gating
 12. ✅ Auth pages — login, signup, change-password, forgot-password, reset-password, verify-email
 13. ✅ Favourites — heart toggle, optimistic updates, status tracking, notes, compare modal
-14. ✅ Profile dashboard — favourites grid, checklist (localStorage), wishlist
+14. ✅ Profile dashboard — favourites grid, checklist (localStorage), wishlist (guides tab)
 15. ✅ Services page + package detail pages (`/services/[country]/[type]`)
 16. ✅ Stripe webhook handler
 17. ✅ Scholarships browse + detail pages (`/services/scholarship`, `/services/scholarship/[id]`)
-18. Community posts on university pages
-19. Messages system
+18. ✅ Deadline calendar — personal deadlines (`personal_deadlines` table), colour coding, add/edit/remove, click-to-add on any date
+19. Messaging platform — user-to-user and/or alumni DMs via `messages` table
 20. About page
 21. Quiz redesign
-22. Resend transactional emails
-23. GDPR cookie banner
-24. Mobile audit
-25. SEO — metadata, Open Graph, sitemap
-26. Macedonian locale — Phase 2, NOT v1
+22. Resend transactional emails (no more "via Supabase" sender)
+23. GDPR cookie banner + Privacy / Terms pages
+24. Stripe payments live
+25. Notifications bell
+26. Mobile audit
+27. SEO — metadata, Open Graph, sitemap
+28. Macedonian locale — Phase 2, NOT v1
 
 ---
 
