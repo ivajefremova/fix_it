@@ -10,7 +10,7 @@ export default async function ProfilePage() {
 
   if (!user) redirect('/login')
 
-  const [{ data: profile }, { data: favRows }, { data: wishlistRows }] = await Promise.all([
+  const [{ data: profile }, { data: favRows }, { data: wishlistRows }, { data: purchases }, { data: personalDeadlineRows }] = await Promise.all([
     supabase.from('profiles').select('full_name, email, user_type').eq('id', user.id).single(),
     supabase
       .from('favorites')
@@ -22,6 +22,15 @@ export default async function ProfilePage() {
       .select('id, package_type, country_slug, country, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false }),
+    supabase
+      .from('purchases')
+      .select('package_type, country_slug, country')
+      .eq('user_id', user.id),
+    supabase
+      .from('personal_deadlines')
+      .select('id, label, date, notes, color')
+      .eq('user_id', user.id)
+      .order('date', { ascending: true }),
   ])
 
   // Enrich favourites with university data
@@ -78,6 +87,47 @@ export default async function ProfilePage() {
     created_at:   w.created_at,
   }))
 
+  // ── Deadline calendar: fetch deadlines for purchased countries ──────────────
+  const purchasedSlugs = [...new Set((purchases ?? []).map(p => p.country_slug))]
+
+  const { data: purchasedUnis } = purchasedSlugs.length
+    ? await supabase
+        .from('universities')
+        .select('id, name, country_slug, country')
+        .in('country_slug', purchasedSlugs)
+    : { data: [] }
+
+  const uniIds = (purchasedUnis ?? []).map(u => u.id)
+  const uniInfoById = Object.fromEntries((purchasedUnis ?? []).map(u => [u.id, u]))
+
+  const { data: deadlineRows } = uniIds.length
+    ? await supabase
+        .from('deadlines')
+        .select('id, university_id, label, date, year, notes, link')
+        .in('university_id', uniIds)
+        .order('date', { ascending: true })
+    : { data: [] }
+
+  const deadlines = (deadlineRows ?? []).map(d => ({
+    id:               String(d.id),
+    label:            d.label,
+    date:             d.date,
+    year:             d.year,
+    notes:            d.notes ?? null,
+    link:             d.link ?? null,
+    university_name:  uniInfoById[d.university_id]?.name ?? '',
+    country:          uniInfoById[d.university_id]?.country ?? '',
+    country_slug:     uniInfoById[d.university_id]?.country_slug ?? '',
+  }))
+
+  const personalDeadlines = (personalDeadlineRows ?? []).map(d => ({
+    id:    String(d.id),
+    label: d.label,
+    date:  d.date,
+    notes: d.notes ?? '',
+    color: d.color ?? '#51e74c',
+  }))
+
   const name     = profile?.full_name ?? ''
   const email    = profile?.email ?? user.email ?? ''
   const initials = name
@@ -93,6 +143,8 @@ export default async function ProfilePage() {
       userType={profile?.user_type ?? null}
       favourites={favourites}
       wishlist={wishlist}
+      deadlines={deadlines}
+      personalDeadlines={personalDeadlines}
     />
   )
 }
