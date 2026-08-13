@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
@@ -52,7 +53,6 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // close mobile menu on route change
   useEffect(() => { setMobileMenuOpen(false) }, [pathname])
 
   const handleSignOut = async () => {

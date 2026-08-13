@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 
 const GEO_URL = '/countries-110m.json'
@@ -11,9 +10,6 @@ const W = 500
 const H = 520
 
 export default function EuropeHeroMap() {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => { setMounted(true) }, [])
-  if (!mounted) return <div style={{ width: '100%', height: '100%' }} />
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>

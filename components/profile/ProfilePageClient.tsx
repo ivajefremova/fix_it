@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 import Checklist from './Checklist'
+import DeadlineCalendar, { type DeadlineItem, type CustomDeadline } from './DeadlineCalendar'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -41,6 +42,8 @@ type Props = {
   userType: string | null
   favourites: FavouriteUniversity[]
   wishlist: WishlistItem[]
+  deadlines: DeadlineItem[]
+  personalDeadlines: CustomDeadline[]
 }
 
 // ─── Status config ──────────────────────────────────────────────────────────────
@@ -103,7 +106,6 @@ function CompareModal({ unis, onClose }: { unis: FavouriteUniversity[]; onClose:
           </button>
         </div>
 
-        {/* University name headers */}
         <div style={{ display: 'grid', gridTemplateColumns: `120px repeat(${unis.length}, 1fr)`, gap: '1rem', marginBottom: '1.5rem' }}>
           <div />
           {unis.map(u => (
@@ -114,7 +116,6 @@ function CompareModal({ unis, onClose }: { unis: FavouriteUniversity[]; onClose:
           ))}
         </div>
 
-        {/* Comparison rows */}
         {rows.map(row => (
           <div
             key={row.key}
@@ -129,7 +130,6 @@ function CompareModal({ unis, onClose }: { unis: FavouriteUniversity[]; onClose:
           </div>
         ))}
 
-        {/* Tags row */}
         <div
           style={{ display: 'grid', gridTemplateColumns: `120px repeat(${unis.length}, 1fr)`, gap: '1rem', padding: '0.75rem 0', borderTop: '1px solid #f0f2f5' }}
         >
@@ -306,9 +306,7 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
 
   return (
     <>
-      {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        {/* Sort */}
         <div className="flex gap-1">
           {([['recent', 'Recent'], ['az', 'A–Z'], ['country', 'Country']] as const).map(([v, label]) => (
             <button
@@ -329,7 +327,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
 
         <div className="flex-1" />
 
-        {/* Compare */}
         {compareIds.size >= 2 && (
           <button
             onClick={() => setShowCompare(true)}
@@ -340,7 +337,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
           </button>
         )}
 
-        {/* Bulk remove */}
         {selected.size > 0 && (
           <button
             onClick={removeSelected}
@@ -352,7 +348,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
         )}
       </div>
 
-      {/* Country groups */}
       <div className="space-y-8">
         {byCountry.map(group => (
           <div key={group.slug}>
@@ -376,7 +371,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
                     }}
                   >
                     <div className="flex items-start gap-3">
-                      {/* Select checkbox */}
                       <input
                         type="checkbox"
                         checked={isSelected}
@@ -390,7 +384,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
                             {f.name}
                           </Link>
 
-                          {/* Status dropdown */}
                           <select
                             value={f.status}
                             onChange={e => updateStatus(f.fav_id, e.target.value)}
@@ -429,7 +422,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
                           )}
                         </div>
 
-                        {/* Tags */}
                         {f.tags && f.tags.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 mb-3">
                             {f.tags.filter(t => !['english','bachelor','master','doctorate'].includes(t)).slice(0, 4).map(tag => (
@@ -438,11 +430,9 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
                           </div>
                         )}
 
-                        {/* Notes */}
                         <NoteEditor favId={f.fav_id} initialNote={f.notes} onSave={note => updateNote(f.fav_id, note)} />
                       </div>
 
-                      {/* Compare toggle */}
                       <button
                         onClick={() => toggleCompare(f.fav_id)}
                         className="text-xs px-3 py-1.5 rounded-full flex-shrink-0 transition-all"
@@ -464,7 +454,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
         ))}
       </div>
 
-      {/* Explore more */}
       <div className="mt-10 text-center">
         <Link
           href="/universities"
@@ -478,7 +467,6 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
         </Link>
       </div>
 
-      {/* Compare modal */}
       {showCompare && compareList.length >= 2 && (
         <CompareModal unis={compareList} onClose={() => setShowCompare(false)} />
       )}
@@ -616,7 +604,7 @@ function PackagesTab({ initialWishlist }: { initialWishlist: WishlistItem[] }) {
 const TABS = ['Universities', 'Guides'] as const
 type Tab = typeof TABS[number]
 
-export default function ProfilePageClient({ userId, name, email, initials, userType, favourites, wishlist }: Props) {
+export default function ProfilePageClient({ userId, name, email, initials, userType, favourites, wishlist, deadlines, personalDeadlines }: Props) {
   const [tab, setTab] = useState<Tab>('Universities')
 
   return (
@@ -643,6 +631,11 @@ export default function ProfilePageClient({ userId, name, email, initials, userT
           )}
         </div>
 
+        {/* Deadline Calendar — full width, standalone */}
+        <div className="mb-6">
+          <DeadlineCalendar deadlines={deadlines} userId={userId} initialPersonalDeadlines={personalDeadlines} />
+        </div>
+
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
@@ -651,7 +644,7 @@ export default function ProfilePageClient({ userId, name, email, initials, userT
             <Checklist userId={userId} />
           </div>
 
-          {/* Right — Favourites tabs */}
+          {/* Right — Universities / Guides tabs */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
               <div className="flex border-b" style={{ borderColor: '#eef0f3' }}>

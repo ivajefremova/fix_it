@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Webflow export — reference only, never linted
+    "fix-it-42b45e.webflow/**",
   ]),
 ]);
 

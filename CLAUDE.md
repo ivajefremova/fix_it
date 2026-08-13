@@ -30,9 +30,9 @@ Fix It closes that gap with alumni-compiled, human-verified guidance. Not generi
 
 | Layer | Technology | Notes |
 |---|---|---|
-| Frontend | Next.js (latest, App Router) | TypeScript, Tailwind CSS v4 |
+| Frontend | Next.js 16.2.4 (App Router) | TypeScript, Tailwind CSS v4 |
 | Database | Supabase (PostgreSQL) | Free tier to start |
-| Auth | Supabase Auth | Email/password, middleware-protected routes |
+| Auth | Supabase Auth | Email/password, server-component-protected routes |
 | Storage | Supabase Storage | Photos, profile pictures, illustrations |
 | Payments | Stripe | One-time purchases only for v1 |
 | Hosting | Vercel | Hobby (free) until Stripe goes live, then Pro ($20/mo) |
@@ -133,65 +133,88 @@ Always run `npm run dev` in one terminal and Claude Code in a second terminal si
 fix-it/
 ├── public/
 │   ├── illustrations/           # Figma SVG exports
-│   └── images/                  # Static images
+│   ├── images/                  # Static images
+│   └── countries-110m.json      # GeoJSON for map component
 ├── app/                         # Next.js App Router (root level, NOT inside src/)
-│   ├── (auth)/                  # Auth route group
+│   ├── (auth)/                  # Auth route group — navbar/footer hidden here
+│   │   ├── layout.tsx           # Centered auth layout
 │   │   ├── login/page.tsx
 │   │   ├── signup/page.tsx
-│   │   └── change-password/page.tsx
-│   ├── (main)/                  # Main site route group
-│   │   ├── page.tsx             # Homepage /
-│   │   ├── universities/
-│   │   │   ├── page.tsx         # /universities — list + search + filter
-│   │   │   └── [slug]/page.tsx  # /universities/[slug] — dynamic, content gated
-│   │   ├── countries/
-│   │   │   ├── page.tsx         # /countries — overview grid of 8 countries
-│   │   │   └── [slug]/page.tsx  # /countries/[slug] — dynamic country page
-│   │   ├── services/page.tsx    # /services — 3 packages + Stripe checkout
-│   │   ├── about/page.tsx       # /about — does not exist yet, needs building
-│   │   └── quiz/page.tsx        # /quiz — find your path, needs full redesign
-│   ├── profile/page.tsx         # /profile — protected, logged-in users only
+│   │   ├── change-password/page.tsx
+│   │   ├── forgot-password/page.tsx
+│   │   ├── reset-password/page.tsx
+│   │   └── verify-email/page.tsx
+│   ├── auth/
+│   │   └── callback/route.ts    # Supabase OAuth/email callback — exchanges code for session
+│   ├── page.tsx                 # Homepage /
+│   ├── universities/
+│   │   ├── page.tsx             # /universities — list + search + filter
+│   │   └── [slug]/page.tsx      # /universities/[slug] — dynamic, content gated
+│   ├── countries/
+│   │   ├── page.tsx             # /countries — interactive map + package tabs
+│   │   └── [slug]/page.tsx      # /countries/[slug] — dynamic country page
+│   ├── services/
+│   │   ├── page.tsx             # /services — package overview + Stripe checkout
+│   │   ├── [country]/[type]/page.tsx   # /services/[country]/country|documents
+│   │   ├── scholarship/page.tsx        # /services/scholarship — browse all scholarships
+│   │   └── scholarship/[id]/page.tsx   # /services/scholarship/[id] — scholarship detail
+│   ├── profile/page.tsx         # /profile — protected, server-side redirect to /login
 │   ├── api/
 │   │   ├── stripe/webhook/route.ts
 │   │   └── checkout/route.ts
-│   ├── layout.tsx               # Root layout — Navbar + Footer + Toaster
+│   ├── layout.tsx               # Root layout — NavbarWrapper + FooterWrapper + Toaster
 │   ├── globals.css              # Global styles + Tailwind v4 theme
+│   ├── error.tsx
 │   └── not-found.tsx
 ├── components/
 │   ├── ui/
-│   │   ├── Button.tsx
-│   │   ├── Card.tsx
-│   │   ├── Modal.tsx
-│   │   └── Skeleton.tsx
+│   │   └── RevealOnScroll.tsx   # Intersection Observer fade-in, directions: up/left/right/none
 │   ├── layout/
 │   │   ├── Navbar.tsx
-│   │   └── Footer.tsx
+│   │   ├── NavbarWrapper.tsx    # Hides Navbar on auth pages
+│   │   ├── Footer.tsx
+│   │   └── FooterWrapper.tsx    # Hides Footer on auth pages
+│   ├── home/
+│   │   ├── HeroSection.tsx
+│   │   ├── EuropeHeroMap.tsx    # react-simple-maps interactive map (SSR disabled)
+│   │   ├── CountryMarquee.tsx
+│   │   ├── HomepageSearch.tsx
+│   │   ├── ServicesTab.tsx
+│   │   └── StatsCounter.tsx
+│   ├── countries/
+│   │   ├── CountriesInteractive.tsx
+│   │   ├── CountryCarousel.tsx
+│   │   ├── EuropeMap.tsx
+│   │   ├── CountryPackageTabs.tsx
+│   │   ├── DocumentsPackageTabs.tsx
+│   │   ├── CountryPageClient.tsx
+│   │   └── PhotoGallery.tsx
 │   ├── universities/
-│   │   ├── UniversityCard.tsx
+│   │   ├── UniversityList.tsx
 │   │   ├── FavouriteButton.tsx
-│   │   ├── SearchBar.tsx
-│   │   └── FilterPanel.tsx
-│   ├── profile/
-│   │   ├── DeadlineCalendar.tsx
-│   │   ├── Checklist.tsx
-│   │   └── ProfilePicture.tsx
-│   └── community/
-│       ├── PostCard.tsx
-│       ├── PostForm.tsx
-│       └── MessageThread.tsx
+│   │   └── ScholarshipTabs.tsx
+│   ├── services/
+│   │   ├── ServicesPageClient.tsx
+│   │   ├── PackageDetailPage.tsx
+│   │   ├── ScholarshipBrowse.tsx
+│   │   ├── ScholarshipDetailPage.tsx
+│   │   └── WishlistButton.tsx
+│   └── profile/
+│       ├── ProfilePageClient.tsx
+│       └── Checklist.tsx        # localStorage-based, keyed per user ID
 ├── lib/
 │   ├── supabase/
 │   │   ├── client.ts
 │   │   └── server.ts
-│   ├── stripe.ts
-│   └── utils.ts
+│   └── stripe.ts
 ├── types/
-│   └── index.ts
-├── middleware.ts                 # Root level — NOT inside app/
+│   └── react-simple-maps.d.ts   # Type declarations for react-simple-maps
 ├── .env.local                   # Never commit
 ├── .gitignore                   # Must include .env.local and CLAUDE.md
 └── CLAUDE.md                    # This file — never commit
 ```
+
+**Auth protection:** There is no `middleware.ts`. Protected pages (`/profile`, `/change-password`) do their own server-side auth check and `redirect('/login')` if no session. This is correct for Next.js App Router — each protected server component is responsible for its own guard.
 
 ---
 
@@ -206,8 +229,8 @@ Based on actual content documents, here is exactly how content is structured:
 - Ranking section (detailed, with specific rankings cited)
 - Undergraduate courses in English (list with direct links to programme pages)
 - Graduate courses in English (list with direct links)
-- Admission requirements — EU students (specific certifications, minimum scores)
-- Admission requirements — non-EU/extra-Schengen (same + language requirement)
+- Admission requirements — EU students (array of requirement strings)
+- Admission requirements — non-EU/extra-Schengen (array of requirement strings)
 - Scholarship options (each named individually with description and eligibility)
 - Accommodation options (each named individually with description)
 
@@ -292,10 +315,10 @@ create table universities (
   -- COUNTRY PACKAGE
   overview_full             text,
   ranking_full              text,
-  undergraduate_courses     jsonb,            -- [{name, link, language, level}]
-  graduate_courses          jsonb,            -- [{name, link, language, level}]
-  admission_eu              text,
-  admission_non_eu          text,
+  undergraduate_courses     jsonb,            -- [{name, link?, language?}]
+  graduate_courses          jsonb,            -- [{name, link?, language?}]
+  admission_eu              jsonb,            -- [{requirement: string}]
+  admission_non_eu          jsonb,            -- [{requirement: string}]
   accommodation             jsonb,            -- [{name, description, link?}]
   student_life              text,
 
@@ -313,8 +336,17 @@ create table universities (
 **Example `undergraduate_courses` jsonb:**
 ```json
 [
-  {"name": "Business Administration", "link": "https://www.luiss.it/...", "language": "English", "level": "undergraduate"},
-  {"name": "Economics and Business", "link": "https://www.luiss.it/...", "language": "English", "level": "undergraduate"}
+  {"name": "Business Administration", "link": "https://www.luiss.it/...", "language": "English"},
+  {"name": "Economics and Business", "link": "https://www.luiss.it/...", "language": "English"}
+]
+```
+
+**Example `admission_eu` / `admission_non_eu` jsonb:**
+```json
+[
+  {"requirement": "High school diploma with minimum GPA 8.5/10"},
+  {"requirement": "English proficiency: IELTS 6.5 or equivalent"},
+  {"requirement": "Pass the LUISS admission test"}
 ]
 ```
 
@@ -326,12 +358,6 @@ create table universities (
     "description": "Awarded to top-performing applicants based on academic results and admission test scores.",
     "amount": "Partial or full tuition waiver",
     "eligibility": "Top academic performers"
-  },
-  {
-    "name": "DiSCo Lazio Regional Scholarship",
-    "description": "Need-based scholarship funded by the Lazio region providing tuition exemptions and financial grants.",
-    "amount": "Variable",
-    "eligibility": "Need-based, students in Rome"
   }
 ]
 ```
@@ -342,12 +368,32 @@ create table universities (
   {
     "name": "LUISS University Residences",
     "description": "Student residences near campuses with furnished rooms and shared facilities."
-  },
-  {
-    "name": "CasaLUISS Private Housing Service",
-    "description": "University-supported service helping students find verified private rooms through a curated database."
   }
 ]
+```
+
+---
+
+### Table: `scholarships`
+
+Standalone scholarships table — separate from the per-university `scholarships` jsonb. Used for the Scholarships browse/detail pages.
+
+```sql
+create table scholarships (
+  id                uuid primary key default gen_random_uuid(),
+  country_slug      text not null,
+  country           text not null,
+  name              text not null,
+  description       text,
+  amount            text,
+  eligibility       text,
+  deadline          text,
+  link              text,
+  university_slugs  text[],         -- which universities this scholarship applies to
+  scholarship_type  text,           -- "merit", "need", "government"
+  levels            text[],         -- ["Bachelor", "Master", "Doctorate"]
+  created_at        timestamptz default now()
+);
 ```
 
 ---
@@ -369,6 +415,29 @@ create table deadlines (
 
 ---
 
+### Table: `personal_deadlines`
+
+User-created deadlines in the calendar. Stored per-user in Supabase (not localStorage).
+
+```sql
+create table personal_deadlines (
+  id        uuid primary key default gen_random_uuid(),
+  user_id   uuid references profiles(id) on delete cascade,
+  label     text not null,
+  date      date not null,
+  notes     text,
+  color     text default '#51e74c',
+  created_at timestamptz default now()
+);
+
+alter table personal_deadlines enable row level security;
+create policy "Users manage own personal deadlines" on personal_deadlines using (auth.uid() = user_id);
+```
+
+**Calendar colour preferences** (per-country and per-date) are stored in `localStorage` as cosmetic-only data — no Supabase table needed.
+
+---
+
 ### Table: `profiles`
 
 ```sql
@@ -376,6 +445,7 @@ create table profiles (
   id                  uuid primary key references auth.users(id) on delete cascade,
   email               text,
   full_name           text,
+  user_type           text,             -- future use (student, parent, alumni, etc.)
   avatar_url          text,
   stripe_customer_id  text,
   created_at          timestamptz default now(),
@@ -399,15 +469,37 @@ create trigger on_auth_user_created
 
 ---
 
-### Table: `favourites`
+### Table: `favorites`
+
+Note: American spelling (`favorites`, not `favourites`). Uses `item_slug` (text) rather than a UUID foreign key, so it can favourite any slugged item.
 
 ```sql
-create table favourites (
+create table favorites (
   id              uuid primary key default gen_random_uuid(),
   user_id         uuid references profiles(id) on delete cascade,
-  university_id   uuid references universities(id) on delete cascade,
+  item_slug       text not null,
+  status          text,             -- "Researching", "Planning to apply", "Applied", "Got in!"
+  notes           text,
   created_at      timestamptz default now(),
-  unique(user_id, university_id)
+  unique(user_id, item_slug)
+);
+```
+
+---
+
+### Table: `wishlist`
+
+Packages a user has added to their wishlist (before or instead of purchasing).
+
+```sql
+create table wishlist (
+  id              uuid primary key default gen_random_uuid(),
+  user_id         uuid references profiles(id) on delete cascade,
+  package_type    text not null,    -- "country", "scholarship", "documents"
+  country_slug    text not null,
+  country         text not null,
+  created_at      timestamptz default now(),
+  unique(user_id, package_type, country_slug)
 );
 ```
 
@@ -430,34 +522,9 @@ create table purchases (
 
 ---
 
-### Table: `checklist_items`
-
-```sql
-create table checklist_items (
-  id              uuid primary key default gen_random_uuid(),
-  user_id         uuid references profiles(id) on delete cascade,
-  text            text not null,
-  is_completed    boolean default false,
-  is_hardcoded    boolean default true,
-  university_id   uuid references universities(id),
-  source_package  text,
-  sort_order      int default 0,
-  created_at      timestamptz default now()
-);
-```
-
-**Hardcoded items seeded for all users on signup:**
-1. Get your high school transcripts officially translated
-2. Request an apostille on your diploma
-3. Research visa requirements for your target country
-4. Open a dedicated bank account or card for abroad expenses
-5. Check if your target universities require specific certifications (SAT, IELTS, GMAT, etc.)
-6. Prepare a motivation letter template
-7. Get passport photos ready
-
----
-
 ### Table: `posts` (Community — Stories, Questions, Answers)
+
+Not yet built. Schema for future implementation:
 
 ```sql
 create table posts (
@@ -481,6 +548,8 @@ create table posts (
 
 ### Table: `messages`
 
+Not yet built. Schema for future implementation:
+
 ```sql
 create table messages (
   id              uuid primary key default gen_random_uuid(),
@@ -496,6 +565,8 @@ create table messages (
 ---
 
 ### Table: `notifications`
+
+Not yet built. Schema for future implementation:
 
 ```sql
 create table notifications (
@@ -521,17 +592,21 @@ alter table profiles enable row level security;
 create policy "Users view own profile" on profiles for select using (auth.uid() = id);
 create policy "Users update own profile" on profiles for update using (auth.uid() = id);
 
--- favourites
-alter table favourites enable row level security;
-create policy "Users manage own favourites" on favourites using (auth.uid() = user_id);
+-- favorites
+alter table favorites enable row level security;
+create policy "Users manage own favorites" on favorites using (auth.uid() = user_id);
+
+-- wishlist
+alter table wishlist enable row level security;
+create policy "Users manage own wishlist" on wishlist using (auth.uid() = user_id);
 
 -- purchases
 alter table purchases enable row level security;
 create policy "Users view own purchases" on purchases for select using (auth.uid() = user_id);
 
--- checklist_items
-alter table checklist_items enable row level security;
-create policy "Users manage own checklist" on checklist_items using (auth.uid() = user_id);
+-- scholarships — public read
+alter table scholarships enable row level security;
+create policy "Public read scholarships" on scholarships for select using (true);
 
 -- notifications
 alter table notifications enable row level security;
@@ -585,65 +660,49 @@ const hasDocumentsPackage = purchases?.some(
 ) ?? false
 ```
 
-**Free (all users):** overview_free, quick_summary, tuition_range, tags, ranking_summary, 1 post, deadline dates
+**Free (all users):** overview_free, quick_summary, tuition_range, tags, ranking_summary, visa_note
 
-**Country package:** overview_full, ranking_full, all courses + links, admission requirements, accommodation, student_life, all posts
+**Country package:** overview_full, ranking_full, all courses + links, admission requirements, accommodation, student_life
 
-**Scholarship package:** scholarships jsonb
+**Scholarship package:** scholarships jsonb (per university) + scholarships table rows (per country)
 
-**Documents package:** country visa_process, document_checklist, moving_guide, bank_account_guide, arrival_tips + personalised profile checklist items
+**Documents package:** country visa_process, document_checklist, moving_guide, bank_account_guide, arrival_tips
 
 ---
 
 ## Auth Flow
 
-```typescript
-// middleware.ts — root level
-export async function middleware(request: NextRequest) {
-  // check Supabase session
-  // redirect to /login if accessing /profile without session
-}
+Auth is handled at the page level — there is no Next.js middleware file. Protected server components check the session themselves:
 
-export const config = {
-  matcher: ['/profile/:path*', '/api/checkout/:path*']
-}
+```typescript
+// Example: app/profile/page.tsx
+const { data: { user } } = await supabase.auth.getUser()
+if (!user) redirect('/login')
 ```
 
-On signup: create profile (via trigger) → seed hardcoded checklist items → send welcome email via Resend
+The `app/auth/callback/route.ts` handles both OAuth and email magic-link/recovery flows — it exchanges the code for a session and redirects to `/profile` (normal login) or `/reset-password` (password recovery).
+
+On signup: Supabase trigger auto-creates a `profiles` row.
 
 ---
 
 ## Stripe Integration
 
 ```typescript
-// app/api/stripe/webhook/route.ts
-export async function POST(req: Request) {
-  const body = await req.text()
-  const sig = req.headers.get('stripe-signature')!
-  
-  let event
-  try {
-    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!)
-  } catch {
-    return new Response('Webhook error', { status: 400 })
-  }
-  
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object
-    const { user_id, package_type, country_slug, country } = session.metadata!
-    
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!  // service role bypasses RLS
-    )
-    
-    await supabase.from('purchases').insert({
-      user_id, package_type, country, country_slug,
-      stripe_payment_id: session.payment_intent
-    })
-  }
-  
-  return new Response('ok', { status: 200 })
+// app/api/checkout/route.ts — creates a Stripe Checkout session
+const PRICES: Record<string, { amount: number; label: string }> = {
+  country:     { amount: 799,  label: 'Country Guide' },
+  scholarship: { amount: 599,  label: 'Scholarship Guide' },
+  documents:   { amount: 399,  label: 'Documents & Relocation' },
+}
+```
+
+```typescript
+// app/api/stripe/webhook/route.ts — writes to purchases table on payment success
+if (event.type === 'checkout.session.completed') {
+  const { user_id, package_type, country_slug, country } = session.metadata!
+  // service role bypasses RLS
+  await supabase.from('purchases').insert({ user_id, package_type, country, country_slug, stripe_payment_id })
 }
 ```
 
@@ -651,18 +710,21 @@ export async function POST(req: Request) {
 
 ## Favourites — FavouriteButton Pattern
 
-```typescript
-const [isFavourited, setIsFavourited] = useState(initialState)
+Table is `favorites` (American spelling). Stores `item_slug` (text), not a university UUID.
 
-const toggle = async () => {
-  setIsFavourited(prev => !prev)           // optimistic update
-  const { error } = isFavourited ? await remove() : await add()
-  if (error) {
-    setIsFavourited(prev => !prev)         // revert on error
-    toast.error('Something went wrong')
-  } else {
-    toast.success(isFavourited ? 'Removed' : 'Saved to favourites!')
-  }
+```typescript
+// Optimistic toggle
+const prev = favourited
+setFavourited(!prev)
+
+if (prev) {
+  const { error } = await supabase.from('favorites').delete().eq('item_slug', slug).eq('user_id', user.id)
+  if (error) { setFavourited(prev); toast.error('Something went wrong') }
+  else toast.success('Removed from favourites')
+} else {
+  const { error } = await supabase.from('favorites').insert({ item_slug: slug, user_id: user.id })
+  if (error) { setFavourited(prev); toast.error('Something went wrong') }
+  else toast.success('Saved to favourites!')
 }
 ```
 
@@ -684,12 +746,12 @@ toast.error('Please log in first')
 
 ## Profile Dashboard Features
 
-1. **Favourited universities** — grid, remove button, link to page
-2. **Deadline calendar** — deadlines from `deadlines` table for all favourited universities, month view
-3. **Checklist** — hardcoded items for all + university-specific for documents package users
-4. **Profile picture** — Supabase Storage bucket `avatars`
-5. **Purchased packages** — list of owned packages with unlock date
-6. **Notifications bell** — badge + dropdown from `notifications` table
+1. **Favourited universities** — grid with status tracking (Researching / Planning to apply / Applied / Got in!), notes per university, compare modal (up to 3 unis)
+2. **Checklist** — 7 hardcoded application items, stored in `localStorage` keyed by user ID (not Supabase). No database table needed.
+3. **Wishlist (Guides tab)** — packages the user has saved but not yet purchased, links to checkout
+4. **Deadline calendar** — fully built. Shows deadlines from purchased country packages + user's personal deadlines. Features: month navigation with pop-in animations, click any date to add a personal deadline (pre-filled), click a deadline date to view details and pick a colour, per-country and per-date colour overrides (stored in `localStorage`), personal deadlines stored in `personal_deadlines` Supabase table (add / edit / remove with optimistic updates).
+5. **Profile picture** — not built yet
+6. **Notifications bell** — not built yet
 
 ---
 
@@ -703,15 +765,17 @@ Schema supports unlimited countries — just add rows.
 
 ## Shared Components
 
-**Navbar** — logo, Countries dropdown (from Supabase), Universities, Services, Login/Profile avatar, mobile hamburger
+**Navbar** — logo, Countries, Universities, Scholarships, Services nav links; Login/Profile avatar; mobile hamburger. Hidden on auth pages via NavbarWrapper.
 
-**Footer** — logo, nav links, social links, copyright, GDPR notice, language selector placeholder
+**Footer** — logo, nav links, social links, copyright, GDPR notice. Hidden on auth pages via FooterWrapper.
 
-Both in `components/layout/`, imported once in `app/layout.tsx`.
+Both in `components/layout/`, imported once in `app/layout.tsx` via their wrapper components.
 
 ---
 
 ## Community System
+
+Not yet built. When built:
 
 Posts table handles everything:
 - `type: "story"` — alumni experience
@@ -725,30 +789,33 @@ All posts moderated (`is_approved = true`) before showing. Messages between user
 ## Build Order
 
 1. ✅ Next.js project setup
-2. ✅ Dependencies: supabase, stripe, sonner
-3. Supabase client setup (client.ts + server.ts)
-4. Middleware for auth protection
-5. **Full database schema** — all tables, RLS, trigger, seed data
-6. Shared Navbar + Footer
-7. Homepage — pixel perfect from Webflow reference
-8. Universities list page + search + filter
-9. Dynamic university page `/universities/[slug]` + content gating
-10. Countries overview page
-11. Dynamic country page `/countries/[slug]`
-12. Auth pages — login, signup, change password
-13. Favourites — heart toggle, optimistic updates, toasts
-14. Profile dashboard — all features
-15. Services page + Stripe checkout
-16. Stripe webhook handler
-17. Community posts on university pages
-18. Messages system
-19. About page
-20. Quiz redesign
-21. Resend transactional emails
-22. GDPR cookie banner
-23. Mobile audit
-24. SEO — metadata, Open Graph, sitemap
-25. Macedonian locale — Phase 2, NOT v1
+2. ✅ Dependencies: supabase, stripe, sonner, resend, react-simple-maps
+3. ✅ Supabase client setup (client.ts + server.ts)
+4. ✅ Auth protection — server-component-level redirects, Supabase auth callback route
+5. ✅ Database schema — countries, universities, scholarships, profiles, favorites, wishlist, purchases, deadlines
+6. ✅ Shared Navbar + Footer (with auth-page wrappers)
+7. ✅ Homepage — hero, map, country marquee, search, services tabs, stats counter
+8. ✅ Universities list page + search + filter (country tabs, field/level/type filters)
+9. ✅ Dynamic university page `/universities/[slug]` + content gating
+10. ✅ Countries overview page — interactive map + package pitch tabs
+11. ✅ Dynamic country page `/countries/[slug]` + content gating
+12. ✅ Auth pages — login, signup, change-password, forgot-password, reset-password, verify-email
+13. ✅ Favourites — heart toggle, optimistic updates, status tracking, notes, compare modal
+14. ✅ Profile dashboard — favourites grid, checklist (localStorage), wishlist (guides tab)
+15. ✅ Services page + package detail pages (`/services/[country]/[type]`)
+16. ✅ Stripe webhook handler
+17. ✅ Scholarships browse + detail pages (`/services/scholarship`, `/services/scholarship/[id]`)
+18. ✅ Deadline calendar — personal deadlines (`personal_deadlines` table), colour coding, add/edit/remove, click-to-add on any date
+19. Messaging platform — user-to-user and/or alumni DMs via `messages` table
+20. About page
+21. Quiz redesign
+22. Resend transactional emails (no more "via Supabase" sender)
+23. GDPR cookie banner + Privacy / Terms pages
+24. Stripe payments live
+25. Notifications bell
+26. Mobile audit
+27. SEO — metadata, Open Graph, sitemap
+28. Macedonian locale — Phase 2, NOT v1
 
 ---
 
@@ -786,11 +853,11 @@ insert into universities (slug, name, country, country_slug, city, type, overvie
 5. **Never trust client for payment verification** — always webhook + purchases table
 6. **Never `sudo npm install`** — causes Mac permission issues
 7. **Always use server Supabase client in server components and API routes**
-8. **Always handle loading states** — Skeleton components, never blank flashes
+8. **Always handle loading states** — skeleton/pulse placeholders, never blank flashes
 9. **Always handle null/empty content gracefully** — content added independently of build
 10. **Always commit after each working feature** — clear messages, push to GitHub
 11. **Mobile first** — build and test mobile width first
-12. **App Router at root level** — `app/` not `src/app/`, `middleware.ts` at root
+12. **App Router at root level** — `app/` not `src/app/`; no `middleware.ts`, auth is page-level
 
 ---
 
@@ -801,6 +868,5 @@ insert into universities (slug, name, country, country_slug, city, type, overvie
 - Webflow export is reference only — use for visual/CSS inspiration, never copy HTML directly
 - When a feature is complete, tell Mila what was built and what to test at localhost:3000
 - This is a real product for real users — quality matters, no shortcuts on UX or error handling
-- Check `node_modules/next/dist/docs/` for version-specific APIs before writing code
 - Tailwind v4 — no tailwind.config.js, CSS-first @theme in globals.css
 - Content is added by research team independently — always handle missing/null fields gracefully
