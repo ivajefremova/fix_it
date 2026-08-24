@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
+import CommunityFeed from '@/components/community/CommunityFeed'
+import { Suspense } from 'react'
 
 type Course      = { name: string; link?: string; language?: string }
 type Requirement = { requirement: string }
@@ -528,6 +530,15 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
             </Card>
           </RevealOnScroll>
         )}
+
+        {/* ─── COMMUNITY ──────────────────────────────────────────────────── */}
+        <RevealOnScroll delay={180}>
+          <Card>
+            <Suspense fallback={null}>
+              <CommunityFeed universitySlug={university.slug} compact />
+            </Suspense>
+          </Card>
+        </RevealOnScroll>
 
       </div>
     </main>

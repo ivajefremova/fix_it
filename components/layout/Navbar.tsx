@@ -13,6 +13,7 @@ const navLinks = [
   { href: '/universities', label: 'Universities' },
   { href: '/services/scholarship', label: 'Scholarships' },
   { href: '/services', label: 'Services' },
+  { href: '/community', label: 'Community' },
 ]
 
 export default function Navbar() {

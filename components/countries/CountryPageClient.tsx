@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, Suspense } from 'react'
 import Link from 'next/link'
 import FavouriteButton from '@/components/universities/FavouriteButton'
+import CommunityFeed from '@/components/community/CommunityFeed'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -670,6 +671,16 @@ export default function CountryPageClient({ country, gated, gatedDocs, gatedScho
         )}
 
       </div>
+
+      {/* ─── COMMUNITY ───────────────────────────────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 pb-16">
+        <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-sm">
+          <Suspense fallback={null}>
+            <CommunityFeed countrySlug={country.slug} compact />
+          </Suspense>
+        </div>
+      </div>
+
     </main>
   )
 }
