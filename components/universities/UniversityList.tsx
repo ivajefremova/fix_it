@@ -195,15 +195,19 @@ export default function UniversityList({
   const filtered = useMemo(() => {
     if (!isFiltered) return []
     const results = universities.filter(u => {
-      const q = search.toLowerCase()
-      if (q && !u.name.toLowerCase().includes(q) && !u.city?.toLowerCase().includes(q) && !u.tags?.some(t => t.includes(q))) return false
+      if (search) {
+        const words = search.toLowerCase().split(/\s+/).filter(Boolean)
+        const haystack = [u.name, u.city, u.country, u.quick_summary, u.ranking_summary, ...(u.tags ?? [])]
+          .filter(Boolean).join(' ').toLowerCase()
+        if (!words.every(w => haystack.includes(w))) return false
+      }
       if (countryFilter !== 'all' && u.country_slug !== countryFilter) return false
       if (typeFilter !== 'all' && u.type !== typeFilter) return false
       if (fieldFilter !== 'All') {
         const matchTags = FIELD_TAGS[fieldFilter] ?? []
         if (!u.tags?.some(t => matchTags.includes(t.toLowerCase()))) return false
       }
-      if (levelFilter !== 'All' && !u.tags?.includes(levelFilter.toLowerCase())) return false
+      if (levelFilter !== 'All' && !u.tags?.map(t => t.toLowerCase()).includes(levelFilter.toLowerCase())) return false
       if (scholarshipFilter && !u.has_scholarship) return false
       return true
     })
@@ -232,7 +236,7 @@ export default function UniversityList({
           </svg>
           <input
             type="text"
-            placeholder="Search by name, city or field..."
+            placeholder="Search by name, city, country, field..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm text-navy placeholder-gray-300 focus:outline-none transition"

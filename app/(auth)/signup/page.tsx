@@ -36,29 +36,34 @@ export default function SignupPage() {
 
     setLoading(true)
 
-    const supabase = createClient()
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { full_name: fullName, user_type: userType },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
-    })
+    try {
+      const supabase = createClient()
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { full_name: fullName, user_type: userType },
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      })
 
-    if (error) {
-      toast.error(error.message)
+      if (error) {
+        toast.error(error.message)
+        setLoading(false)
+        return
+      }
+
+      if (data.user?.identities?.length === 0) {
+        toast.error('An account with this email already exists. Try logging in.')
+        setLoading(false)
+        return
+      }
+
+      router.push('/verify-email')
+    } catch {
+      toast.error('Could not connect. Please try again in a moment.')
       setLoading(false)
-      return
     }
-
-    if (data.user?.identities?.length === 0) {
-      toast.error('An account with this email already exists. Try logging in.')
-      setLoading(false)
-      return
-    }
-
-    router.push('/verify-email')
   }
 
   return (

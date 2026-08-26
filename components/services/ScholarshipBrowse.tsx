@@ -61,21 +61,23 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
   const [country,    setCountry]    = useState('all')
   const [typeFilter, setTypeFilter] = useState('all')
   const [level,      setLevel]      = useState('all')
-  const [uniSearch,  setUniSearch]  = useState('')
+  const [search,     setSearch]     = useState('')
 
   const filtered = useMemo(() => {
     return scholarships.filter(s => {
       if (country !== 'all' && s.country_slug !== country) return false
       if (typeFilter !== 'all' && s.scholarship_type !== typeFilter) return false
-      if (level !== 'all' && !s.levels?.includes(level)) return false
-      if (uniSearch) {
-        const q = uniSearch.toLowerCase()
-        const uniNames = s.university_slugs.map(sl => uniBySlug[sl]?.toLowerCase() ?? '')
-        if (!uniNames.some(n => n.includes(q))) return false
+      if (level !== 'all' && !s.levels?.map(l => l.toLowerCase()).includes(level.toLowerCase())) return false
+      if (search) {
+        const words = search.toLowerCase().split(/\s+/).filter(Boolean)
+        const uniNames = s.university_slugs.map(sl => uniBySlug[sl] ?? '').join(' ')
+        const haystack = [s.name, s.description, s.country, s.eligibility, s.amount, uniNames]
+          .filter(Boolean).join(' ').toLowerCase()
+        if (!words.every(w => haystack.includes(w))) return false
       }
       return true
     })
-  }, [scholarships, country, typeFilter, level, uniSearch, uniBySlug])
+  }, [scholarships, country, typeFilter, level, search, uniBySlug])
 
 
   return (
@@ -103,18 +105,18 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
         <div className="bg-white rounded-2xl p-5 mb-8" style={{ border: '1px solid #eef0f3', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
           <div className="flex flex-wrap gap-3 items-end">
 
-            {/* University search */}
-            <div className="flex flex-col gap-1.5 flex-1 min-w-[180px]">
-              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>University</label>
+            {/* General search */}
+            <div className="flex flex-col gap-1.5 flex-1 min-w-[220px]">
+              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Search</label>
               <div className="relative">
                 <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none" style={{ color: 'rgba(24,24,49,0.3)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
                 <input
                   type="text"
-                  placeholder="Search by university name..."
-                  value={uniSearch}
-                  onChange={e => setUniSearch(e.target.value)}
+                  placeholder="Scholarship name, university, eligibility..."
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
                   className="w-full pl-8 pr-3 py-2 rounded-xl text-xs focus:outline-none"
                   style={{ background: '#f8f9fb', border: '1px solid #eef0f3', fontWeight: 300, fontFamily: 'inherit', color: '#181831' }}
                 />

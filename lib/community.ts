@@ -1,14 +1,14 @@
 export const COMMUNITY_COUNTRIES = [
-  { slug: 'spain',       name: 'Spain',       emoji: '🇪🇸' },
-  { slug: 'italy',       name: 'Italy',       emoji: '🇮🇹' },
-  { slug: 'france',      name: 'France',      emoji: '🇫🇷' },
-  { slug: 'germany',     name: 'Germany',     emoji: '🇩🇪' },
-  { slug: 'netherlands', name: 'Netherlands', emoji: '🇳🇱' },
-  { slug: 'austria',     name: 'Austria',     emoji: '🇦🇹' },
-  { slug: 'hungary',     name: 'Hungary',     emoji: '🇭🇺' },
-  { slug: 'slovenia',    name: 'Slovenia',    emoji: '🇸🇮' },
-  { slug: 'uk',          name: 'UK',          emoji: '🇬🇧' },
-  { slug: 'greece',      name: 'Greece',      emoji: '🇬🇷' },
+  { slug: 'spain',       name: 'Spain' },
+  { slug: 'italy',       name: 'Italy' },
+  { slug: 'france',      name: 'France' },
+  { slug: 'germany',     name: 'Germany' },
+  { slug: 'netherlands', name: 'Netherlands' },
+  { slug: 'austria',     name: 'Austria' },
+  { slug: 'hungary',     name: 'Hungary' },
+  { slug: 'slovenia',    name: 'Slovenia' },
+  { slug: 'uk',          name: 'UK' },
+  { slug: 'greece',      name: 'Greece' },
 ]
 
 export const COMMUNITY_CATEGORIES = [
@@ -16,7 +16,6 @@ export const COMMUNITY_CATEGORIES = [
   'Scholarships',
   'Visa & documents',
   'Student life',
-  'Accommodation',
   'General',
 ]
 
@@ -24,6 +23,7 @@ export type CommunityPost = {
   id: string
   type: 'question' | 'answer'
   parent_id: string | null
+  user_id: string | null
   author_alias: string | null
   content: string
   country_slug: string | null

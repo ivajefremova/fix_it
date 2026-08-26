@@ -230,7 +230,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
                           borderColor: country === c.slug ? '#181831' : '#eef0f3',
                         }}
                       >
-                        {c.emoji} {c.name}
+                        {c.name}
                       </button>
                     ))}
                   </div>

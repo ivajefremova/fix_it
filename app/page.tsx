@@ -18,19 +18,6 @@ export default function HomePage() {
       {/* Divider */}
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
-      {/* ─── COUNTRIES ────────────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-[90%] mx-auto mb-10">
-          <RevealOnScroll>
-            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>Destinations</p>
-            <h2 className="text-2xl sm:text-3xl text-navy" style={{ fontWeight: 400 }}>
-              Find your dream study destination
-            </h2>
-          </RevealOnScroll>
-        </div>
-        <CountryMarquee />
-      </section>
-
       {/* ─── SEARCH ───────────────────────────────────────────────────────── */}
       <HomepageSearch />
 
@@ -49,6 +36,9 @@ export default function HomePage() {
           <RevealOnScroll delay={100}>
             <ServicesTab />
           </RevealOnScroll>
+        </div>
+        <div style={{ marginTop: 80, borderTop: '1px solid #e4ebf3', paddingTop: 80 }}>
+          <CountryMarquee />
         </div>
       </section>
 

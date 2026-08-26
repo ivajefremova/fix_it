@@ -17,21 +17,26 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
 
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    try {
+      const supabase = createClient()
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-    if (error) {
-      toast.error(
-        error.message === 'Invalid login credentials'
-          ? 'Incorrect email or password.'
-          : error.message
-      )
+      if (error) {
+        toast.error(
+          error.message === 'Invalid login credentials'
+            ? 'Incorrect email or password.'
+            : error.message
+        )
+        setLoading(false)
+        return
+      }
+
+      router.push('/profile')
+      router.refresh()
+    } catch {
+      toast.error('Could not connect. Please try again in a moment.')
       setLoading(false)
-      return
     }
-
-    router.push('/profile')
-    router.refresh()
   }
 
   return (
