@@ -519,7 +519,7 @@ export default function HousingBoard() {
                             <button
                               onClick={() => markStatus(l.id, l.listing_type === 'offering' ? 'taken' : 'found')}
                               style={{
-                                width: '100%', padding: '10px', borderTop: '1px solid #eef0f3',
+                                width: '100%', padding: '10px',
                                 background: 'transparent', border: 'none', borderTop: '1px solid #eef0f3',
                                 cursor: 'pointer', fontSize: 11, fontFamily: 'inherit', fontWeight: 300,
                                 color: 'rgba(24,24,49,0.38)', display: 'flex', alignItems: 'center',

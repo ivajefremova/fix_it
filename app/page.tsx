@@ -2,10 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import StatsCounter from '@/components/home/StatsCounter'
-import ServicesTab from '@/components/home/ServicesTab'
 import CountryMarquee from '@/components/home/CountryMarquee'
 import HeroSection from '@/components/home/HeroSection'
 import HomepageSearch from '@/components/home/HomepageSearch'
+import HowItWorks from '@/components/home/HowItWorks'
 
 
 export default function HomePage() {
@@ -15,34 +15,16 @@ export default function HomePage() {
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <HeroSection />
 
-      {/* Divider */}
+      <div style={{ height: '1px', background: '#e4ebf3' }} />
+
+      {/* ─── HOW IT WORKS ─────────────────────────────────────────────────── */}
+      <HowItWorks />
+
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
       {/* ─── SEARCH ───────────────────────────────────────────────────────── */}
       <HomepageSearch />
 
-      {/* Divider */}
-      <div style={{ height: '1px', background: '#e4ebf3' }} />
-
-      {/* ─── SERVICES ─────────────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-[90%] mx-auto">
-          <RevealOnScroll className="mb-10">
-            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>What we cover</p>
-            <h2 className="text-2xl sm:text-3xl text-navy" style={{ fontWeight: 400 }}>
-              Essential information, all here.
-            </h2>
-          </RevealOnScroll>
-          <RevealOnScroll delay={100}>
-            <ServicesTab />
-          </RevealOnScroll>
-        </div>
-        <div style={{ marginTop: 80, borderTop: '1px solid #e4ebf3', paddingTop: 80 }}>
-          <CountryMarquee />
-        </div>
-      </section>
-
-      {/* Divider */}
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
       {/* ─── ABOUT + STATS ────────────────────────────────────────────────── */}
@@ -80,7 +62,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Divider */}
+      <div style={{ height: '1px', background: '#e4ebf3' }} />
+
+      {/* ─── COUNTRY MARQUEE ──────────────────────────────────────────────── */}
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="max-w-[90%] mx-auto mb-10">
+          <RevealOnScroll>
+            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>10 countries covered</p>
+            <h2 className="text-2xl sm:text-3xl text-navy" style={{ fontWeight: 300 }}>
+              Where do you want to study?
+            </h2>
+          </RevealOnScroll>
+        </div>
+        <CountryMarquee />
+      </section>
+
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
       {/* ─── QUIZ ─────────────────────────────────────────────────────────── */}
@@ -125,7 +121,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Divider */}
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
       {/* ─── TRUST ────────────────────────────────────────────────────────── */}

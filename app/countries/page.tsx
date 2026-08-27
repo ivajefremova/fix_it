@@ -1,9 +1,8 @@
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
+import { createClient } from '@/lib/supabase/server'
 import CountriesInteractive from '@/components/countries/CountriesInteractive'
-import CountryPackageTabs from '@/components/countries/CountryPackageTabs'
-import DocumentsPackageTabs from '@/components/countries/DocumentsPackageTabs'
+import CountryGuidesSection from '@/components/countries/CountryGuidesSection'
 import PhotoGallery from '@/components/countries/PhotoGallery'
 
 export const metadata = {
@@ -23,66 +22,20 @@ export default async function CountriesPage() {
   return (
     <main className="bg-white min-h-screen">
 
-      {/* ─── HERO + MAP + CAROUSEL (shared active state) ──────────────────── */}
+      {/* ─── HERO + MAP + CAROUSEL ─────────────────────────────────────────── */}
       <CountriesInteractive countries={list} />
 
-      <div style={{ height: '1px', background: '#e4ebf3' }} />
-
-      {/* ─── PACKAGES TABS ────────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-[90%] mx-auto">
-          <RevealOnScroll>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Guides</p>
-            <h2
-              className="mb-3"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}
-            >
-              Want to study abroad?
-            </h2>
-            <p className="text-sm mb-10 max-w-lg leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-              Pick a country and see exactly what you get — a paid, alumni-compiled guide covering everything you need to apply, get funded, and move there.
-            </p>
-          </RevealOnScroll>
-          <RevealOnScroll delay={80}>
-            <CountryPackageTabs countries={list} />
-          </RevealOnScroll>
-        </div>
-      </section>
+      {/* ─── GUIDES + DOCUMENTS (combined) ─────────────────────────────────── */}
+      <CountryGuidesSection countries={list} />
 
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
-      {/* ─── DOCUMENTS PACKAGE TABS ───────────────────────────────────────── */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-[90%] mx-auto">
-          <RevealOnScroll>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Moving abroad</p>
-            <h2
-              className="mb-3"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}
-            >
-              Need help moving there?
-            </h2>
-            <p className="text-sm mb-10 max-w-lg leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-              Visas, documents, bank accounts, arrival checklists — our Documents & Relocation package walks you through every step of actually moving abroad.
-            </p>
-          </RevealOnScroll>
-          <RevealOnScroll delay={80}>
-            <DocumentsPackageTabs countries={list} />
-          </RevealOnScroll>
-        </div>
-      </section>
-
-      <div style={{ height: '1px', background: '#e4ebf3' }} />
-
-      {/* ─── PHOTO GALLERY ────────────────────────────────────────────────── */}
+      {/* ─── PHOTO GALLERY ─────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24">
         <div className="max-w-[90%] mx-auto">
           <RevealOnScroll>
             <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Life abroad</p>
-            <h2
-              className="mb-10"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}
-            >
+            <h2 className="mb-10" style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}>
               A taste of student life
             </h2>
           </RevealOnScroll>
@@ -94,15 +47,12 @@ export default async function CountriesPage() {
 
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
-      {/* ─── QUIZ ─────────────────────────────────────────────────────────── */}
+      {/* ─── QUIZ ──────────────────────────────────────────────────────────── */}
       <section className="py-14 sm:py-20">
         <div className="max-w-[90%] mx-auto text-center">
           <RevealOnScroll>
             <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#51e74c' }}>Find your path</p>
-            <h2
-              className="mb-3"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(20px, 2.5vw, 32px)' }}
-            >
+            <h2 className="mb-3" style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
               Don&apos;t know where to start?
             </h2>
             <p className="text-sm mb-7 max-w-sm mx-auto" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>

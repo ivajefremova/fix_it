@@ -10,6 +10,7 @@ type Country = {
   slug: string
   name: string
   tagline: string | null
+  hero_image_url: string | null
 }
 
 export default function CountriesInteractive({ countries }: { countries: Country[] }) {
@@ -22,7 +23,7 @@ export default function CountriesInteractive({ countries }: { countries: Country
   return (
     <>
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20 border-b border-gray-100">
+      <section className="pt-12 pb-8 sm:pt-16 sm:pb-10 border-b border-gray-100">
         <div className="max-w-[90%] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>

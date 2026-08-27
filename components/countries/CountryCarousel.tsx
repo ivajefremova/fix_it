@@ -2,11 +2,13 @@
 
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Country = {
   slug: string
   name: string
   tagline: string | null
+  hero_image_url: string | null
 }
 
 type Props = {
@@ -31,11 +33,43 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
   if (!c) return null
 
   return (
-    <section className="bg-white" style={{ borderBottom: '1px solid #e4ebf3' }}>
-      <div className="max-w-[90%] mx-auto py-16 sm:py-24">
-        <div>
+    <section
+      className="bg-white relative overflow-hidden"
+      style={{ borderBottom: '1px solid #e4ebf3' }}
+    >
+      {/* Hero image — right side, gradient fade out on left */}
+      <div
+        style={{
+          position: 'absolute', inset: 0,
+          opacity: fading ? 0 : 1,
+          transition: 'opacity 0.22s ease',
+          pointerEvents: 'none',
+        }}
+      >
+        {(c.hero_image_url || c.slug) && (
+          <>
+            <Image
+              src={c.hero_image_url ?? `/images/countries/${c.slug}.png`}
+              alt={c.name}
+              fill
+              priority
+              style={{
+                objectFit: 'contain',
+                objectPosition: 'left center',
+              }}
+            />
+            {/* Gradient overlay — white from right, transparent to left */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'linear-gradient(to left, #ffffff 50%, rgba(255,255,255,0.3) 78%, rgba(255,255,255,0) 98%)',
+            }} />
+          </>
+        )}
+      </div>
 
-          {/* text */}
+      {/* Content — right half, image shows on the left */}
+      <div className="max-w-[90%] mx-auto pt-8 pb-14 sm:pt-10 sm:pb-20 relative">
+        <div style={{ marginLeft: 'auto', width: '50%' }}>
           <div
             style={{
               opacity: fading ? 0 : 1,
@@ -69,50 +103,47 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
             </Link>
           </div>
 
+          {/* Controls */}
+          <div className="flex items-center gap-5 mt-12">
+            <button
+              onClick={prev}
+              aria-label="Previous"
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:bg-gray-100 active:scale-95"
+              style={{ border: '1px solid #e4ebf3', background: 'rgba(255,255,255,0.8)' }}
+            >
+              <svg className="w-4 h-4 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+            <button
+              onClick={next}
+              aria-label="Next"
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:bg-gray-100 active:scale-95"
+              style={{ border: '1px solid #e4ebf3', background: 'rgba(255,255,255,0.8)' }}
+            >
+              <svg className="w-4 h-4 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
 
-        </div>
-
-        {/* Controls — below content */}
-        <div className="flex items-center gap-5 mt-12">
-          <button
-            onClick={prev}
-            aria-label="Previous"
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:bg-gray-100 active:scale-95"
-            style={{ border: '1px solid #e4ebf3' }}
-          >
-            <svg className="w-4 h-4 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-          </button>
-          <button
-            onClick={next}
-            aria-label="Next"
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:bg-gray-100 active:scale-95"
-            style={{ border: '1px solid #e4ebf3' }}
-          >
-            <svg className="w-4 h-4 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </button>
-
-          {/* Dots */}
-          <div className="flex items-center gap-2 ml-2">
-            {countries.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => go(i)}
-                aria-label={`Go to ${countries[i].name}`}
-                className="rounded-full transition-all duration-300"
-                style={{
-                  height: '5px',
-                  width: i === active ? '24px' : '5px',
-                  background: i === active ? '#51e74c' : '#d1d9e0',
-                }}
-              />
-            ))}
+            {/* Dots */}
+            <div className="flex items-center gap-2 ml-2">
+              {countries.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => go(i)}
+                  aria-label={`Go to ${countries[i].name}`}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    height: '5px',
+                    width: i === active ? '24px' : '5px',
+                    background: i === active ? '#51e74c' : '#d1d9e0',
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   )
