@@ -411,10 +411,7 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
                           {f.city && <span className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{f.city}</span>}
                           {f.city && f.type && <span style={{ color: '#e4ebf3', fontSize: 10 }}>·</span>}
                           {f.type && (
-                            <span className="text-xs px-2 py-0.5 rounded-full" style={{
-                              background: f.type === 'Public' ? 'rgba(12,77,134,0.08)' : 'rgba(81,231,76,0.1)',
-                              color: f.type === 'Public' ? '#0c4d86' : '#181831', fontWeight: 300,
-                            }}>{f.type}</span>
+                            <span className="text-xs" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>{f.type}</span>
                           )}
                           {f.tuition_range && (
                             <>
@@ -626,11 +623,7 @@ export default function ProfilePageClient({ userId, name, email, initials, userT
             <p className="text-sm mt-0.5 truncate" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{email}</p>
           </div>
           {userType && (
-            <span className="hidden sm:block text-xs px-3 py-1 rounded-full flex-shrink-0" style={{
-              border: `1px solid ${userType === 'student' ? 'rgba(12,77,134,0.3)' : 'rgba(81,231,76,0.4)'}`,
-              color: userType === 'student' ? '#0c4d86' : '#15803d',
-              fontWeight: 300,
-            }}>
+            <span className="hidden sm:block text-xs flex-shrink-0" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>
               {userType === 'student' ? 'Student' : 'Parent'}
             </span>
           )}
@@ -668,14 +661,10 @@ export default function ProfilePageClient({ userId, name, email, initials, userT
                   >
                     {t}
                     {t === 'Universities' && favourites.length > 0 && (
-                      <span className="ml-1.5 text-xs px-1.5 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                        {favourites.length}
-                      </span>
+                      <span className="ml-1 text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>({favourites.length})</span>
                     )}
                     {t === 'Guides' && wishlist.length > 0 && (
-                      <span className="ml-1.5 text-xs px-1.5 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                        {wishlist.length}
-                      </span>
+                      <span className="ml-1 text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>({wishlist.length})</span>
                     )}
                   </button>
                 ))}

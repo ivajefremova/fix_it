@@ -114,18 +114,17 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
 
             {/* Left */}
             <div>
-              <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span
-                  className="text-xs px-2.5 py-1 rounded-full"
-                  style={{ background: typeColors.bg, color: typeColors.color, fontWeight: 300 }}
-                >
-                  {TYPE_LABELS[s.scholarship_type ?? 'merit-based']}
-                </span>
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className="text-xs" style={{ color: typeColors.color, fontWeight: 300 }}>{TYPE_LABELS[s.scholarship_type ?? 'merit-based']}</span>
+                <span style={{ color: '#e4ebf3', fontSize: 10 }}>·</span>
                 <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>{s.country}</span>
                 {s.levels && s.levels.map(l => (
-                  <span key={l} className="text-xs px-2.5 py-1 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                    {l.charAt(0).toUpperCase() + l.slice(1)}
-                  </span>
+                  <>
+                    <span key={l + '-dot'} style={{ color: '#e4ebf3', fontSize: 10 }}>·</span>
+                    <span key={l} className="text-xs" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                      {l.charAt(0).toUpperCase() + l.slice(1)}
+                    </span>
+                  </>
                 ))}
               </div>
 

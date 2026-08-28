@@ -191,16 +191,7 @@ function UniCard({ uni, isFavourited, isLoggedIn }: { uni: University; isFavouri
         )}
         {uni.city && uni.type && <span style={{ color: '#e4ebf3' }}>·</span>}
         {uni.type && (
-          <span
-            className="text-xs px-2 py-0.5 rounded-full"
-            style={{
-              background: uni.type === 'Public' ? 'rgba(12,77,134,0.08)' : 'rgba(81,231,76,0.1)',
-              color: uni.type === 'Public' ? '#0c4d86' : '#181831',
-              fontWeight: 300,
-            }}
-          >
-            {uni.type}
-          </span>
+          <span className="text-xs" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>{uni.type}</span>
         )}
         {uni.tuition_range && (
           <>
@@ -415,9 +406,7 @@ export default function CountryPageClient({ country, gated, gatedDocs, gatedScho
                         <div key={i} className="rounded-xl p-5" style={{ border: '1px solid #eef0f3', background: '#fafafa' }}>
                           <h3 className="text-base text-navy mb-1.5" style={{ fontWeight: 300 }}>{c.city}</h3>
                           {c.best_for && (
-                            <span className="text-xs px-2 py-0.5 rounded-full inline-block mb-3" style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 300 }}>
-                              Best for: {c.best_for}
-                            </span>
+                            <p className="text-xs mb-3" style={{ color: '#51e74c', fontWeight: 300 }}>Best for: {c.best_for}</p>
                           )}
                           {c.description && (
                             <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{c.description}</p>
@@ -543,12 +532,12 @@ export default function CountryPageClient({ country, gated, gatedDocs, gatedScho
                         {s.eligibility && (
                           <p className="text-sm leading-relaxed mb-2" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{s.eligibility}</p>
                         )}
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-3">
                           {s.amount && (
-                            <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 300 }}>{s.amount}</span>
+                            <span className="text-xs" style={{ color: '#0c4d86', fontWeight: 300 }}>{s.amount}</span>
                           )}
                           {s.deadline && (
-                            <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>Deadline: {s.deadline}</span>
+                            <span className="text-xs" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>Deadline: {s.deadline}</span>
                           )}
                         </div>
                       </div>

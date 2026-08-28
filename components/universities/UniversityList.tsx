@@ -51,26 +51,12 @@ function UniversityCard({ u, rankingLabel, isFavourited, isLoggedIn }: { u: Univ
             <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
               {[u.city, u.country].filter(Boolean).join(' · ')}
             </p>
-            <div className="flex items-center gap-1.5 flex-shrink-0">
+            <div className="flex items-center gap-2 flex-shrink-0">
               {rankingLabel && (
-                <span
-                  className="text-xs px-2.5 py-1 rounded-full"
-                  style={{ background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 300 }}
-                >
-                  {rankingLabel}
-                </span>
+                <span className="text-xs" style={{ color: '#0c4d86', fontWeight: 300 }}>{rankingLabel}</span>
               )}
               {u.type && (
-                <span
-                  className="text-xs px-2.5 py-1 rounded-full"
-                  style={{
-                    background: u.type === 'Public' ? 'rgba(12,77,134,0.07)' : 'rgba(81,231,76,0.1)',
-                    color: u.type === 'Public' ? '#0c4d86' : '#181831',
-                    fontWeight: 300,
-                  }}
-                >
-                  {u.type}
-                </span>
+                <span className="text-xs" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>{u.type}</span>
               )}
             </div>
           </div>
@@ -119,21 +105,10 @@ function UniversityRow({ u, isFavourited, isLoggedIn }: { u: University; isFavou
           <div className="flex items-center gap-2 mb-0.5 flex-wrap">
             <h3 className="text-base text-navy" style={{ fontWeight: 300 }}>{u.name}</h3>
             {u.type && (
-              <span
-                className="text-xs px-2 py-0.5 rounded-full flex-shrink-0"
-                style={{
-                  background: u.type === 'Public' ? 'rgba(12,77,134,0.08)' : 'rgba(81,231,76,0.1)',
-                  color: u.type === 'Public' ? '#0c4d86' : '#181831',
-                  fontWeight: 300,
-                }}
-              >
-                {u.type}
-              </span>
+              <span className="text-xs" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300, flexShrink: 0 }}>{u.type}</span>
             )}
             {u.has_scholarship && (
-              <span className="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: 'rgba(81,231,76,0.12)', color: '#181831', fontWeight: 300 }}>
-                Scholarship
-              </span>
+              <span className="text-xs" style={{ color: '#51e74c', fontWeight: 300, flexShrink: 0 }}>Scholarship</span>
             )}
           </div>
           <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>

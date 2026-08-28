@@ -97,15 +97,9 @@ export default function ScholarshipTabs({ universities, scholarships }: Props) {
             View all available scholarships in {active.name}, assistance, deadlines and advice coming from international students who have gotten the scholarship.
           </p>
 
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8 text-xs"
-            style={{ background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 300 }}
-          >
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-            </svg>
+          <p className="text-xs mb-8" style={{ color: '#0c4d86', fontWeight: 300 }}>
             One-time purchase · Covers all 8 countries · €5.99
-          </div>
+          </p>
 
           <Link
             href="/services/scholarship"
@@ -144,23 +138,15 @@ export default function ScholarshipTabs({ universities, scholarships }: Props) {
                     <p className="text-xs mb-2" style={{ color: '#0c4d86', fontWeight: 300 }}>{s.amount}</p>
                   )}
 
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-col gap-1">
                     {coveredNames.map(name => (
-                      <span
-                        key={name}
-                        className="text-xs px-2 py-0.5 rounded-full"
-                        style={{ background: 'rgba(81,231,76,0.12)', color: '#181831', fontWeight: 300 }}
-                      >
-                        {name}
-                      </span>
+                      <div key={name} style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                        <span style={{ color: '#51e74c', flexShrink: 0 }}>•</span>
+                        <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{name}</span>
+                      </div>
                     ))}
                     {s.deadline && (
-                      <span
-                        className="text-xs px-2 py-0.5 rounded-full"
-                        style={{ background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 300 }}
-                      >
-                        {s.deadline}
-                      </span>
+                      <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>Deadline: {s.deadline}</span>
                     )}
                   </div>
                 </div>

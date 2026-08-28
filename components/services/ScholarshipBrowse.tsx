@@ -200,13 +200,9 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
 
                     {/* Left — info */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span
-                          className="text-xs px-2.5 py-1 rounded-full"
-                          style={{ background: colors.bg, color: colors.color, fontWeight: 300 }}
-                        >
-                          {TYPE_LABELS[s.scholarship_type ?? 'merit-based'] ?? s.scholarship_type}
-                        </span>
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <span className="text-xs" style={{ color: colors.color, fontWeight: 300 }}>{TYPE_LABELS[s.scholarship_type ?? 'merit-based'] ?? s.scholarship_type}</span>
+                        <span style={{ color: '#e4ebf3', fontSize: 10 }}>·</span>
                         <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>{s.country}</span>
                       </div>
 

@@ -80,9 +80,7 @@ function CourseRow({ course }: { course: Course }) {
         <span style={{ color: '#51e74c', fontSize: '8px', flexShrink: 0 }}>●</span>
         <span className="text-sm text-navy truncate" style={{ fontWeight: 300 }}>{course.name}</span>
         {course.language && course.language !== 'English' && (
-          <span className="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-            {course.language}
-          </span>
+          <span className="text-xs flex-shrink-0" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>{course.language}</span>
         )}
       </div>
       {course.link && (
@@ -210,12 +208,8 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
               </p>
               {university.type && (
                 <span
-                  className="text-xs px-2.5 py-1 rounded-full flex-shrink-0"
-                  style={{
-                    background: university.type === 'Public' ? 'rgba(12,77,134,0.07)' : 'rgba(81,231,76,0.1)',
-                    color: university.type === 'Public' ? '#0c4d86' : '#181831',
-                    fontWeight: 300,
-                  }}
+                  className="text-xs flex-shrink-0"
+                  style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}
                 >
                   {university.type}
                 </span>
@@ -263,15 +257,12 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                 {university.tags && university.tags.length > 0 && (
                   <div>
                     <p className="text-xs mb-2" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>Fields of study</p>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-col gap-1.5">
                       {university.tags.map((tag: string) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2.5 py-1 rounded-full capitalize"
-                          style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}
-                        >
-                          {tag}
-                        </span>
+                        <div key={tag} style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                          <span style={{ color: '#51e74c', flexShrink: 0 }}>•</span>
+                          <span className="text-xs capitalize" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{tag}</span>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -463,12 +454,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <p className="text-sm text-navy" style={{ fontWeight: 300 }}>{s.name}</p>
                       {s.amount && (
-                        <span
-                          className="text-xs px-2.5 py-1 rounded-full flex-shrink-0"
-                          style={{ background: 'rgba(81,231,76,0.12)', color: '#181831', fontWeight: 300 }}
-                        >
-                          {s.amount}
-                        </span>
+                        <span className="text-xs flex-shrink-0" style={{ color: '#0c4d86', fontWeight: 300 }}>{s.amount}</span>
                       )}
                     </div>
                     {s.description && (
