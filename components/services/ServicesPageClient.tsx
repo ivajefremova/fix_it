@@ -78,68 +78,6 @@ const PACKAGES = [
   },
 ]
 
-const HOW_IT_WORKS = [
-  {
-    label: 'Pick your guide',
-    description: 'Choose the package that matches where you are in the process.',
-    icon: (
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Pay once',
-    description: 'No subscription. No recurring charges. Yours permanently.',
-    icon: (
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Apply with confidence',
-    description: 'Access your guide any time. Everything in one place, always up to date.',
-    icon: (
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
-      </svg>
-    ),
-  },
-]
-
-const BENEFITS = [
-  'Written by Macedonian alumni who have actually been there — not scraped data',
-  'One-time purchase, lifetime access. No subscriptions, no hidden fees',
-  'Step-by-step guidance, not just information dumps',
-  'Verified deadlines, scholarship requirements, and visa processes',
-  'Covers everything: from application to arrival and settling in',
-  'Available immediately after purchase, in your profile dashboard',
-]
-
-const TRIGGERS = [
-  {
-    label: 'Scholarship guide',
-    question: 'Need a scholarship to study abroad, but don\'t know if you are eligible?',
-    description: 'View which universities offer them and access advice and guidance from students who have received it.',
-    cta: 'View Scholarship Guide',
-    anchor: '#packages',
-  },
-  {
-    label: 'Documents guide',
-    question: 'Want to prepare for bureaucracy abroad?',
-    description: 'Check out our Documents guide for in-depth explanations on how to move abroad — visas, bank accounts, arrival checklists and more.',
-    cta: 'View Documents Guide',
-    anchor: '#packages',
-  },
-  {
-    label: 'Full country guide',
-    question: 'Want a complete breakdown of applying, enrolling, getting funded and settling in?',
-    description: 'Our Country Guide covers everything from admission requirements to career prospects — researched and verified by alumni.',
-    cta: 'View Full Guide',
-    anchor: '#packages',
-  },
-]
 
 export default function ServicesPageClient({ countries, purchases, wishlist, isLoggedIn, success }: Props) {
   const router = useRouter()
@@ -186,59 +124,18 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
           >
             Everything you need.<br />Nothing you don&apos;t.
           </h1>
-          <p className="text-sm max-w-md leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-            One-time purchases. Alumni-verified. Yours permanently.
-          </p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
+            {['One-time purchase', 'Alumni-verified', 'Lifetime access'].map((t, i) => (
+              <span key={i} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                <span style={{ color: '#51e74c', fontSize: 8 }}>●</span>
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
       <div className="max-w-[90%] mx-auto py-10 sm:py-14 space-y-12">
-
-        {/* ─── BENEFITS ────────────────────────────────────────────────────────── */}
-        <div className="bg-white rounded-2xl p-8 sm:p-10" style={{ border: '1px solid #eef0f3' }}>
-          <p className="text-xs uppercase tracking-widest mb-6" style={{ color: '#51e74c' }}>Why Fix It guides</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {BENEFITS.map((b, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <span className="mt-1.5 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center" style={{ background: 'rgba(81,231,76,0.15)' }}>
-                  <svg className="w-2.5 h-2.5" style={{ color: '#181831' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                </span>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>{b}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── TRIGGERS ────────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TRIGGERS.map((t, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-6 flex flex-col"
-              style={{ border: '1px solid #eef0f3' }}
-            >
-              <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c', fontWeight: 400 }}>{t.label}</p>
-              <p className="text-sm leading-snug mb-3 text-navy" style={{ fontWeight: 300, fontSize: 'clamp(15px, 1.5vw, 17px)' }}>
-                {t.question}
-              </p>
-              <p className="text-xs leading-relaxed mb-6" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                {t.description}
-              </p>
-              <a
-                href={t.anchor}
-                className="mt-auto inline-flex items-center gap-1.5 text-xs transition-all hover:opacity-80"
-                style={{ color: '#0c4d86', fontWeight: 300 }}
-              >
-                {t.cta}
-                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-                </svg>
-              </a>
-            </div>
-          ))}
-        </div>
 
         {/* ─── PACKAGES ────────────────────────────────────────────────────────── */}
         <div id="packages">
@@ -284,8 +181,8 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                   <div className="px-8 py-6 flex-1">
                     <ul className="space-y-3">
                       {pkg.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs leading-relaxed" style={{ color: 'rgba(24,24,49,0.6)', fontWeight: 300 }}>
-                          <span className="mt-0.5 flex-shrink-0" style={{ color: '#51e74c', fontSize: 8 }}>●</span>
+                        <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.6)', fontWeight: 300 }}>
+                          <span className="mt-1 flex-shrink-0" style={{ color: '#51e74c', fontSize: 8 }}>●</span>
                           {f}
                         </li>
                       ))}
@@ -313,7 +210,7 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                       <select
                         value={selectedCountry[pkg.id] ?? ''}
                         onChange={e => setSelectedCountry(prev => ({ ...prev, [pkg.id]: e.target.value }))}
-                        className="w-full rounded-xl px-4 py-2.5 text-xs outline-none transition"
+                        className="w-full rounded-xl px-4 py-3 text-sm outline-none transition"
                         style={{
                           border: '1px solid #e4ebf3',
                           background: '#fafafa',
@@ -331,7 +228,7 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
 
                     {owned ? (
                       <div
-                        className="w-full py-2.5 rounded-xl text-xs text-center"
+                        className="w-full py-3 rounded-xl text-sm text-center"
                         style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 300 }}
                       >
                         ✓ Already purchased
@@ -340,7 +237,7 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                       <button
                         onClick={() => handleNavigate(pkg.id)}
                         disabled={!canNavigate}
-                        className="w-full py-2.5 rounded-xl text-xs font-normal transition hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+                        className="w-full py-3 rounded-xl text-sm font-normal transition hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                         style={{ background: '#51e74c', color: '#181831' }}
                       >
                         {pkg.id === 'scholarship' ? 'Browse Scholarships' : `View ${pkg.name}`}
@@ -353,31 +250,6 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                 </div>
               )
             })}
-          </div>
-        </div>
-
-        {/* ─── HOW IT WORKS ────────────────────────────────────────────────────── */}
-        <div className="bg-white rounded-2xl p-8 sm:p-12 shadow-sm">
-          <p className="text-xs uppercase tracking-widest mb-8" style={{ color: '#51e74c' }}>How it works</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 relative">
-            <div
-              className="absolute hidden sm:block"
-              style={{ top: 16, left: 'calc(16.66% + 16px)', right: 'calc(16.66% + 16px)', height: '1px', background: '#e4ebf3' }}
-            />
-            {HOW_IT_WORKS.map((step, i) => (
-              <div key={i} className="flex flex-col items-start sm:items-center sm:text-center px-0 sm:px-6 mb-8 sm:mb-0">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center mb-4 relative z-10"
-                  style={{ background: 'white', border: '1px solid #e4ebf3', color: '#0c4d86' }}
-                >
-                  {step.icon}
-                </div>
-                <p className="text-sm text-navy mb-1.5" style={{ fontWeight: 300 }}>{step.label}</p>
-                <p className="text-xs leading-relaxed max-w-[200px]" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>
-                  {step.description}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
 

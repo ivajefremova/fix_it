@@ -44,11 +44,11 @@ function UniversityCard({ u, rankingLabel, isFavourited, isLoggedIn }: { u: Univ
     <div className="relative group">
       <Link href={`/universities/${u.slug}`} className="block">
         <div
-          className="bg-white rounded-2xl p-6 h-full flex flex-col transition-all duration-300 group-hover:shadow-md"
+          className="bg-white rounded-2xl p-8 h-full flex flex-col transition-all duration-300 group-hover:shadow-md"
           style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)' }}
         >
           <div className="flex items-center justify-between gap-2 mb-4">
-            <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+            <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
               {[u.city, u.country].filter(Boolean).join(' · ')}
             </p>
             <div className="flex items-center gap-1.5 flex-shrink-0">
@@ -74,14 +74,15 @@ function UniversityCard({ u, rankingLabel, isFavourited, isLoggedIn }: { u: Univ
               )}
             </div>
           </div>
-          <h2 className="text-base text-navy mb-1.5 leading-snug" style={{ fontWeight: 300 }}>{u.name}</h2>
+          <h2 className="text-lg text-navy mb-1.5 leading-snug" style={{ fontWeight: 300 }}>{u.name}</h2>
           {u.quick_summary && (
-            <p className="text-xs mb-4" style={{ color: '#0c4d86', fontWeight: 300 }}>{u.quick_summary}</p>
+            <p className="text-sm mb-4" style={{ color: '#0c4d86', fontWeight: 300 }}>{u.quick_summary}</p>
           )}
           {u.tags && u.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-4">
+            <div className="mb-4 flex flex-col gap-1.5">
               {u.tags.filter(t => !['english','bachelor','master','doctorate'].includes(t)).slice(0, 4).map(tag => (
-                <span key={tag} className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                <span key={tag} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
+                  <span style={{ color: '#51e74c', fontSize: 8, flexShrink: 0 }}>●</span>
                   {tag}
                 </span>
               ))}
@@ -89,10 +90,10 @@ function UniversityCard({ u, rankingLabel, isFavourited, isLoggedIn }: { u: Univ
           )}
           <div className="mt-auto pt-4 flex items-center justify-between" style={{ borderTop: '1px solid #f0f2f5' }}>
             {u.tuition_range
-              ? <p className="text-xs text-navy" style={{ fontWeight: 400 }}>{u.tuition_range}</p>
+              ? <p className="text-sm text-navy" style={{ fontWeight: 400 }}>{u.tuition_range}</p>
               : <span />
             }
-            <span className="flex items-center gap-1 text-xs transition-all duration-200 group-hover:gap-2" style={{ color: '#0c4d86', fontWeight: 300 }}>
+            <span className="flex items-center gap-1 text-sm transition-all duration-200 group-hover:gap-2" style={{ color: '#0c4d86', fontWeight: 300 }}>
               View guide
               <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -116,7 +117,7 @@ function UniversityRow({ u, isFavourited, isLoggedIn }: { u: University; isFavou
       <Link href={`/universities/${u.slug}`} className="flex-1 flex items-center gap-4 py-4 min-w-0">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-            <h3 className="text-sm text-navy" style={{ fontWeight: 300 }}>{u.name}</h3>
+            <h3 className="text-base text-navy" style={{ fontWeight: 300 }}>{u.name}</h3>
             {u.type && (
               <span
                 className="text-xs px-2 py-0.5 rounded-full flex-shrink-0"
@@ -135,7 +136,7 @@ function UniversityRow({ u, isFavourited, isLoggedIn }: { u: University; isFavou
               </span>
             )}
           </div>
-          <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+          <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
             {[u.city, u.quick_summary].filter(Boolean).join(' · ')}
           </p>
         </div>
@@ -336,7 +337,7 @@ export default function UniversityList({
       {/* ─── FILTERED GRID ──────────────────────────────────────────────────── */}
       {isFiltered && (
         <>
-          <p className="text-xs mb-5" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+          <p className="text-sm mb-5" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
             {filtered.length} {filtered.length === 1 ? 'university' : 'universities'}
           </p>
           {filtered.length === 0 ? (
@@ -387,7 +388,7 @@ export default function UniversityList({
 
           {/* Scrollable university list */}
           <div className="relative">
-            <p className="px-5 pt-4 pb-2 text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>
+            <p className="px-5 pt-4 pb-2 text-sm" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>
               {activeCountry.unis.length} {activeCountry.unis.length === 1 ? 'university' : 'universities'}
             </p>
             <div

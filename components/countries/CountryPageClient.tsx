@@ -153,12 +153,12 @@ function TeaserLock({ title, countryName, countrySlug, packageType = 'country' }
             </svg>
           </div>
           <h3 className="text-base text-navy mb-1.5" style={{ fontWeight: 300 }}>{title}</h3>
-          <p className="text-xs mb-5 max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+          <p className="text-sm mb-5 max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
             Part of the {countryName} {PACKAGE_LABELS[packageType]}.
           </p>
           <Link
             href={href}
-            className="inline-flex items-center justify-center px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-normal transition hover:opacity-90"
             style={{ background: '#51e74c', color: '#181831' }}
           >
             Unlock guide
@@ -211,17 +211,14 @@ function UniCard({ uni, isFavourited, isLoggedIn }: { uni: University; isFavouri
       </div>
 
       {uni.ranking_summary && (
-        <p className="text-xs mb-3" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{uni.ranking_summary}</p>
+        <p className="text-sm mb-3" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{uni.ranking_summary}</p>
       )}
 
       {uni.tags && uni.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {uni.tags.slice(0, 4).map(tag => (
-            <span
-              key={tag}
-              className="text-xs px-2 py-0.5 rounded-full"
-              style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}
-            >
+        <div className="flex flex-col gap-1.5">
+          {uni.tags.filter(t => !['english','bachelor','master','doctorate'].includes(t)).slice(0, 4).map(tag => (
+            <span key={tag} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
+              <span style={{ color: '#51e74c', fontSize: 8, flexShrink: 0 }}>●</span>
               {tag}
             </span>
           ))}
@@ -544,7 +541,7 @@ export default function CountryPageClient({ country, gated, gatedDocs, gatedScho
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>{s.name}</p>
                         {s.eligibility && (
-                          <p className="text-xs leading-relaxed mb-2" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{s.eligibility}</p>
+                          <p className="text-sm leading-relaxed mb-2" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{s.eligibility}</p>
                         )}
                         <div className="flex flex-wrap gap-2">
                           {s.amount && (

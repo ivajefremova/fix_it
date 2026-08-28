@@ -4,16 +4,16 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const COUNTRIES = [
-  { slug: 'italy',          name: 'Italy',          flag: '🇮🇹' },
-  { slug: 'germany',        name: 'Germany',        flag: '🇩🇪' },
-  { slug: 'netherlands',    name: 'Netherlands',    flag: '🇳🇱' },
-  { slug: 'spain',          name: 'Spain',          flag: '🇪🇸' },
-  { slug: 'austria',        name: 'Austria',        flag: '🇦🇹' },
-  { slug: 'hungary',        name: 'Hungary',        flag: '🇭🇺' },
-  { slug: 'slovenia',       name: 'Slovenia',       flag: '🇸🇮' },
-  { slug: 'united-kingdom', name: 'United Kingdom', flag: '🇬🇧' },
-  { slug: 'france',         name: 'France',         flag: '🇫🇷' },
-  { slug: 'greece',         name: 'Greece',         flag: '🇬🇷' },
+  { slug: 'italy',          name: 'Italy' },
+  { slug: 'germany',        name: 'Germany' },
+  { slug: 'netherlands',    name: 'Netherlands' },
+  { slug: 'spain',          name: 'Spain' },
+  { slug: 'austria',        name: 'Austria' },
+  { slug: 'hungary',        name: 'Hungary' },
+  { slug: 'slovenia',       name: 'Slovenia' },
+  { slug: 'united-kingdom', name: 'United Kingdom' },
+  { slug: 'france',         name: 'France' },
+  { slug: 'greece',         name: 'Greece' },
 ]
 
 const FIELDS   = ['Business', 'Engineering', 'Medicine', 'Law', 'Sciences', 'Humanities']
@@ -26,9 +26,9 @@ const selectStyle = (active: boolean): React.CSSProperties => ({
   color: active ? '#fff' : 'rgba(24,24,49,0.6)',
   fontWeight: 300,
   fontFamily: 'inherit',
-  fontSize: '13px',
+  fontSize: '15px',
   borderRadius: '12px',
-  padding: '10px 14px',
+  padding: '12px 16px',
   outline: 'none',
   cursor: 'pointer',
   appearance: 'none' as const,
@@ -74,7 +74,7 @@ export default function HomepageSearch() {
 
         <div className="mb-8">
           <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>University search</p>
-          <h2 className="text-2xl sm:text-3xl text-navy" style={{ fontWeight: 400 }}>
+          <h2 className="text-3xl sm:text-4xl text-navy" style={{ fontWeight: 300 }}>
             Find the right university for you.
           </h2>
         </div>
@@ -128,15 +128,15 @@ export default function HomepageSearch() {
               <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Funding</label>
               <button
                 onClick={() => setScholarship(p => !p)}
-                className="flex items-center gap-1.5 rounded-xl text-xs transition-all duration-200"
+                className="flex items-center gap-1.5 rounded-xl transition-all duration-200"
                 style={{
-                  padding: '10px 14px',
+                  padding: '12px 16px',
                   background: scholarship ? '#51e74c' : '#fff',
                   color: scholarship ? '#181831' : 'rgba(24,24,49,0.6)',
                   fontWeight: scholarship ? 400 : 300,
                   border: `1px solid ${scholarship ? '#51e74c' : '#eef0f3'}`,
                   cursor: 'pointer',
-                  fontSize: '13px',
+                  fontSize: '15px',
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -150,15 +150,15 @@ export default function HomepageSearch() {
             {/* Search button */}
             <button
               onClick={handleSearch}
-              className="inline-flex items-center gap-2 rounded-xl text-xs transition-all hover:opacity-90 flex-shrink-0"
+              className="inline-flex items-center gap-2 rounded-xl transition-all hover:opacity-90 flex-shrink-0"
               style={{
-                padding: '10px 20px',
+                padding: '12px 24px',
                 background: '#51e74c',
                 color: '#181831',
                 fontWeight: 400,
                 border: 'none',
                 cursor: 'pointer',
-                fontSize: '13px',
+                fontSize: '15px',
               }}
             >
               {activeCount > 0 && (

@@ -117,7 +117,7 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
                   placeholder="Scholarship name, university, eligibility..."
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="w-full pl-8 pr-3 py-2 rounded-xl text-xs focus:outline-none"
+                  className="w-full pl-8 pr-3 py-2.5 rounded-xl text-sm focus:outline-none"
                   style={{ background: '#f8f9fb', border: '1px solid #eef0f3', fontWeight: 300, fontFamily: 'inherit', color: '#181831' }}
                 />
               </div>
@@ -129,7 +129,7 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
               <select
                 value={country}
                 onChange={e => setCountry(e.target.value)}
-                className="rounded-xl px-3 py-2 text-xs outline-none"
+                className="rounded-xl px-3 py-2.5 text-sm outline-none"
                 style={{ border: '1px solid #eef0f3', background: country !== 'all' ? '#181831' : '#f0f2f5', color: country !== 'all' ? '#fff' : 'rgba(24,24,49,0.6)', fontWeight: 300, fontFamily: 'inherit' }}
               >
                 <option value="all">All countries</option>
@@ -143,7 +143,7 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
               <select
                 value={typeFilter}
                 onChange={e => setTypeFilter(e.target.value)}
-                className="rounded-xl px-3 py-2 text-xs outline-none"
+                className="rounded-xl px-3 py-2.5 text-sm outline-none"
                 style={{ border: '1px solid #eef0f3', background: typeFilter !== 'all' ? '#181831' : '#f0f2f5', color: typeFilter !== 'all' ? '#fff' : 'rgba(24,24,49,0.6)', fontWeight: 300, fontFamily: 'inherit' }}
               >
                 <option value="all">All types</option>
@@ -159,7 +159,7 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
               <select
                 value={level}
                 onChange={e => setLevel(e.target.value)}
-                className="rounded-xl px-3 py-2 text-xs outline-none"
+                className="rounded-xl px-3 py-2.5 text-sm outline-none"
                 style={{ border: '1px solid #eef0f3', background: level !== 'all' ? '#181831' : '#f0f2f5', color: level !== 'all' ? '#fff' : 'rgba(24,24,49,0.6)', fontWeight: 300, fontFamily: 'inherit' }}
               >
                 <option value="all">All levels</option>
@@ -172,7 +172,7 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
         </div>
 
         {/* ─── COUNT ────────────────────────────────────────────────────────────── */}
-        <p className="text-xs mb-6" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+        <p className="text-sm mb-6" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
           {filtered.length} {filtered.length === 1 ? 'scholarship' : 'scholarships'}
         </p>
 
@@ -210,10 +210,10 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
                       <h3 className="text-base text-navy mb-1.5 leading-snug" style={{ fontWeight: 300 }}>{s.name}</h3>
 
                       {s.description && (
-                        <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{s.description}</p>
+                        <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{s.description}</p>
                       )}
 
-                      <div className="flex flex-wrap gap-3 text-xs mb-4">
+                      <div className="flex flex-wrap gap-3 text-sm mb-4">
                         {s.amount && (
                           <span style={{ color: '#0c4d86', fontWeight: 300 }}>{s.amount}</span>
                         )}
@@ -224,9 +224,10 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
 
                       {/* Covered universities */}
                       {uniNames.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 mb-3">
+                        <div className="flex flex-col gap-1 mb-3">
                           {uniNames.map(name => (
-                            <span key={name} className="text-xs px-2 py-0.5 rounded-full" style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 300 }}>
+                            <span key={name} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.6)', fontWeight: 300 }}>
+                              <span style={{ color: '#51e74c', fontSize: 8, flexShrink: 0 }}>●</span>
                               {name}
                             </span>
                           ))}
@@ -235,13 +236,9 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
 
                       {/* Levels */}
                       {s.levels && s.levels.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5">
-                          {s.levels.map(l => (
-                            <span key={l} className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                              {l.charAt(0).toUpperCase() + l.slice(1)}
-                            </span>
-                          ))}
-                        </div>
+                        <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+                          {s.levels.map(l => l.charAt(0).toUpperCase() + l.slice(1)).join(' · ')}
+                        </p>
                       )}
                     </div>
 
@@ -251,7 +248,7 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
                       <p className="text-xs mb-2" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>one-time</p>
                       <Link
                         href={`/services/scholarship/${s.id}`}
-                        className="px-5 py-2 rounded-xl text-xs transition hover:opacity-90 inline-flex items-center gap-1.5"
+                        className="px-6 py-3 rounded-xl text-sm transition hover:opacity-90 inline-flex items-center gap-1.5"
                         style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
                       >
                         View guide

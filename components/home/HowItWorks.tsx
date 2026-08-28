@@ -180,11 +180,11 @@ function Step({ heading, body, icon, flip }: StepDef) {
     <div className="flex flex-col justify-center py-2" style={{ maxWidth: 480 }}>
       <h3
         className="text-navy mb-3 leading-snug"
-        style={{ fontSize: 'clamp(19px, 2.2vw, 24px)', fontWeight: 300 }}
+        style={{ fontSize: 'clamp(21px, 2.4vw, 27px)', fontWeight: 300 }}
       >
         {heading}
       </h3>
-      <p style={{ fontSize: 14, color: 'rgba(24,24,49,0.52)', fontWeight: 300, lineHeight: 1.75 }}>
+      <p style={{ fontSize: 16, color: 'rgba(24,24,49,0.52)', fontWeight: 300, lineHeight: 1.75 }}>
         {body}
       </p>
     </div>

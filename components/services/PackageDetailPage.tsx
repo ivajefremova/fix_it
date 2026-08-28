@@ -129,7 +129,7 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
                 </span>
                 <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>one-time</span>
               </div>
-              <p className="text-xs mb-6" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{fill(meta.tagline)}</p>
+              <p className="text-sm mb-6" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{fill(meta.tagline)}</p>
 
               {alreadyOwned ? (
                 <div
@@ -184,7 +184,7 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
                 </span>
                 <div>
                   <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>{f.label}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{fill(f.detail)}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{fill(f.detail)}</p>
                 </div>
               </div>
             ))}

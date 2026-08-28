@@ -79,7 +79,7 @@ export default function DocumentsPackageTabs({ countries }: { countries: Country
 
             <Link
               href={`/services/${c.slug}/documents`}
-              className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-normal transition-all hover:opacity-90"
+              className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl text-sm font-normal transition-all hover:opacity-90"
               style={{ background: '#51e74c', color: '#181831' }}
             >
               Get {c.name} documents guide

@@ -60,7 +60,7 @@ function LockedCard({ title, description }: { title: string; description: string
         </p>
         <Link
           href="/services"
-          className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
+          className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl text-sm font-normal transition hover:opacity-90"
           style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
         >
           View packages
@@ -402,7 +402,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                           <div>
                             <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>{a.name}</p>
                             {a.description && (
-                              <p className="text-xs leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                              <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
                                 {a.description}
                               </p>
                             )}
@@ -472,12 +472,12 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                       )}
                     </div>
                     {s.description && (
-                      <p className="text-xs leading-relaxed mb-2" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
+                      <p className="text-sm leading-relaxed mb-2" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
                         {s.description}
                       </p>
                     )}
                     {s.eligibility && (
-                      <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+                      <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
                         Eligibility: {s.eligibility}
                       </p>
                     )}

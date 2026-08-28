@@ -34,7 +34,7 @@ export default function CountriesInteractive({ countries }: { countries: Country
               >
                 Study in Europe.
               </h1>
-              <p className="text-sm max-w-md leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+              <p className="text-base max-w-md leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
                 8 countries. Alumni-verified guides. Everything you need — from application to arrival — in one place.
               </p>
             </div>

@@ -135,9 +135,11 @@ function CompareModal({ unis, onClose }: { unis: FavouriteUniversity[]; onClose:
         >
           <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>Fields</p>
           {unis.map(u => (
-            <div key={u.slug} className="flex flex-wrap gap-1">
-              {(u.tags ?? []).slice(0, 3).map(t => (
-                <span key={t} className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{t}</span>
+            <div key={u.slug} className="flex flex-col gap-1">
+              {(u.tags ?? []).filter(t => !['english','bachelor','master','doctorate'].includes(t)).slice(0, 3).map(t => (
+                <span key={t} className="flex items-center gap-1.5 text-sm" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
+                  <span style={{ color: '#51e74c', fontSize: 8, flexShrink: 0 }}>●</span>{t}
+                </span>
               ))}
             </div>
           ))}
@@ -188,7 +190,7 @@ function NoteEditor({ favId, initialNote, onSave }: { favId: number; initialNote
         onChange={e => setValue(e.target.value)}
         placeholder="Your note..."
         rows={2}
-        className="w-full rounded-xl text-xs resize-none focus:outline-none"
+        className="w-full rounded-xl text-sm resize-none focus:outline-none"
         style={{ background: '#f8f9fb', border: '1px solid #e4ebf3', padding: '8px 10px', fontFamily: 'inherit', fontWeight: 300, color: '#181831' }}
       />
       <div className="flex gap-2 mt-1.5">
@@ -289,10 +291,10 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
           </svg>
         </div>
         <p className="text-sm mb-1" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>No saved universities yet.</p>
-        <p className="text-xs mb-6" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Heart a university while browsing to save it here.</p>
+        <p className="text-sm mb-6" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Heart a university while browsing to save it here.</p>
         <Link
           href="/universities"
-          className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs transition hover:opacity-90"
+          className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl text-sm transition hover:opacity-90"
           style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
         >
           Explore universities
@@ -423,9 +425,12 @@ function UniversitiesTab({ initialFavourites, userId }: { initialFavourites: Fav
                         </div>
 
                         {f.tags && f.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 mb-3">
+                          <div className="flex flex-col gap-1 mb-3">
                             {f.tags.filter(t => !['english','bachelor','master','doctorate'].includes(t)).slice(0, 4).map(tag => (
-                              <span key={tag} className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{tag}</span>
+                              <span key={tag} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
+                                <span style={{ color: '#51e74c', fontSize: 8, flexShrink: 0 }}>●</span>
+                                {tag}
+                              </span>
                             ))}
                           </div>
                         )}
@@ -504,7 +509,7 @@ function PackagesTab({ initialWishlist }: { initialWishlist: WishlistItem[] }) {
         <p className="text-xs mb-6" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Heart a guide on the services page to save it for later.</p>
         <Link
           href="/services"
-          className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs transition hover:opacity-90"
+          className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl text-sm transition hover:opacity-90"
           style={{ background: '#51e74c', color: '#181831', fontWeight: 400 }}
         >
           Explore guides

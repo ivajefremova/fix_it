@@ -125,13 +125,13 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <p className="text-xs leading-relaxed mb-6" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+          <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
             Alumni-verified guides across 8 European countries.
           </p>
 
           <Link
             href="/signup"
-            className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-normal transition hover:opacity-90"
             style={{ background: '#51e74c', color: '#181831' }}
           >
             Get Started
@@ -228,7 +228,7 @@ function HeroText({ done, visible, idx }: { done: boolean; visible: boolean; idx
       <div style={{ animation: 'fadeInUp 0.7s ease 0.55s both' }}>
         <Link
           href="/signup"
-          className="inline-flex items-center justify-center px-5 py-2 rounded-xl text-xs font-normal transition hover:opacity-90"
+          className="inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-normal transition hover:opacity-90"
           style={{ background: '#51e74c', color: '#181831' }}
         >
           Get Started
