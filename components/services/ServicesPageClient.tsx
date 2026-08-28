@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import { useRouter } from 'next/navigation'
 import WishlistButton from './WishlistButton'
 
@@ -117,21 +118,23 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
               Payment successful — your guide is ready.
             </div>
           )}
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Guides & pricing</p>
-          <h1
-            className="mb-3 leading-tight"
-            style={{ color: '#181831', fontWeight: 200, fontSize: 'clamp(32px, 5vw, 60px)', letterSpacing: '-0.02em' }}
-          >
-            Everything you need.<br />Nothing you don&apos;t.
-          </h1>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
-            {['One-time purchase', 'Alumni-verified', 'Lifetime access'].map((t, i) => (
-              <span key={i} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                <span style={{ color: '#51e74c', fontSize: 8 }}>●</span>
-                {t}
-              </span>
-            ))}
-          </div>
+          <RevealOnScroll>
+            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Guides & pricing</p>
+            <h1
+              className="mb-3 leading-tight"
+              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(26px, 4vw, 46px)' }}
+            >
+              Everything you need.<br />Nothing you don&apos;t.
+            </h1>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
+              {['One-time purchase', 'Alumni-verified', 'Lifetime access'].map((t, i) => (
+                <span key={i} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                  <span style={{ color: '#51e74c', fontSize: 8 }}>●</span>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </RevealOnScroll>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import Link from 'next/link'
 import WishlistButton from './WishlistButton'
 
@@ -86,16 +87,18 @@ export default function ScholarshipBrowse({ scholarships, universities, isLogged
       {/* ─── HERO ─────────────────────────────────────────────────────────────── */}
       <div className="bg-white border-b" style={{ borderColor: '#e4ebf3' }}>
         <div className="max-w-[90%] mx-auto py-14 sm:py-20">
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Scholarship guides</p>
-          <h1
-            className="mb-3 leading-tight"
-            style={{ color: '#181831', fontWeight: 200, fontSize: 'clamp(28px, 4vw, 52px)', letterSpacing: '-0.02em' }}
-          >
-            Find your scholarship.
-          </h1>
-          <p className="text-sm max-w-md leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-            Browse every scholarship available to Macedonian students studying in Europe. Filter by country, type and level — then get the guide written by students who actually received it.
-          </p>
+          <RevealOnScroll>
+            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Scholarship guides</p>
+            <h1
+              className="mb-3 leading-tight"
+              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(26px, 4vw, 46px)' }}
+            >
+              Find your scholarship.
+            </h1>
+            <p className="text-sm max-w-md leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+              Browse every scholarship available to Macedonian students studying in Europe. Filter by country, type and level — then get the guide written by students who actually received it.
+            </p>
+          </RevealOnScroll>
         </div>
       </div>
 
