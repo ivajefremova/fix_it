@@ -66,12 +66,12 @@ export default function ServicesTab() {
               borderBottom: i < services.length - 1 ? '1px solid #eef0f3' : 'none',
             }}
           >
-            <div style={{ color: i === active ? '#0c4d86' : 'rgba(24,24,49,0.3)', transition: 'color 0.2s' }}>
+            <div style={{ color: i === active ? '#0c4d86' : 'rgba(24,24,49,0.82)', transition: 'color 0.2s' }}>
               {s.icon}
             </div>
             <span
               className="text-sm"
-              style={{ color: i === active ? '#181831' : 'rgba(24,24,49,0.45)', fontWeight: i === active ? 400 : 300, transition: 'all 0.2s' }}
+              style={{ color: i === active ? '#181831' : 'rgba(24,24,49,0.72)', fontWeight: i === active ? 400 : 300, transition: 'all 0.2s' }}
             >
               {s.label}
             </span>
@@ -83,10 +83,10 @@ export default function ServicesTab() {
       <div className="md:col-span-3 p-8 sm:p-10 bg-white flex flex-col justify-between min-h-[280px]">
         <div>
           <div className="mb-4" style={{ color: '#0c4d86' }}>{svc.icon}</div>
-          <h3 className="text-xl text-navy mb-4 leading-snug" style={{ fontWeight: 300 }}>
+          <h3 className="text-xl text-navy mb-4 leading-snug" style={{ fontWeight: 400 }}>
             {svc.title}
           </h3>
-          <p className="text-sm leading-relaxed text-gray-500" style={{ fontWeight: 300 }}>
+          <p className="text-sm leading-relaxed text-gray-500" style={{ fontWeight: 400 }}>
             {svc.body}
           </p>
         </div>

@@ -40,8 +40,8 @@ export default function PhotoGallery() {
               <svg className="w-9 h-9 mb-3" style={{ color: 'rgba(24,24,49,0.15)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
               </svg>
-              <p className="text-xs" style={{ color: 'rgba(24,24,49,0.3)', fontWeight: 300 }}>{p.country} · {p.label}</p>
-              <p className="text-xs mt-1" style={{ color: 'rgba(24,24,49,0.2)', fontWeight: 300 }}>Photos coming soon</p>
+              <p className="text-xs" style={{ color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>{p.country} · {p.label}</p>
+              <p className="text-xs mt-1" style={{ color: 'rgba(24,24,49,0.78)', fontWeight: 400 }}>Photos coming soon</p>
             </div>
           ))}
         </div>
@@ -64,10 +64,10 @@ export default function PhotoGallery() {
         />
         <div
           className="absolute bottom-0 left-0 right-0 px-6 py-4"
-          style={{ background: 'linear-gradient(transparent, rgba(24,24,49,0.6))' }}
+          style={{ background: 'linear-gradient(transparent, rgba(24,24,49,0.82))' }}
         >
-          <p className="text-sm text-white" style={{ fontWeight: 300 }}>{current.caption}</p>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 300 }}>{current.country}</p>
+          <p className="text-sm text-white" style={{ fontWeight: 400 }}>{current.caption}</p>
+          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>{current.country}</p>
         </div>
       </div>
 

@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <h1 className="text-2xl text-navy mb-2" style={{ fontWeight: 300 }}>
+        <h1 className="text-2xl text-navy mb-2" style={{ fontWeight: 400 }}>
           Reset link sent
         </h1>
         <p className="text-gray-400 text-sm leading-relaxed mb-8">
@@ -52,7 +52,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 sm:p-10">
-      <h1 className="text-2xl text-navy mb-1" style={{ fontWeight: 300 }}>
+      <h1 className="text-2xl text-navy mb-1" style={{ fontWeight: 400 }}>
         Reset password
       </h1>
       <p className="text-gray-400 text-sm mb-8">

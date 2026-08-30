@@ -54,8 +54,8 @@ function LockedCard({ title, description }: { title: string; description: string
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
           </svg>
         </div>
-        <h3 className="text-base text-navy mb-2" style={{ fontWeight: 300 }}>{title}</h3>
-        <p className="text-sm mb-7 max-w-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+        <h3 className="text-base text-navy mb-2" style={{ fontWeight: 400 }}>{title}</h3>
+        <p className="text-sm mb-7 max-w-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
           {description}
         </p>
         <Link
@@ -78,9 +78,9 @@ function CourseRow({ course }: { course: Course }) {
     <div className="flex items-center justify-between gap-4 py-3" style={{ borderBottom: '1px solid #f0f2f5' }}>
       <div className="flex items-center gap-2 min-w-0">
         <span style={{ color: '#51e74c', fontSize: '8px', flexShrink: 0 }}>●</span>
-        <span className="text-sm text-navy truncate" style={{ fontWeight: 300 }}>{course.name}</span>
+        <span className="text-sm text-navy truncate" style={{ fontWeight: 400 }}>{course.name}</span>
         {course.language && course.language !== 'English' && (
-          <span className="text-xs flex-shrink-0" style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>{course.language}</span>
+          <span className="text-xs flex-shrink-0" style={{ color: 'rgba(24,24,49,0.72)', fontWeight: 400 }}>{course.language}</span>
         )}
       </div>
       {course.link && (
@@ -89,7 +89,7 @@ function CourseRow({ course }: { course: Course }) {
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs flex-shrink-0 flex items-center gap-1 transition-opacity hover:opacity-70"
-          style={{ color: '#0c4d86', fontWeight: 300 }}
+          style={{ color: '#0c4d86', fontWeight: 400 }}
         >
           Programme page
           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -191,7 +191,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
         <Link
           href="/universities"
           className="inline-flex items-center gap-1.5 text-xs transition-opacity hover:opacity-70"
-          style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}
+          style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
@@ -203,13 +203,13 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
         <RevealOnScroll>
           <Card>
             <div className="flex items-start justify-between gap-4 mb-5">
-              <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+              <p className="text-xs" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
                 {[university.city, university.country].filter(Boolean).join(' · ')}
               </p>
               {university.type && (
                 <span
                   className="text-xs flex-shrink-0"
-                  style={{ color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}
+                  style={{ color: 'rgba(24,24,49,0.72)', fontWeight: 400 }}
                 >
                   {university.type}
                 </span>
@@ -218,13 +218,13 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
 
             <h1
               className="mb-2 leading-tight"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3.5vw, 36px)' }}
+              style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(22px, 3.5vw, 36px)' }}
             >
               {university.name}
             </h1>
 
             {university.quick_summary && (
-              <p className="text-sm mb-4" style={{ color: '#0c4d86', fontWeight: 300 }}>
+              <p className="text-sm mb-4" style={{ color: '#0c4d86', fontWeight: 400 }}>
                 {university.quick_summary}
               </p>
             )}
@@ -232,7 +232,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
             {university.ranking_summary && (
               <div className="flex items-center gap-2">
                 <span style={{ color: '#51e74c', fontSize: '8px' }}>●</span>
-                <p className="text-xs" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                <p className="text-xs" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                   {university.ranking_summary}
                 </p>
               </div>
@@ -247,8 +247,8 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
               <div className="flex flex-col sm:flex-row sm:items-center gap-5">
                 {university.tuition_range && (
                   <div>
-                    <p className="text-xs mb-1" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>Tuition / year</p>
-                    <p className="text-base text-navy" style={{ fontWeight: 300 }}>{university.tuition_range}</p>
+                    <p className="text-xs mb-1" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>Tuition / year</p>
+                    <p className="text-base text-navy" style={{ fontWeight: 400 }}>{university.tuition_range}</p>
                   </div>
                 )}
                 {university.tuition_range && university.tags && university.tags.length > 0 && (
@@ -256,12 +256,12 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                 )}
                 {university.tags && university.tags.length > 0 && (
                   <div>
-                    <p className="text-xs mb-2" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>Fields of study</p>
+                    <p className="text-xs mb-2" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>Fields of study</p>
                     <div className="flex flex-col gap-1.5">
                       {university.tags.map((tag: string) => (
                         <div key={tag} style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
                           <span style={{ color: '#51e74c', flexShrink: 0 }}>•</span>
-                          <span className="text-xs capitalize" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{tag}</span>
+                          <span className="text-xs capitalize" style={{ color: 'rgba(24,24,49,0.78)', fontWeight: 400 }}>{tag}</span>
                         </div>
                       ))}
                     </div>
@@ -277,7 +277,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
           <RevealOnScroll delay={100}>
             <Card>
               <SectionLabel text="Overview" />
-              <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>
+              <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                 {university.overview_free}
               </p>
             </Card>
@@ -302,7 +302,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                       <SectionLabel text="In depth" />
                       <div className="space-y-3 mb-6">
                         {countryGated.overview_full.split('\n\n').map((para, i) => (
-                          <p key={i} className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>
+                          <p key={i} className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                             {para}
                           </p>
                         ))}
@@ -312,7 +312,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                   {countryGated.ranking_full && (
                     <>
                       <SectionLabel text="Rankings" />
-                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>
+                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                         {countryGated.ranking_full}
                       </p>
                     </>
@@ -326,7 +326,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                   <SectionLabel text="Programmes in English" />
                   {undergradCourses.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>Undergraduate</h3>
+                      <h3 className="text-sm text-navy mb-1" style={{ fontWeight: 400 }}>Undergraduate</h3>
                       <div>
                         {undergradCourses.map((c, i) => <CourseRow key={i} course={c} />)}
                       </div>
@@ -334,7 +334,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                   )}
                   {gradCourses.length > 0 && (
                     <div>
-                      <h3 className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>Graduate</h3>
+                      <h3 className="text-sm text-navy mb-1" style={{ fontWeight: 400 }}>Graduate</h3>
                       <div>
                         {gradCourses.map((c, i) => <CourseRow key={i} course={c} />)}
                       </div>
@@ -350,10 +350,10 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {admissionEU.length > 0 && (
                       <div>
-                        <h3 className="text-sm text-navy mb-3" style={{ fontWeight: 300 }}>EU students</h3>
+                        <h3 className="text-sm text-navy mb-3" style={{ fontWeight: 400 }}>EU students</h3>
                         <ul className="space-y-2">
                           {admissionEU.map((r, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>
+                            <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                               <span className="mt-1.5 flex-shrink-0" style={{ color: '#51e74c', fontSize: '7px' }}>●</span>
                               {r.requirement}
                             </li>
@@ -363,10 +363,10 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                     )}
                     {admissionNonEU.length > 0 && (
                       <div>
-                        <h3 className="text-sm text-navy mb-3" style={{ fontWeight: 300 }}>Non-EU students</h3>
+                        <h3 className="text-sm text-navy mb-3" style={{ fontWeight: 400 }}>Non-EU students</h3>
                         <ul className="space-y-2">
                           {admissionNonEU.map((r, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>
+                            <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                               <span className="mt-1.5 flex-shrink-0" style={{ color: '#51e74c', fontSize: '7px' }}>●</span>
                               {r.requirement}
                             </li>
@@ -391,9 +391,9 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                       >
                         <div className="flex items-start justify-between gap-3">
                           <div>
-                            <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>{a.name}</p>
+                            <p className="text-sm text-navy mb-1" style={{ fontWeight: 400 }}>{a.name}</p>
                             {a.description && (
-                              <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                              <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                                 {a.description}
                               </p>
                             )}
@@ -404,7 +404,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-xs flex-shrink-0 transition-opacity hover:opacity-70"
-                              style={{ color: '#0c4d86', fontWeight: 300 }}
+                              style={{ color: '#0c4d86', fontWeight: 400 }}
                             >
                               Visit ↗
                             </a>
@@ -422,7 +422,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                   <SectionLabel text="Student life" />
                   <div className="space-y-3">
                     {countryGated.student_life.split('\n\n').map((para, i) => (
-                      <p key={i} className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>
+                      <p key={i} className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                         {para}
                       </p>
                     ))}
@@ -452,18 +452,18 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                     style={{ background: '#f8f9fb', border: '1px solid #eef0f3' }}
                   >
                     <div className="flex items-start justify-between gap-3 mb-2">
-                      <p className="text-sm text-navy" style={{ fontWeight: 300 }}>{s.name}</p>
+                      <p className="text-sm text-navy" style={{ fontWeight: 400 }}>{s.name}</p>
                       {s.amount && (
-                        <span className="text-xs flex-shrink-0" style={{ color: '#0c4d86', fontWeight: 300 }}>{s.amount}</span>
+                        <span className="text-xs flex-shrink-0" style={{ color: '#0c4d86', fontWeight: 400 }}>{s.amount}</span>
                       )}
                     </div>
                     {s.description && (
-                      <p className="text-sm leading-relaxed mb-2" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
+                      <p className="text-sm leading-relaxed mb-2" style={{ color: 'rgba(24,24,49,0.78)', fontWeight: 400 }}>
                         {s.description}
                       </p>
                     )}
                     {s.eligibility && (
-                      <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+                      <p className="text-sm" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
                         Eligibility: {s.eligibility}
                       </p>
                     )}
@@ -473,7 +473,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-xs mt-3 transition-opacity hover:opacity-70"
-                        style={{ color: '#0c4d86', fontWeight: 300 }}
+                        style={{ color: '#0c4d86', fontWeight: 400 }}
                       >
                         Apply
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -488,7 +488,7 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
           ) : (
             <Card>
               <SectionLabel text="Scholarships" />
-              <p className="text-sm" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+              <p className="text-sm" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
                 Scholarship details coming soon.
               </p>
             </Card>
@@ -500,13 +500,13 @@ export default async function UniversityPage({ params }: { params: Promise<{ slu
           <RevealOnScroll delay={160}>
             <Card>
               <SectionLabel text="Visa" />
-              <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                 {university.visa_note}
               </p>
               <Link
                 href={`/countries/${university.country_slug}`}
                 className="inline-flex items-center gap-1.5 text-xs transition-opacity hover:opacity-70"
-                style={{ color: '#0c4d86', fontWeight: 300 }}
+                style={{ color: '#0c4d86', fontWeight: 400 }}
               >
                 Full visa guide for {university.country}
                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

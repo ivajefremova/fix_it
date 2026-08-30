@@ -70,10 +70,25 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000             # change to production UR
 --color-white: #ffffff;     /* page background */
 ```
 
+Page-level backgrounds:
+- Main content sections (behind cards): `#f8f9fb`
+- Alternate heavier grey (used sparingly): `#f0f2f5`
+- Section cards and filter bars: `#ffffff`
+
+Muted text opacity floor is **0.65** — never go below `rgba(24,24,49,0.65)` for any readable body or label text. Prefer `rgba(24,24,49,0.75)` for subheadings and `#181831` (full) for list items.
+
+**Never use grey for paragraph or body text.** All paragraph copy (`<p>` tags, body text in sections, descriptions) must use `#181831` (full navy). Grey (`rgba(24,24,49,0.5)` or lower) is only acceptable for truly secondary labels, captions, or placeholder text — never for content the user is meant to read.
+
 ### Typography
 - **Font:** Encode Sans Expanded — load via Google Fonts
-- **Weight:** Thin (100) and Light (300) preferred. Regular (400) for body copy. Never bold for headings.
+- **Weight:** Regular (400) for body copy and UI labels. Medium (500) for headings, section titles, and bullet list items. Never use 300 (light) or bold (700+) anywhere.
+- **Global base (set in globals.css):**
+  - `html { font-size: 17px; }`
+  - `body { font-weight: 400; line-height: 1.65; }`
+  - `p { font-weight: 400; font-size: 1rem; line-height: 1.7; }`
+  - `h1, h2, h3, h4, h5, h6 { font-weight: 500; }`
 - **Style:** Clean, minimal, airy. No chunky text anywhere.
+- **Inline styles:** Always include `fontFamily: 'inherit'` when setting other text properties via inline styles, so Encode Sans Expanded is never overridden by a browser default.
 
 ### Aesthetic
 - Clean, sleek, liquid glass style — frosted glass cards, subtle transparency, smooth shadows
@@ -83,6 +98,61 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000             # change to production UR
 - Photos: stored in Supabase Storage, fetched via URL
 - Mobile first — design for mobile width first, then scale up
 
+### Hero Sections
+
+Every major page hero follows this exact pattern (see `components/universities/UniversityHero.tsx`):
+
+```tsx
+<section className="bg-white border-b" style={{ borderColor: '#e4ebf3', minHeight: '560px', position: 'relative' }}>
+  <div className="max-w-[90%] mx-auto flex items-center" style={{ minHeight: '560px' }}>
+
+    {/* Text — left side */}
+    <div className="flex-1 py-24 z-10 relative">
+      <p className="text-xs uppercase tracking-widest mb-4 hero-text-in" style={{ color: '#51e74c' }}>Label</p>
+      <h1 className="leading-tight mb-4 hero-text-in-2" style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(28px, 4vw, 52px)' }}>
+        Heading on one line
+      </h1>
+      <p className="text-sm leading-relaxed max-w-sm hero-text-in-3" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
+        Subtext.
+      </p>
+    </div>
+
+    <HeroSheets />   {/* Right side — animated stacked SVG books */}
+
+  </div>
+</section>
+```
+
+- `HeroSheets` (`components/ui/HeroSheets.tsx`) renders 6 stacked SVG books (portrait orientation, palette colours) that scatter and fade on scroll. It also injects the hero text animation keyframes globally.
+- Text enters with a staggered fade-up: use classes `hero-text-in` (label), `hero-text-in-2` (heading, 0.12s delay), `hero-text-in-3` (body, 0.24s delay).
+- The hero h1 should always be on **one line** — no `<br />`. Use `whiteSpace: 'nowrap'` if needed.
+- Used on: `/universities`, `/countries`, `/services`, `/services/scholarship`.
+
+### Filter / Search Bars
+
+All filter bars across the site share this style (see `components/universities/UniversityList.tsx`):
+
+```tsx
+<div
+  className="bg-white rounded-2xl p-6 sm:p-8 mb-6"
+  style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.04)', border: '1px solid #eef0f3', borderTop: '3px solid #51e74c' }}
+>
+```
+
+- Inputs: `fontSize: 15px, padding: '12px 16px', paddingLeft: '40px'` (for icon), `background: '#fff'`, `border: '1px solid #eef0f3'`, `borderRadius: '12px'`
+- Selects: `fontSize: 15px`, `padding: '12px 34px 12px 16px'`, `borderRadius: '12px'`, custom SVG chevron via `backgroundImage`. When active (filtered): `background: '#181831', color: '#fff'`. When inactive: `background: '#fff', color: 'rgba(24,24,49,0.82)'`.
+- Search icon: `left-4`, `w-4 h-4`
+
+### Package Bullet Lists
+
+Section heading in package description lists:
+- `fontSize: 'clamp(22px, 2.5vw, 32px)', fontWeight: 500, color: '#181831'`
+
+Bullet items:
+- `fontSize: 16, fontWeight: 500, color: '#181831'`
+- Row: `borderBottom: '1px solid #f0f2f5', padding: '11px 0'`
+- Green dash on right: `color: '#51e74c'`
+
 ### Absolute Don'ts
 - Never `alert()` — use toast notifications always
 - No purple gradients
@@ -91,6 +161,9 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000             # change to production UR
 - No dark mode
 - No emoji in UI elements
 - No hardcoded Supabase or Stripe keys anywhere
+- **No pill/chip/badge labels** — never use a `<span>` or `<div>` with `rounded-full` + tinted background to show a static category, type, or status. Use plain muted text or green-dot bullet lists instead. Interactive filter buttons are the only exception.
+- **No flag emojis anywhere** — never show country flag emoji in any UI element.
+- **No grey paragraph text** — body copy and section descriptions must be `#181831`. Grey is only for captions and placeholders.
 
 ---
 

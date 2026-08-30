@@ -1,54 +1,89 @@
 'use client'
 
-import { useRef, useEffect, type ReactNode } from 'react'
+import { useRef, useEffect, useState, useMemo, type ReactNode } from 'react'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 
-// ─── Animated connector between steps ────────────────────────────────────────
+// ─── Scroll-driven wire ───────────────────────────────────────────────────────
 
-function Connector({ leftToRight }: { leftToRight: boolean }) {
-  const pathRef = useRef<SVGPathElement>(null)
+function ScrollWire({ sectionRef, flips }: { sectionRef: React.RefObject<HTMLElement | null>; flips: boolean[] }) {
+  const fillRef = useRef<SVGPathElement>(null)
+  const [dims, setDims] = useState({ w: 0, h: 0 })
+  const [pathLen, setPathLen] = useState(0)
 
   useEffect(() => {
-    const el = pathRef.current
+    const el = sectionRef.current
     if (!el) return
+    const update = () => setDims({ w: el.offsetWidth, h: el.offsetHeight })
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [sectionRef])
+
+  const path = useMemo<string>(() => {
+    const { w, h } = dims
+    if (!w || !h) return ''
+    const n = flips.length
+    const lx = w * 0.26
+    const rx = w * 0.74
+    const r = Math.min(72, w * 0.06)
+    const padFrac = 0.06
+    const span = h * (1 - 2 * padFrac) / n
+    const cy = (i: number) => h * padFrac + span * i + span * 0.5
+
+    const parts: string[] = [`M ${flips[0] ? rx : lx} 0`]
+    for (let i = 0; i < n; i++) {
+      const cx = flips[i] ? rx : lx
+      const cyi = cy(i)
+      if (i === 0) parts.push(`V ${cyi}`)
+      if (i < n - 1) {
+        const ncx = flips[i + 1] ? rx : lx
+        const ncyi = cy(i + 1)
+        const mid = (cyi + ncyi) / 2
+        if (cx !== ncx) {
+          if (cx < ncx) {
+            parts.push(`V ${mid - r}`, `Q ${cx} ${mid} ${cx + r} ${mid}`, `H ${ncx - r}`, `Q ${ncx} ${mid} ${ncx} ${mid + r}`)
+          } else {
+            parts.push(`V ${mid - r}`, `Q ${cx} ${mid} ${cx - r} ${mid}`, `H ${ncx + r}`, `Q ${ncx} ${mid} ${ncx} ${mid + r}`)
+          }
+        }
+        parts.push(`V ${ncyi}`)
+      } else {
+        parts.push(`V ${h}`)
+      }
+    }
+    return parts.join(' ')
+  }, [dims, flips])
+
+  useEffect(() => {
+    const el = fillRef.current
+    if (!el || !path) return
     const len = el.getTotalLength()
+    setPathLen(len)
     el.style.strokeDasharray = String(len)
     el.style.strokeDashoffset = String(len)
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1) 0.1s'
-          el.style.strokeDashoffset = '0'
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.4 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+  }, [path])
 
-  const d = leftToRight
-    ? 'M 200 4 C 200 50, 600 30, 600 76'
-    : 'M 600 4 C 600 50, 200 30, 200 76'
+  useEffect(() => {
+    if (!pathLen || !sectionRef.current) return
+    const section = sectionRef.current
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect()
+      const scrollable = rect.height - window.innerHeight
+      const progress = scrollable > 0 ? Math.max(0, Math.min(1, -rect.top / scrollable)) : 0
+      if (fillRef.current) fillRef.current.style.strokeDashoffset = String(pathLen * (1 - progress))
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [pathLen, sectionRef])
 
+  if (!dims.w) return null
   return (
-    <div className="hidden md:block" aria-hidden>
-      <svg
-        viewBox="0 0 800 80"
-        preserveAspectRatio="none"
-        style={{ width: '100%', height: '64px', display: 'block', overflow: 'visible' }}
-      >
-        <path
-          ref={pathRef}
-          d={d}
-          fill="none"
-          stroke="rgba(24,24,49,0.12)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
+    <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', overflow: 'hidden' }} aria-hidden>
+      <path d={path} fill="none" stroke="rgba(12,77,134,0.13)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path ref={fillRef} d={path} fill="none" stroke="#51e74c" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }
 
@@ -177,14 +212,17 @@ function Step({ heading, body, icon, flip }: StepDef) {
   )
 
   const text = (
-    <div className="flex flex-col justify-center py-2" style={{ maxWidth: 480 }}>
+    <div
+      className="flex flex-col justify-center py-2"
+      style={{ maxWidth: 480, textAlign: flip ? 'left' : 'right', background: '#fff', borderRadius: 12, padding: '10px 18px' }}
+    >
       <h3
         className="text-navy mb-3 leading-snug"
-        style={{ fontSize: 'clamp(21px, 2.4vw, 27px)', fontWeight: 300 }}
+        style={{ fontSize: 'clamp(21px, 2.4vw, 27px)', fontWeight: 400 }}
       >
         {heading}
       </h3>
-      <p style={{ fontSize: 16, color: 'rgba(24,24,49,0.52)', fontWeight: 300, lineHeight: 1.75 }}>
+      <p style={{ fontSize: 16, color: '#181831', fontWeight: 400, lineHeight: 1.75 }}>
         {body}
       </p>
     </div>
@@ -193,7 +231,7 @@ function Step({ heading, body, icon, flip }: StepDef) {
   return (
     <div className={`flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-20`}>
       <div className="flex-1 w-full">{visual}</div>
-      <div className="flex-1 w-full">{text}</div>
+      <div className="flex-1 w-full" style={{ display: 'flex', justifyContent: flip ? 'flex-start' : 'flex-end' }}>{text}</div>
     </div>
   )
 }
@@ -201,32 +239,88 @@ function Step({ heading, body, icon, flip }: StepDef) {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export default function HowItWorks() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const closingRef = useRef<HTMLDivElement>(null)
+  const [closingVisible, setClosingVisible] = useState(false)
+
+  useEffect(() => {
+    const el = closingRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setClosingVisible(true); obs.disconnect() } },
+      { threshold: 0.3 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section className="bg-white py-24 sm:py-32">
-      <div className="max-w-[90%] mx-auto">
+    <section ref={sectionRef as React.RefObject<HTMLDivElement>} className="bg-white py-24 sm:py-32" style={{ position: 'relative' }}>
+      <ScrollWire sectionRef={sectionRef} flips={STEPS.map((s, i) => i === STEPS.length - 1 ? false : s.flip)} />
+      <div className="max-w-[90%] mx-auto" style={{ position: 'relative', zIndex: 1 }}>
 
         <RevealOnScroll className="mb-20 sm:mb-24">
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>
-            How it works
-          </p>
-          <h2
-            className="text-navy leading-snug"
-            style={{ fontSize: 'clamp(24px, 3.5vw, 38px)', fontWeight: 300 }}
-          >
-            Everything you need. In one place.
-          </h2>
+          <div style={{ background: '#fff', display: 'inline-block', borderRadius: 10, padding: '8px 16px' }}>
+            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>
+              How it works
+            </p>
+            <h2
+              className="text-navy leading-snug"
+              style={{ fontSize: 'clamp(24px, 3.5vw, 38px)', fontWeight: 400 }}
+            >
+              Everything you need. In one place.
+            </h2>
+          </div>
         </RevealOnScroll>
 
         {STEPS.map((step, i) => (
-          <div key={step.n}>
+          <div key={step.n} style={{ marginBottom: i < STEPS.length - 1 ? '5rem' : 0 }}>
             <RevealOnScroll direction={step.revealDir} delay={60}>
               <Step {...step} />
             </RevealOnScroll>
-            {i < STEPS.length - 1 && (
-              <Connector leftToRight={!step.flip} />
-            )}
           </div>
         ))}
+
+        {/* Closing statement */}
+        <div
+          ref={closingRef}
+          style={{
+            marginTop: '22rem',
+            textAlign: 'center',
+            opacity: closingVisible ? 1 : 0,
+            transform: closingVisible ? 'translateY(0) scale(1)' : 'translateY(32px) scale(0.97)',
+            transition: 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)',
+          }}
+        >
+          <p style={{
+            fontSize: 'clamp(20px, 4vw, 40px)',
+            fontWeight: 500, color: '#181831', lineHeight: 1.4,
+            background: '#fff', borderRadius: 12, padding: '8px 24px', display: 'inline-block',
+          }}>
+            Don&apos;t search for people with answers. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix it<span style={{ color: '#51e74c' }}>.</span>
+          </p>
+          <div style={{ marginTop: '2.5rem' }}>
+            <a
+              href="/signup"
+              style={{
+                display: 'inline-block',
+                background: '#51e74c',
+                color: '#181831',
+                fontWeight: 500,
+                fontSize: 16,
+                padding: '14px 36px',
+                borderRadius: 12,
+                textDecoration: 'none',
+                fontFamily: 'inherit',
+                transition: 'opacity 0.2s',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+              onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+            >
+              Sign up!
+            </a>
+          </div>
+        </div>
 
       </div>
     </section>

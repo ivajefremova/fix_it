@@ -48,7 +48,7 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
 
         <Link
           href="/community"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, textDecoration: 'none', marginBottom: 24 }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, textDecoration: 'none', marginBottom: 24 }}
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />

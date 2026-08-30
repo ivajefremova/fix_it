@@ -96,7 +96,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
 
   return (
     <div
-      style={{ position: 'fixed', inset: 0, zIndex: 900, background: 'rgba(24,24,49,0.45)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}
+      style={{ position: 'fixed', inset: 0, zIndex: 900, background: 'rgba(24,24,49,0.72)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
     >
       <div
@@ -106,7 +106,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
           onClick={onClose}
           style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
         >
-          <svg className="w-5 h-5" style={{ color: 'rgba(24,24,49,0.3)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-5 h-5" style={{ color: 'rgba(24,24,49,0.82)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -114,7 +114,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
         {/* Loading */}
         {step === 'loading' && (
           <div style={{ padding: '2rem 0', textAlign: 'center' }}>
-            <div className="animate-pulse" style={{ color: 'rgba(24,24,49,0.4)', fontSize: 14, fontWeight: 300 }}>Loading…</div>
+            <div className="animate-pulse" style={{ color: 'rgba(24,24,49,0.7)', fontSize: 14, fontWeight: 400 }}>Loading…</div>
           </div>
         )}
 
@@ -126,13 +126,13 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
               </svg>
             </div>
-            <h2 style={{ color: '#181831', fontWeight: 300, fontSize: 16, marginBottom: 8 }}>Log in to post</h2>
-            <p style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300, fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>
+            <h2 style={{ color: '#181831', fontWeight: 400, fontSize: 16, marginBottom: 8 }}>Log in to post</h2>
+            <p style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400, fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>
               You can read everything without an account. Log in to ask questions or share answers.
             </p>
             <Link
               href="/login"
-              style={{ display: 'inline-block', background: '#181831', color: 'white', padding: '10px 24px', borderRadius: 12, fontSize: 13, fontWeight: 300, textDecoration: 'none' }}
+              style={{ display: 'inline-block', background: '#181831', color: 'white', padding: '10px 24px', borderRadius: 12, fontSize: 13, fontWeight: 400, textDecoration: 'none' }}
             >
               Log in
             </Link>
@@ -142,8 +142,8 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
         {/* Alias setup */}
         {step === 'alias' && (
           <div>
-            <h2 style={{ color: '#181831', fontWeight: 300, fontSize: 16, marginBottom: 8 }}>Pick your community name</h2>
-            <p style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300, fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
+            <h2 style={{ color: '#181831', fontWeight: 400, fontSize: 16, marginBottom: 8 }}>Pick your community name</h2>
+            <p style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400, fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
               This is how you appear on all your posts — anonymous but recognisable. First name, nickname, or anything you like.
             </p>
             <input
@@ -153,10 +153,10 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
               onKeyDown={e => { if (e.key === 'Enter') saveAlias() }}
               placeholder="e.g. Ana from Skopje"
               maxLength={24}
-              style={{ width: '100%', padding: '10px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 300, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', marginBottom: 12 }}
+              style={{ width: '100%', padding: '10px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 400, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', marginBottom: 12 }}
             />
             {aliasInput.trim().length >= 2 && (
-              <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, marginBottom: 16 }}>
+              <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, marginBottom: 16 }}>
                 You'll appear as: <strong style={{ fontWeight: 400 }}>{aliasInput.trim()}</strong>
               </p>
             )}
@@ -173,10 +173,10 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
         {/* Form */}
         {step === 'form' && (
           <div>
-            <h2 style={{ color: '#181831', fontWeight: 300, fontSize: 16, marginBottom: 4 }}>
+            <h2 style={{ color: '#181831', fontWeight: 400, fontSize: 16, marginBottom: 4 }}>
               {type === 'question' ? 'Ask a question' : 'Write an answer'}
             </h2>
-            <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, marginBottom: 20 }}>
+            <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, marginBottom: 20 }}>
               Posting as <strong style={{ fontWeight: 400 }}>{alias}</strong>
             </p>
 
@@ -184,7 +184,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
               <>
                 {/* Category */}
                 <div style={{ marginBottom: 16 }}>
-                  <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.5)', fontWeight: 300, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Category *</p>
+                  <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.75)', fontWeight: 400, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Category *</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {COMMUNITY_CATEGORIES.map(cat => (
                       <button
@@ -194,12 +194,12 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
                           padding: '5px 12px',
                           borderRadius: 20,
                           fontSize: 12,
-                          fontWeight: 300,
+                          fontWeight: 400,
                           fontFamily: 'inherit',
                           border: '1px solid',
                           cursor: 'pointer',
                           background: category === cat ? 'rgba(12,77,134,0.1)' : '#f8f9fb',
-                          color: category === cat ? '#0c4d86' : 'rgba(24,24,49,0.55)',
+                          color: category === cat ? '#0c4d86' : 'rgba(24,24,49,0.78)',
                           borderColor: category === cat ? 'rgba(12,77,134,0.25)' : '#eef0f3',
                         }}
                       >
@@ -211,7 +211,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
 
                 {/* Country */}
                 <div style={{ marginBottom: 16 }}>
-                  <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.5)', fontWeight: 300, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Country</p>
+                  <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.75)', fontWeight: 400, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Country</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {COMMUNITY_COUNTRIES.map(c => (
                       <button
@@ -221,12 +221,12 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
                           padding: '5px 10px',
                           borderRadius: 10,
                           fontSize: 12,
-                          fontWeight: 300,
+                          fontWeight: 400,
                           fontFamily: 'inherit',
                           border: '1px solid',
                           cursor: 'pointer',
                           background: country === c.slug ? '#181831' : '#f8f9fb',
-                          color: country === c.slug ? 'white' : 'rgba(24,24,49,0.55)',
+                          color: country === c.slug ? 'white' : 'rgba(24,24,49,0.78)',
                           borderColor: country === c.slug ? '#181831' : '#eef0f3',
                         }}
                       >
@@ -238,13 +238,13 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
 
                 {/* University */}
                 <div style={{ marginBottom: 16 }}>
-                  <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.5)', fontWeight: 300, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>University (optional)</p>
+                  <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.75)', fontWeight: 400, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>University (optional)</p>
                   <input
                     type="text"
                     value={university}
                     onChange={e => setUniversity(e.target.value)}
                     placeholder="e.g. Bocconi, Sapienza…"
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 300, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '10px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 400, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box' }}
                   />
                 </div>
               </>
@@ -252,7 +252,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
 
             {/* Content */}
             <div style={{ marginBottom: 20 }}>
-              <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.5)', fontWeight: 300, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.75)', fontWeight: 400, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 {type === 'question' ? 'Your question *' : 'Your answer *'}
               </p>
               <textarea
@@ -260,7 +260,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
                 onChange={e => setContent(e.target.value)}
                 placeholder={type === 'question' ? 'What do you want to know?' : 'Share what you know or experienced…'}
                 rows={4}
-                style={{ width: '100%', padding: '12px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 300, fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
+                style={{ width: '100%', padding: '12px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 400, fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }}
               />
             </div>
 
@@ -272,7 +272,7 @@ export default function PostForm({ type, parentId, prefillCountrySlug, prefillUn
               {submitting ? 'Posting…' : type === 'question' ? 'Post question →' : 'Post answer →'}
             </button>
 
-            <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.3)', fontWeight: 300, textAlign: 'center', marginTop: 12 }}>
+            <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.82)', fontWeight: 400, textAlign: 'center', marginTop: 12 }}>
               Be respectful. Misleading posts can be reported and removed.
             </p>
           </div>

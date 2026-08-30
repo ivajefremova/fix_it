@@ -91,13 +91,13 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
       <div className="bg-white border-b" style={{ borderColor: '#e4ebf3' }}>
         <div className="max-w-[90%] mx-auto py-14 sm:py-20">
           <div className="flex items-center gap-2 mb-4">
-            <Link href="/services" className="text-xs hover:opacity-70 transition" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+            <Link href="/services" className="text-xs hover:opacity-70 transition" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
               Guides
             </Link>
-            <span style={{ color: 'rgba(24,24,49,0.25)', fontSize: '10px' }}>›</span>
-            <span className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{country.name}</span>
-            <span style={{ color: 'rgba(24,24,49,0.25)', fontSize: '10px' }}>›</span>
-            <span className="text-xs" style={{ color: '#51e74c', fontWeight: 300 }}>{meta.name}</span>
+            <span style={{ color: 'rgba(24,24,49,0.58)', fontSize: '10px' }}>›</span>
+            <span className="text-xs" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>{country.name}</span>
+            <span style={{ color: 'rgba(24,24,49,0.58)', fontSize: '10px' }}>›</span>
+            <span className="text-xs" style={{ color: '#51e74c', fontWeight: 400 }}>{meta.name}</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
@@ -109,10 +109,10 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
               >
                 {country.name}
               </h1>
-              <p className="text-sm max-w-md leading-relaxed mb-6" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+              <p className="text-sm max-w-md leading-relaxed mb-6" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                 {fill(meta.description)}
               </p>
-              <p className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300, fontStyle: 'italic' }}>
+              <p className="text-xs" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400, fontStyle: 'italic' }}>
                 {country.tagline}
               </p>
             </div>
@@ -122,19 +122,19 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
               className="bg-white rounded-2xl p-8"
               style={{ border: '1px solid #eef0f3', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}
             >
-              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>{meta.name}</p>
+              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>{meta.name}</p>
               <div className="flex items-baseline gap-1.5 mb-1">
                 <span style={{ fontSize: 'clamp(32px, 4vw, 44px)', fontWeight: 200, color: '#181831', letterSpacing: '-0.02em' }}>
                   {meta.price}
                 </span>
-                <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>one-time</span>
+                <span className="text-xs" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>one-time</span>
               </div>
-              <p className="text-sm mb-6" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{fill(meta.tagline)}</p>
+              <p className="text-sm mb-6" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>{fill(meta.tagline)}</p>
 
               {alreadyOwned ? (
                 <div
                   className="w-full py-3 rounded-xl text-sm text-center mb-4"
-                  style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 300 }}
+                  style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 400 }}
                 >
                   ✓ You already own this guide
                 </div>
@@ -154,7 +154,7 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
                 </button>
               )}
 
-              <div className="flex items-center justify-center gap-4 text-xs" style={{ color: 'rgba(24,24,49,0.3)', fontWeight: 300 }}>
+              <div className="flex items-center justify-center gap-4 text-xs" style={{ color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>
                 <span>One-time payment</span>
                 <span>·</span>
                 <span>Instant access</span>
@@ -183,8 +183,8 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
                   </svg>
                 </span>
                 <div>
-                  <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>{f.label}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{fill(f.detail)}</p>
+                  <p className="text-sm text-navy mb-1" style={{ fontWeight: 400 }}>{f.label}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>{fill(f.detail)}</p>
                 </div>
               </div>
             ))}
@@ -193,7 +193,7 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
 
         {/* ─── ALSO AVAILABLE ───────────────────────────────────────────────────── */}
         <div>
-          <p className="text-xs uppercase tracking-widest mb-5" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Also available for {country.name}</p>
+          <p className="text-xs uppercase tracking-widest mb-5" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Also available for {country.name}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {packageType !== 'country' && (
               <Link
@@ -207,9 +207,9 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Country Guide</p>
-                  <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>Full {country.name} guide</p>
-                  <p className="text-xs" style={{ color: '#0c4d86', fontWeight: 300 }}>€7.99 · one-time</p>
+                  <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Country Guide</p>
+                  <p className="text-sm text-navy mb-1" style={{ fontWeight: 400 }}>Full {country.name} guide</p>
+                  <p className="text-xs" style={{ color: '#0c4d86', fontWeight: 400 }}>€7.99 · one-time</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#0c4d86' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -228,9 +228,9 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Documents & Relocation</p>
-                  <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>{country.name} relocation guide</p>
-                  <p className="text-xs" style={{ color: '#0c4d86', fontWeight: 300 }}>€3.99 · one-time</p>
+                  <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Documents & Relocation</p>
+                  <p className="text-sm text-navy mb-1" style={{ fontWeight: 400 }}>{country.name} relocation guide</p>
+                  <p className="text-xs" style={{ color: '#0c4d86', fontWeight: 400 }}>€3.99 · one-time</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#0c4d86' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -248,9 +248,9 @@ export default function PackageDetailPage({ country, packageType, purchases, isL
                 </svg>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Scholarship Guide</p>
-                <p className="text-sm text-navy mb-1" style={{ fontWeight: 300 }}>Browse all scholarships</p>
-                <p className="text-xs" style={{ color: '#0c4d86', fontWeight: 300 }}>from €5.99 · per scholarship</p>
+                <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Scholarship Guide</p>
+                <p className="text-sm text-navy mb-1" style={{ fontWeight: 400 }}>Browse all scholarships</p>
+                <p className="text-xs" style={{ color: '#0c4d86', fontWeight: 400 }}>from €5.99 · per scholarship</p>
               </div>
               <svg className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#0c4d86' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

@@ -68,7 +68,7 @@ export default function SignupPage() {
 
   return (
     <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 sm:p-10">
-      <h1 className="text-2xl text-navy mb-1" style={{ fontWeight: 300 }}>
+      <h1 className="text-2xl text-navy mb-1" style={{ fontWeight: 400 }}>
         Create your account
       </h1>
       <p className="text-gray-400 text-sm mb-6">Join Fix It and start your journey</p>

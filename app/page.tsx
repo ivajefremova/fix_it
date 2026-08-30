@@ -39,14 +39,14 @@ export default function HomePage() {
                 <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Who we are</p>
                 <h2
                   className="text-3xl sm:text-4xl mb-4 leading-snug text-navy"
-                  style={{ fontWeight: 300 }}
+                  style={{ fontWeight: 400 }}
                 >
                   Real insight from students who have actually done it.
                 </h2>
-                <p className="mb-1 text-base leading-relaxed" style={{ color: 'rgba(24,24,49,0.6)', fontWeight: 300 }}>
+                <p className="mb-1 text-base leading-relaxed" style={{ color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>
                   Fix It is built by Macedonian alumni studying across Europe — people who navigated every deadline, visa, and housing search themselves. No generic scraped data. Just verified, lived experience.
                 </p>
-                <p className="mb-8 text-xs uppercase tracking-widest mt-3" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 400 }}>
+                <p className="mb-8 text-xs uppercase tracking-widest mt-3" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
                   Macedonian Alumni Students · From all over Europe
                 </p>
                 <Link
@@ -69,7 +69,7 @@ export default function HomePage() {
         <div className="max-w-[90%] mx-auto mb-10">
           <RevealOnScroll>
             <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>10 countries covered</p>
-            <h2 className="text-3xl sm:text-4xl text-navy" style={{ fontWeight: 300 }}>
+            <h2 className="text-3xl sm:text-4xl text-navy" style={{ fontWeight: 400 }}>
               Where do you want to study?
             </h2>
           </RevealOnScroll>
@@ -89,11 +89,11 @@ export default function HomePage() {
               </p>
               <h3
                 className="mb-3 leading-tight"
-                style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(24px, 3.5vw, 42px)' }}
+                style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(24px, 3.5vw, 42px)' }}
               >
                 Don&apos;t know where to start?
               </h3>
-              <p className="text-base mb-8 max-w-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+              <p className="text-base mb-8 max-w-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                 Answer 5 quick questions and we&apos;ll match you with the right country and universities for your goals.
               </p>
 
@@ -128,10 +128,10 @@ export default function HomePage() {
         <div className="max-w-[90%] mx-auto text-center">
           <RevealOnScroll>
             <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>Why trust us</p>
-            <h2 className="text-3xl sm:text-4xl mb-4 text-navy" style={{ fontWeight: 300 }}>
+            <h2 className="text-3xl sm:text-4xl mb-4 text-navy" style={{ fontWeight: 400 }}>
               Accurate, structured, and human-verified.
             </h2>
-            <p className="text-base max-w-xl mx-auto leading-relaxed" style={{ color: 'rgba(24,24,49,0.6)', fontWeight: 300 }}>
+            <p className="text-base max-w-xl mx-auto leading-relaxed" style={{ color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>
               Every guide on Fix It is written by someone who lived it. We provide everything you need — scholarships, visas, housing, deadlines — in one clear, reliable platform.
             </p>
           </RevealOnScroll>

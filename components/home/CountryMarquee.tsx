@@ -84,7 +84,7 @@ export default function CountryMarquee() {
           ))}
         </div>
       </div>
-      <p className="text-center text-xs mt-4" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300, letterSpacing: '0.04em' }}>
+      <p className="text-center text-xs mt-4" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400, letterSpacing: '0.04em' }}>
         Click on a country to explore
       </p>
     </div>

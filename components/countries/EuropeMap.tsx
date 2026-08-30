@@ -30,15 +30,15 @@ export default function EuropeMap({ countries, active, onSelect }: Props) {
   useEffect(() => { setMounted(true) }, [])
 
   if (!mounted) {
-    return <div style={{ height: 360, background: '#f8f9fb', borderRadius: 16 }} />
+    return <div style={{ height: 320, background: '#f8f9fb', borderRadius: 16 }} />
   }
 
   return (
-    <div style={{ borderRadius: 16, overflow: 'hidden', background: '#f0f4f8' }}>
+    <div style={{ borderRadius: 16, overflow: 'hidden', background: '#ffffff' }}>
       <ComposableMap
         projection="geoAzimuthalEqualArea"
-        projectionConfig={{ rotate: [-12, -53, 0], scale: 920 }}
-        style={{ width: '100%', height: '360px' }}
+        projectionConfig={{ rotate: [-12, -53, 0], scale: 1280 }}
+        style={{ width: '100%', height: '320px' }}
       >
         <Geographies geography={GEO_URL}>
           {({ geographies }) =>
@@ -47,9 +47,9 @@ export default function EuropeMap({ countries, active, onSelect }: Props) {
                 key={geo.rsmKey}
                 geography={geo}
                 style={{
-                  default: { fill: '#dde3ea', stroke: '#f0f4f8', strokeWidth: 0.7, outline: 'none' },
-                  hover:   { fill: '#dde3ea', outline: 'none' },
-                  pressed: { fill: '#dde3ea', outline: 'none' },
+                  default: { fill: '#dde3ea', stroke: '#ffffff', strokeWidth: 0.7, outline: 'none' },
+                  hover:   { fill: '#dde3ea', stroke: '#ffffff', outline: 'none' },
+                  pressed: { fill: '#dde3ea', stroke: '#ffffff', outline: 'none' },
                 }}
               />
             ))
@@ -68,21 +68,21 @@ export default function EuropeMap({ countries, active, onSelect }: Props) {
             >
               {isActive && (
                 <circle
-                  r={18}
+                  r={24}
                   fill="#51e74c"
-                  opacity={0.15}
+                  opacity={0.18}
                   style={{ pointerEvents: 'none' }}
                 />
               )}
               <circle
-                r={isActive ? 7 : 5}
+                r={isActive ? 10 : 8}
                 fill={isActive ? '#51e74c' : '#181831'}
-                opacity={isActive ? 1 : 0.45}
+                opacity={1}
                 stroke={isActive ? '#fff' : 'none'}
-                strokeWidth={isActive ? 1.5 : 0}
+                strokeWidth={isActive ? 2 : 0}
                 style={{
                   cursor: 'pointer',
-                  transition: 'r 0.25s ease, fill 0.25s ease, opacity 0.25s ease',
+                  transition: 'r 0.25s ease, fill 0.25s ease',
                 }}
               />
             </Marker>

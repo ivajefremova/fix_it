@@ -9,7 +9,7 @@ export default function VerifyEmailPage() {
         </svg>
       </div>
 
-      <h1 className="text-2xl text-navy mb-2" style={{ fontWeight: 300 }}>
+      <h1 className="text-2xl text-navy mb-2" style={{ fontWeight: 400 }}>
         Check your inbox
       </h1>
       <p className="text-gray-400 text-sm leading-relaxed mb-3">

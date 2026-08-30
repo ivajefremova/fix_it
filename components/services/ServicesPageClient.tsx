@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import RevealOnScroll from '@/components/ui/RevealOnScroll'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import WishlistButton from './WishlistButton'
+import HeroSheets from '@/components/ui/HeroSheets'
+import RevealOnScroll from '@/components/ui/RevealOnScroll'
 
 type Country = { slug: string; name: string }
 type Purchase = { package_type: string; country_slug: string }
@@ -41,7 +42,7 @@ const PACKAGES = [
     id: 'scholarship' as const,
     name: 'Scholarship Guide',
     price: 'from €5.99',
-    tagline: 'Find the right scholarship and learn exactly how to apply.',
+    tagline: 'Want to secure a scholarship with a full guide from students who have done it?',
     needsCountry: false,
     features: [
       'Eligibility requirements explained',
@@ -80,6 +81,211 @@ const PACKAGES = [
 ]
 
 
+// ─── Why Fix It — zig-zag with image slots ────────────────────────────────────
+
+const WHY_STEPS = [
+  {
+    n: '01',
+    heading: 'Your deadlines. All in one place.',
+    body: 'A personalised, always-updated calendar of every deadline you need — university applications, enrollment dates, scholarship applications, or both. Nothing slips through.',
+    flip: false,
+    image: '/images/ss%20/WhatsApp%20Image%202026-08-30%20at%2001.53.58.jpeg',
+    imgWidth: 460,
+    imgOffset: 'translateY(40px) translateX(-24px)',
+  },
+  {
+    n: '02',
+    heading: 'Know before it\'s too late.',
+    body: 'Get notified when a deadline is approaching. No more checking tabs and hoping you remembered. The reminder comes to you.',
+    flip: true,
+    image: '/images/ss%20/image%204.png',
+    imgWidth: 530,
+    imgOffset: 'translateY(-36px) translateX(20px)',
+  },
+  {
+    n: '03',
+    heading: 'Depth that actually helps.',
+    body: 'Read in-depth information carefully curated by students — explaining specific situations, clearing up vague official guidance and giving real personal experience from people who went through it.',
+    flip: false,
+    image: '/images/ss%20/image%206.png',
+    imgWidth: 430,
+    imgOffset: 'translateY(50px) translateX(-18px)',
+  },
+]
+
+function ScrollWire({ sectionRef, flips }: { sectionRef: React.RefObject<HTMLElement | null>; flips: boolean[] }) {
+  const fillRef = useRef<SVGPathElement>(null)
+  const [dims, setDims] = useState({ w: 0, h: 0 })
+  const [pathLen, setPathLen] = useState(0)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const update = () => setDims({ w: el.offsetWidth, h: el.offsetHeight })
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [sectionRef])
+
+  const path = useMemo<string>(() => {
+    const { w, h } = dims
+    if (!w || !h) return ''
+    const n = flips.length
+    const lx = w * 0.26
+    const rx = w * 0.74
+    const r = Math.min(72, w * 0.06)
+    const padFrac = 0.09
+    const span = h * (1 - 2 * padFrac) / n
+    const cy = (i: number) => h * padFrac + span * i + span * 0.5
+
+    const parts: string[] = [`M ${flips[0] ? rx : lx} 0`]
+    for (let i = 0; i < n; i++) {
+      const cx = flips[i] ? rx : lx
+      const cyi = cy(i)
+      if (i === 0) parts.push(`V ${cyi}`)
+      if (i < n - 1) {
+        const ncx = flips[i + 1] ? rx : lx
+        const ncyi = cy(i + 1)
+        const mid = (cyi + ncyi) / 2
+        if (cx < ncx) {
+          parts.push(`V ${mid - r}`, `Q ${cx} ${mid} ${cx + r} ${mid}`, `H ${ncx - r}`, `Q ${ncx} ${mid} ${ncx} ${mid + r}`)
+        } else {
+          parts.push(`V ${mid - r}`, `Q ${cx} ${mid} ${cx - r} ${mid}`, `H ${ncx + r}`, `Q ${ncx} ${mid} ${ncx} ${mid + r}`)
+        }
+        parts.push(`V ${ncyi}`)
+      } else {
+        parts.push(`V ${h}`)
+      }
+    }
+    return parts.join(' ')
+  }, [dims, flips])
+
+  useEffect(() => {
+    const el = fillRef.current
+    if (!el || !path) return
+    const len = el.getTotalLength()
+    setPathLen(len)
+    el.style.strokeDasharray = String(len)
+    el.style.strokeDashoffset = String(len)
+  }, [path])
+
+  useEffect(() => {
+    if (!pathLen || !sectionRef.current) return
+    const section = sectionRef.current
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect()
+      const scrollable = rect.height - window.innerHeight
+      const progress = scrollable > 0 ? Math.max(0, Math.min(1, -rect.top / scrollable)) : 0
+      if (fillRef.current) fillRef.current.style.strokeDashoffset = String(pathLen * (1 - progress))
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [pathLen, sectionRef])
+
+  if (!dims.w) return null
+  return (
+    <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', overflow: 'hidden' }} aria-hidden>
+      <path d={path} fill="none" stroke="rgba(12,77,134,0.13)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path ref={fillRef} d={path} fill="none" stroke="#51e74c" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function WhyStep({ body, flip, image, imgWidth, imgOffset }: typeof WHY_STEPS[0]) {
+  const imgJustify = flip ? 'flex-end' : 'flex-start'
+  const textPadding = flip ? { paddingRight: '5rem' } : { paddingLeft: '5rem' }
+
+  const imageEl = (
+    <div style={{ display: 'flex', justifyContent: imgJustify }}>
+      <img
+        src={image}
+        alt=""
+        style={{
+          width: `${imgWidth}px`, maxWidth: '100%', height: 'auto', borderRadius: 16, display: 'block',
+          transform: imgOffset,
+        }}
+      />
+    </div>
+  )
+
+  const text = (
+    <div className="flex flex-col" style={{ maxWidth: 500, ...textPadding, background: '#fff', borderRadius: 12, padding: '12px 20px' }}>
+      <p style={{ fontSize: 'clamp(19px, 1.8vw, 23px)', color: '#181831', fontWeight: 400, lineHeight: 2, fontFamily: 'inherit' }}>
+        {body}
+      </p>
+    </div>
+  )
+
+  return (
+    <div className={`flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
+      <div className="flex-1 w-full">
+        <RevealOnScroll direction={flip ? 'right' : 'left'}>
+          {imageEl}
+        </RevealOnScroll>
+      </div>
+      <div className="flex-1 w-full" style={{ textAlign: 'left' }}>
+        <RevealOnScroll direction={flip ? 'left' : 'right'} delay={80}>
+          {text}
+        </RevealOnScroll>
+      </div>
+    </div>
+  )
+}
+
+function WhyFixIt() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const closingRef = useRef<HTMLDivElement>(null)
+  const [closingVisible, setClosingVisible] = useState(false)
+  useEffect(() => {
+    const el = closingRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setClosingVisible(true); obs.disconnect() } },
+      { threshold: 0.3 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <section ref={sectionRef as React.RefObject<HTMLDivElement>} className="bg-white" style={{ borderTop: '1px solid #e4ebf3', borderBottom: '1px solid #e4ebf3', paddingTop: '8rem', paddingBottom: '8rem', position: 'relative' }}>
+      <ScrollWire sectionRef={sectionRef} flips={WHY_STEPS.map(s => s.flip)} />
+      <div className="max-w-[90%] mx-auto" style={{ position: 'relative', zIndex: 1 }}>
+
+        {/* Zig-zag rows */}
+        {WHY_STEPS.map((step, i) => (
+          <div key={step.n} style={{ marginBottom: i < WHY_STEPS.length - 1 ? '8rem' : 0 }}>
+            <WhyStep {...step} />
+          </div>
+        ))}
+
+        {/* Closing statement */}
+        <div
+          ref={closingRef}
+          style={{
+            marginTop: '22rem',
+            textAlign: 'center',
+            opacity: closingVisible ? 1 : 0,
+            transform: closingVisible ? 'translateY(0) scale(1)' : 'translateY(32px) scale(0.97)',
+            transition: 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)',
+          }}
+        >
+          <p style={{
+            fontSize: 'clamp(20px, 4vw, 40px)',
+            fontWeight: 500, color: '#181831', lineHeight: 1.4,
+            background: '#fff', borderRadius: 12, padding: '8px 24px', display: 'inline-block',
+          }}>
+            Don&apos;t search for people with answers. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix it<span style={{ color: '#51e74c' }}>.</span>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
 export default function ServicesPageClient({ countries, purchases, wishlist, isLoggedIn, success }: Props) {
   const router = useRouter()
   const [selectedCountry, setSelectedCountry] = useState<Record<string, string>>({
@@ -105,44 +311,55 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
     <main style={{ background: '#f0f2f5', minHeight: '100vh' }}>
 
       {/* ─── HERO ──────────────────────────────────────────────────────────────── */}
-      <div className="bg-white border-b" style={{ borderColor: '#e4ebf3' }}>
-        <div className="max-w-[90%] mx-auto py-14 sm:py-20">
-          {success && (
-            <div
-              className="mb-8 px-5 py-3 rounded-xl text-sm inline-flex items-center gap-2"
-              style={{ background: 'rgba(81,231,76,0.12)', color: '#181831', fontWeight: 300 }}
-            >
-              <svg className="w-4 h-4" style={{ color: '#51e74c' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              Payment successful — your guide is ready.
-            </div>
-          )}
-          <RevealOnScroll>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Guides & pricing</p>
+      <section
+        className="bg-white border-b"
+        style={{ borderColor: '#e4ebf3', minHeight: '560px', position: 'relative' }}
+      >
+        <div className="max-w-[90%] mx-auto flex items-center" style={{ minHeight: '560px' }}>
+
+          {/* Text */}
+          <div className="flex-1 py-24 z-10 relative">
+            {success && (
+              <div
+                className="mb-8 px-5 py-3 rounded-xl text-sm inline-flex items-center gap-2"
+                style={{ background: 'rgba(81,231,76,0.12)', color: '#181831', fontWeight: 400 }}
+              >
+                <svg className="w-4 h-4" style={{ color: '#51e74c' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Payment successful — your guide is ready.
+              </div>
+            )}
+            <p className="text-xs uppercase tracking-widest mb-4 hero-text-in" style={{ color: '#51e74c' }}>Guides & pricing</p>
             <h1
-              className="mb-3 leading-tight"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(26px, 4vw, 46px)' }}
+              className="leading-tight mb-4 hero-text-in-2"
+              style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(28px, 4vw, 52px)' }}
             >
-              Everything you need.<br />Nothing you don&apos;t.
+              Everything you need.
             </h1>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 hero-text-in-3">
               {['One-time purchase', 'Alumni-verified', 'Lifetime access'].map((t, i) => (
-                <span key={i} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                <span key={i} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                   <span style={{ color: '#51e74c', fontSize: 8 }}>●</span>
                   {t}
                 </span>
               ))}
             </div>
-          </RevealOnScroll>
+          </div>
+
+          <HeroSheets />
+
         </div>
-      </div>
+      </section>
+
+      {/* ─── WHY FIX IT — ZIG-ZAG ─────────────────────────────────────────────── */}
+      <WhyFixIt />
 
       <div className="max-w-[90%] mx-auto py-10 sm:py-14 space-y-12">
 
         {/* ─── PACKAGES ────────────────────────────────────────────────────────── */}
         <div id="packages">
-          <p className="text-xs uppercase tracking-widest mb-6" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Choose your guide</p>
+          <p className="text-xs uppercase tracking-widest mb-6" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Choose your guide</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {PACKAGES.map(pkg => {
               const slug = pkg.needsCountry ? selectedCountry[pkg.id] : 'all'
@@ -164,18 +381,18 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                     >
                       {pkg.icon}
                     </div>
-                    <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>
+                    <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                       {pkg.name}
                     </p>
                     <div className="flex items-baseline gap-1.5 mb-2">
                       <span style={{ fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 200, color: '#181831', letterSpacing: '-0.02em' }}>
                         {pkg.price}
                       </span>
-                      <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>
+                      <span className="text-xs" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                         {pkg.needsCountry ? '/ country' : '/ scholarship'}
                       </span>
                     </div>
-                    <p className="text-xs leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                    <p className="text-xs leading-relaxed" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                       {pkg.tagline}
                     </p>
                   </div>
@@ -184,7 +401,7 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                   <div className="px-8 py-6 flex-1">
                     <ul className="space-y-3">
                       {pkg.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.6)', fontWeight: 300 }}>
+                        <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>
                           <span className="mt-1 flex-shrink-0" style={{ color: '#51e74c', fontSize: 8 }}>●</span>
                           {f}
                         </li>
@@ -204,7 +421,7 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                           initialSaved={isSaved}
                           isLoggedIn={isLoggedIn}
                         />
-                        <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>
+                        <span className="text-xs" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                           {isSaved ? 'Saved for later' : 'Save for later'}
                         </span>
                       </div>
@@ -217,8 +434,8 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                         style={{
                           border: '1px solid #e4ebf3',
                           background: '#fafafa',
-                          color: selectedCountry[pkg.id] ? '#181831' : 'rgba(24,24,49,0.35)',
-                          fontWeight: 300,
+                          color: selectedCountry[pkg.id] ? '#181831' : 'rgba(24,24,49,0.65)',
+                          fontWeight: 400,
                           fontFamily: 'inherit',
                         }}
                       >
@@ -232,7 +449,7 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
                     {owned ? (
                       <div
                         className="w-full py-3 rounded-xl text-sm text-center"
-                        style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 300 }}
+                        style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 400 }}
                       >
                         ✓ Already purchased
                       </div>
@@ -268,7 +485,7 @@ export default function ServicesPageClient({ countries, purchases, wishlist, isL
             ].map((item, i) => (
               <div key={i} style={{ borderBottom: i < 3 ? '1px solid #f0f2f5' : 'none', paddingBottom: i < 3 ? '1.5rem' : 0 }}>
                 <p className="text-sm text-navy mb-2" style={{ fontWeight: 400 }}>{item.q}</p>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>{item.a}</p>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.78)', fontWeight: 400 }}>{item.a}</p>
               </div>
             ))}
           </div>

@@ -46,7 +46,7 @@ const TYPE_LABELS: Record<string, string> = {
 const TYPE_COLORS: Record<string, { bg: string; color: string }> = {
   'merit-based': { bg: 'rgba(12,77,134,0.07)',  color: '#0c4d86' },
   'need-based':  { bg: 'rgba(81,231,76,0.12)',   color: '#181831' },
-  'government':  { bg: 'rgba(24,24,49,0.06)',    color: 'rgba(24,24,49,0.6)' },
+  'government':  { bg: 'rgba(24,24,49,0.06)',    color: 'rgba(24,24,49,0.82)' },
 }
 
 const WHAT_YOU_GET = [
@@ -103,11 +103,11 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
 
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 mb-4 flex-wrap">
-            <Link href="/services" className="text-xs hover:opacity-70 transition" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>Guides</Link>
-            <span style={{ color: 'rgba(24,24,49,0.25)', fontSize: '10px' }}>›</span>
-            <Link href="/services/scholarship" className="text-xs hover:opacity-70 transition" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>Scholarships</Link>
-            <span style={{ color: 'rgba(24,24,49,0.25)', fontSize: '10px' }}>›</span>
-            <span className="text-xs" style={{ color: '#51e74c', fontWeight: 300 }}>{s.name}</span>
+            <Link href="/services" className="text-xs hover:opacity-70 transition" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>Guides</Link>
+            <span style={{ color: 'rgba(24,24,49,0.58)', fontSize: '10px' }}>›</span>
+            <Link href="/services/scholarship" className="text-xs hover:opacity-70 transition" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>Scholarships</Link>
+            <span style={{ color: 'rgba(24,24,49,0.58)', fontSize: '10px' }}>›</span>
+            <span className="text-xs" style={{ color: '#51e74c', fontWeight: 400 }}>{s.name}</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
@@ -115,16 +115,16 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
             {/* Left */}
             <div>
               <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="text-xs" style={{ color: typeColors.color, fontWeight: 300 }}>{TYPE_LABELS[s.scholarship_type ?? 'merit-based']}</span>
+                <span className="text-xs" style={{ color: typeColors.color, fontWeight: 400 }}>{TYPE_LABELS[s.scholarship_type ?? 'merit-based']}</span>
                 <span style={{ color: '#e4ebf3', fontSize: 10 }}>·</span>
-                <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>{s.country}</span>
+                <span className="text-xs" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>{s.country}</span>
                 {s.levels && s.levels.map(l => (
-                  <>
-                    <span key={l + '-dot'} style={{ color: '#e4ebf3', fontSize: 10 }}>·</span>
-                    <span key={l} className="text-xs" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                  <span key={l} className="flex items-center gap-3">
+                    <span style={{ color: '#e4ebf3', fontSize: 10 }}>·</span>
+                    <span className="text-xs" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                       {l.charAt(0).toUpperCase() + l.slice(1)}
                     </span>
-                  </>
+                  </span>
                 ))}
               </div>
 
@@ -136,7 +136,7 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
               </h1>
 
               {s.description && (
-                <p className="text-sm max-w-md leading-relaxed mb-5" style={{ color: 'rgba(24,24,49,0.55)', fontWeight: 300 }}>
+                <p className="text-sm max-w-md leading-relaxed mb-5" style={{ color: 'rgba(24,24,49,0.78)', fontWeight: 400 }}>
                   {s.description}
                 </p>
               )}
@@ -144,14 +144,14 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
               <div className="flex flex-wrap gap-4 text-xs">
                 {s.amount && (
                   <div>
-                    <p className="mb-0.5 uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400, fontSize: '10px' }}>Amount</p>
-                    <p style={{ color: '#0c4d86', fontWeight: 300 }}>{s.amount}</p>
+                    <p className="mb-0.5 uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400, fontSize: '10px' }}>Amount</p>
+                    <p style={{ color: '#0c4d86', fontWeight: 400 }}>{s.amount}</p>
                   </div>
                 )}
                 {s.deadline && (
                   <div>
-                    <p className="mb-0.5 uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400, fontSize: '10px' }}>Deadline</p>
-                    <p style={{ color: '#181831', fontWeight: 300 }}>{s.deadline}</p>
+                    <p className="mb-0.5 uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400, fontSize: '10px' }}>Deadline</p>
+                    <p style={{ color: '#181831', fontWeight: 400 }}>{s.deadline}</p>
                   </div>
                 )}
               </div>
@@ -162,17 +162,17 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
               className="bg-white rounded-2xl p-8"
               style={{ border: '1px solid #eef0f3', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}
             >
-              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Scholarship Guide</p>
+              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Scholarship Guide</p>
               <div className="flex items-baseline gap-1.5 mb-1">
                 <span style={{ fontSize: 'clamp(32px, 4vw, 44px)', fontWeight: 200, color: '#181831', letterSpacing: '-0.02em' }}>€5.99</span>
-                <span className="text-xs" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>one-time</span>
+                <span className="text-xs" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>one-time</span>
               </div>
-              <p className="text-xs mb-6" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+              <p className="text-xs mb-6" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
                 Full guide to applying for this scholarship — written by a Macedonian student who received it.
               </p>
 
               {alreadyOwned ? (
-                <div className="w-full py-3 rounded-xl text-sm text-center mb-4" style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 300 }}>
+                <div className="w-full py-3 rounded-xl text-sm text-center mb-4" style={{ background: 'rgba(81,231,76,0.1)', color: '#181831', fontWeight: 400 }}>
                   ✓ You already own this guide
                 </div>
               ) : (
@@ -191,7 +191,7 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
                 </button>
               )}
 
-              <div className="flex items-center justify-center gap-4 text-xs" style={{ color: 'rgba(24,24,49,0.3)', fontWeight: 300 }}>
+              <div className="flex items-center justify-center gap-4 text-xs" style={{ color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>
                 <span>One-time payment</span>
                 <span>·</span>
                 <span>Instant access</span>
@@ -209,7 +209,7 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
         {s.eligibility && (
           <div className="bg-white rounded-2xl p-8 sm:p-10" style={{ border: '1px solid #eef0f3' }}>
             <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#51e74c' }}>Eligibility</p>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>{s.eligibility}</p>
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>{s.eligibility}</p>
           </div>
         )}
 
@@ -224,7 +224,7 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                 </span>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 300 }}>{item}</p>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>{item}</p>
               </div>
             ))}
           </div>
@@ -245,8 +245,8 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
                   style={{ border: '1px solid #f0f2f5', textDecoration: 'none' }}
                 >
                   <div>
-                    <p className="text-sm text-navy mb-0.5" style={{ fontWeight: 300 }}>{u.name}</p>
-                    <p className="text-xs" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+                    <p className="text-sm text-navy mb-0.5" style={{ fontWeight: 400 }}>{u.name}</p>
+                    <p className="text-xs" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
                       {[u.city, u.type].filter(Boolean).join(' · ')}
                       {u.quick_summary ? ` · ${u.quick_summary}` : ''}
                     </p>
@@ -265,7 +265,7 @@ export default function ScholarshipDetailPage({ scholarship: s, universities, pu
           <Link
             href="/services/scholarship"
             className="inline-flex items-center gap-1.5 text-xs transition hover:opacity-70"
-            style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}
+            style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />

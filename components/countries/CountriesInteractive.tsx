@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import CountryCarousel from './CountryCarousel'
+import HeroSheets from '@/components/ui/HeroSheets'
 
 const EuropeMap = dynamic(() => import('./EuropeMap'), { ssr: false })
 
@@ -20,40 +21,48 @@ export default function CountriesInteractive({ countries }: { countries: Country
     setActive(index)
   }, [])
 
-  return (
+return (
     <>
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-12 pb-8 sm:pt-16 sm:pb-10 border-b border-gray-100">
-        <div className="max-w-[90%] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Destinations</p>
-              <h1
-                className="mb-3 leading-tight"
-                style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(28px, 4vw, 48px)' }}
-              >
-                Study in Europe.
-              </h1>
-              <p className="text-base max-w-md leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-                8 countries. Alumni-verified guides. Everything you need — from application to arrival — in one place.
-              </p>
-            </div>
+      <section
+        className="bg-white border-b"
+        style={{ borderColor: '#e4ebf3', minHeight: '560px', position: 'relative' }}
+      >
+        <div className="max-w-[90%] mx-auto flex items-center" style={{ minHeight: '560px' }}>
 
-            <div className="hidden lg:block">
-              <EuropeMap countries={countries} active={active} onSelect={go} />
-            </div>
+          {/* Text */}
+          <div className="flex-1 py-24 z-10 relative">
+            <p className="text-xs uppercase tracking-widest mb-4 hero-text-in" style={{ color: '#51e74c' }}>Destinations</p>
+            <h1
+              className="leading-tight mb-4 hero-text-in-2"
+              style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(28px, 4vw, 52px)' }}
+            >
+              Study in Europe.
+            </h1>
+            <p className="text-sm leading-relaxed max-w-sm hero-text-in-3" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
+              8 countries. Alumni-verified guides. Everything you need — from application to arrival — in one place.
+            </p>
           </div>
+
+          <HeroSheets />
+
         </div>
       </section>
 
-      {/* ─── CAROUSEL ─────────────────────────────────────────────────────── */}
-      {countries.length > 0 && (
-        <CountryCarousel
-          countries={countries}
-          active={active}
-          onActiveChange={go}
-        />
-      )}
+      {/* ─── MAP + CAROUSEL ───────────────────────────────────────────────── */}
+      <section className="bg-white border-b" style={{ borderColor: '#e4ebf3' }}>
+        <div className="py-4 px-[5%]">
+          <EuropeMap countries={countries} active={active} onSelect={go} />
+        </div>
+
+        {countries.length > 0 && (
+          <CountryCarousel
+            countries={countries}
+            active={active}
+            onActiveChange={go}
+          />
+        )}
+      </section>
     </>
   )
 }

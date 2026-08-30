@@ -35,7 +35,7 @@ export default async function CountriesPage() {
         <div className="max-w-[90%] mx-auto">
           <RevealOnScroll>
             <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Life abroad</p>
-            <h2 className="mb-10" style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}>
+            <h2 className="mb-10" style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(22px, 3vw, 36px)' }}>
               A taste of student life
             </h2>
           </RevealOnScroll>
@@ -52,10 +52,10 @@ export default async function CountriesPage() {
         <div className="max-w-[90%] mx-auto text-center">
           <RevealOnScroll>
             <p className="text-xs uppercase tracking-widest mb-4" style={{ color: '#51e74c' }}>Find your path</p>
-            <h2 className="mb-3" style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
+            <h2 className="mb-3" style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
               Don&apos;t know where to start?
             </h2>
-            <p className="text-sm mb-7 max-w-sm mx-auto" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+            <p className="text-sm mb-7 max-w-sm mx-auto" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
               Take the quiz and find the right country for you in 2 minutes.
             </p>
             <Link

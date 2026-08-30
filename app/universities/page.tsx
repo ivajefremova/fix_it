@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import UniversityList from '@/components/universities/UniversityList'
 import ScholarshipTabs from '@/components/universities/ScholarshipTabs'
+import UniversityHero from '@/components/universities/UniversityHero'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 
 export const metadata = {
@@ -21,7 +22,7 @@ export default async function UniversitiesPage({
   const [{ data: raw }, { data: scholarshipsRaw }, { data: favRows }] = await Promise.all([
     supabase
       .from('universities')
-      .select('slug, name, country, country_slug, city, type, quick_summary, tuition_range, tags, ranking_summary, scholarships, subject_rankings')
+      .select('slug, name, country, country_slug, city, type, quick_summary, tuition_range, tags, ranking_summary, scholarships, subject_rankings, hero_image_url, qs_rank, shanghai_rank')
       .order('name'),
     supabase
       .from('scholarships')
@@ -47,6 +48,9 @@ export default async function UniversitiesPage({
     ranking_summary: u.ranking_summary,
     subject_rankings: (u.subject_rankings ?? {}) as Record<string, number>,
     has_scholarship: Array.isArray(u.scholarships) && u.scholarships.length > 0,
+    hero_image_url: u.hero_image_url as string | null,
+    qs_rank: u.qs_rank as number | null,
+    shanghai_rank: u.shanghai_rank as number | null,
   }))
 
   const scholarships = (scholarshipsRaw ?? []).map(s => ({
@@ -65,22 +69,7 @@ export default async function UniversitiesPage({
     <main className="min-h-screen" style={{ background: '#f8f9fb' }}>
 
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white border-b border-gray-100 py-14 sm:py-20">
-        <div className="max-w-[90%] mx-auto">
-          <RevealOnScroll>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Universities</p>
-            <h1
-              className="mb-3 leading-tight"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(26px, 4vw, 46px)' }}
-            >
-              Find your university
-            </h1>
-            <p className="text-sm max-w-lg leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-              Every guide is written by Macedonian alumni who studied there. Real admission info, real costs, real insight.
-            </p>
-          </RevealOnScroll>
-        </div>
-      </section>
+      <UniversityHero />
 
       {/* ─── LIST + FILTERS ───────────────────────────────────────────────── */}
       <section className="py-10">
@@ -101,21 +90,9 @@ export default async function UniversitiesPage({
       <div style={{ height: '1px', background: '#e4ebf3' }} />
 
       {/* ─── SCHOLARSHIP GUIDE ────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20">
-        <div className="max-w-[90%] mx-auto">
+      <section className="bg-white" style={{ borderTop: '1px solid #e4ebf3', minHeight: '100vh' }}>
+        <div className="px-[4%]" style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
           <RevealOnScroll>
-            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>Scholarship guide</p>
-            <h2
-              className="mb-3"
-              style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(22px, 3vw, 36px)' }}
-            >
-              Need a scholarship to study abroad?
-            </h2>
-            <p className="text-sm mb-10 max-w-lg leading-relaxed" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
-              Complete guide to the application process, evaluation of eligibility and criteria for the scholarship. Be 100% free of financial stress.
-            </p>
-          </RevealOnScroll>
-          <RevealOnScroll delay={80}>
             <ScholarshipTabs universities={universities} scholarships={scholarships} />
           </RevealOnScroll>
         </div>

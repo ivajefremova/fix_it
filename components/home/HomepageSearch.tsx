@@ -23,8 +23,8 @@ const TYPES    = ['Public', 'Private']
 const selectStyle = (active: boolean): React.CSSProperties => ({
   border: `1px solid ${active ? '#181831' : '#eef0f3'}`,
   backgroundColor: active ? '#181831' : '#fff',
-  color: active ? '#fff' : 'rgba(24,24,49,0.6)',
-  fontWeight: 300,
+  color: active ? '#fff' : 'rgba(24,24,49,0.82)',
+  fontWeight: 400,
   fontFamily: 'inherit',
   fontSize: '15px',
   borderRadius: '12px',
@@ -74,7 +74,7 @@ export default function HomepageSearch() {
 
         <div className="mb-8">
           <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#51e74c' }}>University search</p>
-          <h2 className="text-3xl sm:text-4xl text-navy" style={{ fontWeight: 300 }}>
+          <h2 className="text-3xl sm:text-4xl text-navy" style={{ fontWeight: 400 }}>
             Find the right university for you.
           </h2>
         </div>
@@ -87,7 +87,7 @@ export default function HomepageSearch() {
 
             {/* Country */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Country</label>
+              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Country</label>
               <select value={country} onChange={e => setCountry(e.target.value)} style={selectStyle(country !== 'all')}>
                 <option value="all">All countries</option>
                 {COUNTRIES.map(c => (
@@ -98,7 +98,7 @@ export default function HomepageSearch() {
 
             {/* Field */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Field of study</label>
+              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Field of study</label>
               <select value={field} onChange={e => setField(e.target.value)} style={selectStyle(field !== 'All')}>
                 <option value="All">All fields</option>
                 {FIELDS.map(f => <option key={f} value={f}>{f}</option>)}
@@ -107,7 +107,7 @@ export default function HomepageSearch() {
 
             {/* Level */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Level</label>
+              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Level</label>
               <select value={level} onChange={e => setLevel(e.target.value)} style={selectStyle(level !== 'All')}>
                 <option value="All">All levels</option>
                 {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
@@ -116,7 +116,7 @@ export default function HomepageSearch() {
 
             {/* Type */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Type</label>
+              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Type</label>
               <select value={type} onChange={e => setType(e.target.value)} style={selectStyle(type !== 'all')}>
                 <option value="all">All types</option>
                 {TYPES.map(t => <option key={t} value={t}>{t}</option>)}
@@ -125,14 +125,14 @@ export default function HomepageSearch() {
 
             {/* Scholarship */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.35)', fontWeight: 400 }}>Funding</label>
+              <label className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Funding</label>
               <button
                 onClick={() => setScholarship(p => !p)}
                 className="flex items-center gap-1.5 rounded-xl transition-all duration-200"
                 style={{
                   padding: '12px 16px',
                   background: scholarship ? '#51e74c' : '#fff',
-                  color: scholarship ? '#181831' : 'rgba(24,24,49,0.6)',
+                  color: scholarship ? '#181831' : 'rgba(24,24,49,0.82)',
                   fontWeight: scholarship ? 400 : 300,
                   border: `1px solid ${scholarship ? '#51e74c' : '#eef0f3'}`,
                   cursor: 'pointer',

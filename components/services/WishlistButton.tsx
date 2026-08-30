@@ -55,7 +55,7 @@ export default function WishlistButton({ packageType, countrySlug, country, init
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         borderRadius: '50%', border: 'none', cursor: 'pointer',
         background: saved ? 'rgba(239,68,68,0.1)' : 'rgba(24,24,49,0.05)',
-        color: saved ? '#ef4444' : 'rgba(24,24,49,0.3)',
+        color: saved ? '#ef4444' : 'rgba(24,24,49,0.82)',
         transition: 'background 0.15s, color 0.15s',
       }}
       onMouseEnter={e => {
@@ -67,7 +67,7 @@ export default function WishlistButton({ packageType, countrySlug, country, init
       onMouseLeave={e => {
         if (!saved) {
           ;(e.currentTarget as HTMLButtonElement).style.background = 'rgba(24,24,49,0.05)'
-          ;(e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.3)'
+          ;(e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.82)'
         }
       }}
     >

@@ -20,7 +20,7 @@ type Props = {
 
 function CategoryPill({ text }: { text: string }) {
   return (
-    <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 20, background: 'rgba(12,77,134,0.08)', color: '#0c4d86', fontWeight: 300, whiteSpace: 'nowrap' }}>
+    <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 20, background: 'rgba(12,77,134,0.08)', color: '#0c4d86', fontWeight: 400, whiteSpace: 'nowrap' }}>
       {text}
     </span>
   )
@@ -53,9 +53,9 @@ function QuestionCard({ q, currentUserId, onDelete }: { q: Question; currentUser
       }}
     >
       {isOwn && (
-        <button onClick={handleDelete} title="Delete" style={{ position: 'absolute', top: 12, right: 12, background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'rgba(24,24,49,0.25)', lineHeight: 1 }}
+        <button onClick={handleDelete} title="Delete" style={{ position: 'absolute', top: 12, right: 12, background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'rgba(24,24,49,0.58)', lineHeight: 1 }}
           onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#e53e3e' }}
-          onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.25)' }}>
+          onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.58)' }}>
           <svg style={{ width: 13, height: 13 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
           </svg>
@@ -65,25 +65,25 @@ function QuestionCard({ q, currentUserId, onDelete }: { q: Question; currentUser
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10, flexWrap: 'wrap' }}>
         {q.category && <CategoryPill text={q.category} />}
         {country && (
-          <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{country.name}</span>
+          <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>{country.name}</span>
         )}
         {q.university_slug && (
-          <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.38)', fontWeight: 300 }}>{q.university_slug}</span>
+          <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.38)', fontWeight: 400 }}>{q.university_slug}</span>
         )}
       </div>
 
-      <p style={{ fontSize: 13, color: '#181831', fontWeight: 300, lineHeight: 1.65, marginBottom: 12, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+      <p style={{ fontSize: 13, color: '#181831', fontWeight: 400, lineHeight: 1.65, marginBottom: 12, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
         {q.content}
       </p>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{q.author_alias ?? 'Anonymous'}</span>
+        <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>{q.author_alias ?? 'Anonymous'}</span>
         <span style={{ color: 'rgba(24,24,49,0.18)', fontSize: 10 }}>·</span>
-        <span suppressHydrationWarning style={{ fontSize: 12, color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>{timeAgo(q.created_at)}</span>
+        <span suppressHydrationWarning style={{ fontSize: 12, color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>{timeAgo(q.created_at)}</span>
         {q.answer_count > 0 && (
           <>
             <span style={{ color: 'rgba(24,24,49,0.18)', fontSize: 10 }}>·</span>
-            <span style={{ fontSize: 12, color: '#51e74c', fontWeight: 300 }}>{q.answer_count} {q.answer_count === 1 ? 'answer' : 'answers'}</span>
+            <span style={{ fontSize: 12, color: '#51e74c', fontWeight: 400 }}>{q.answer_count} {q.answer_count === 1 ? 'answer' : 'answers'}</span>
           </>
         )}
       </div>
@@ -111,7 +111,7 @@ const selectStyle: React.CSSProperties = {
   border: '1px solid #eef0f3',
   background: 'white',
   fontSize: 13,
-  fontWeight: 300,
+  fontWeight: 400,
   fontFamily: 'inherit',
   color: '#181831',
   outline: 'none',
@@ -216,14 +216,14 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
       <div>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16, gap: 12 }}>
           <div>
-            <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#51e74c', fontWeight: 300, marginBottom: 4 }}>Community</p>
-            <h2 style={{ fontSize: 15, color: '#181831', fontWeight: 300 }}>
+            <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#51e74c', fontWeight: 400, marginBottom: 4 }}>Community</p>
+            <h2 style={{ fontSize: 15, color: '#181831', fontWeight: 400 }}>
               {countrySlug ? `Students are asking about ${countryName}` : universitySlug ? 'Students are asking about this university' : 'From the community'}
             </h2>
           </div>
           <button
             onClick={() => setShowForm(true)}
-            style={{ flexShrink: 0, fontSize: 12, padding: '7px 14px', borderRadius: 10, background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 300, border: 'none', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
+            style={{ flexShrink: 0, fontSize: 12, padding: '7px 14px', borderRadius: 10, background: 'rgba(12,77,134,0.07)', color: '#0c4d86', fontWeight: 400, border: 'none', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
           >
             Ask something
           </button>
@@ -233,7 +233,7 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}><Skeleton /><Skeleton /><Skeleton /></div>
         ) : filtered.length === 0 ? (
           <div style={{ borderRadius: 16, padding: '28px 24px', textAlign: 'center', background: 'rgba(12,77,134,0.03)', border: '1px dashed rgba(12,77,134,0.15)' }}>
-            <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>No questions yet. Be the first to ask.</p>
+            <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>No questions yet. Be the first to ask.</p>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -242,7 +242,7 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
         )}
 
         <div style={{ marginTop: 14 }}>
-          <Link href={viewAllHref} style={{ fontSize: 12, color: '#0c4d86', fontWeight: 300, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+          <Link href={viewAllHref} style={{ fontSize: 12, color: '#0c4d86', fontWeight: 400, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
             See all questions
             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -274,7 +274,7 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
 
       {/* Search */}
       <div style={{ position: 'relative' }}>
-        <svg className="w-4 h-4" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'rgba(24,24,49,0.3)', pointerEvents: 'none' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg className="w-4 h-4" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'rgba(24,24,49,0.82)', pointerEvents: 'none' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803a7.5 7.5 0 0010.607 10.607z" />
         </svg>
         <input
@@ -282,13 +282,13 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search questions…"
-          style={{ width: '100%', paddingLeft: 34, paddingRight: 12, paddingTop: 9, paddingBottom: 9, borderRadius: 10, border: '1px solid #eef0f3', background: 'white', fontSize: 13, fontWeight: 300, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box' }}
+          style={{ width: '100%', paddingLeft: 34, paddingRight: 12, paddingTop: 9, paddingBottom: 9, borderRadius: 10, border: '1px solid #eef0f3', background: 'white', fontSize: 13, fontWeight: 400, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box' }}
         />
       </div>
 
       {/* Country dropdown */}
       <div>
-        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.45)', fontWeight: 300, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Country</p>
+        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.72)', fontWeight: 400, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Country</p>
         <div style={{ position: 'relative' }}>
           <select value={activeCountry} onChange={e => setActiveCountry(e.target.value)} style={selectStyle}>
             <option value="">All countries</option>
@@ -301,7 +301,7 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
 
       {/* Category dropdown */}
       <div>
-        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.45)', fontWeight: 300, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Topic</p>
+        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.72)', fontWeight: 400, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Topic</p>
         <div style={{ position: 'relative' }}>
           <select value={activeCategory} onChange={e => setActiveCategory(e.target.value)} style={selectStyle}>
             <option value="">All topics</option>
@@ -316,7 +316,7 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
       {(activeCountry || activeCategory || search) && (
         <button
           onClick={() => { setActiveCountry(''); setActiveCategory(''); setSearch('') }}
-          style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', padding: 0 }}
+          style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', padding: 0 }}
         >
           ✕ Clear filters
         </button>
@@ -324,7 +324,7 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
 
       {/* Disclaimer */}
       <div style={{ borderRadius: 12, padding: '12px 14px', background: 'rgba(12,77,134,0.04)', border: '1px solid rgba(12,77,134,0.09)' }}>
-        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.5)', fontWeight: 300, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.75)', fontWeight: 400, lineHeight: 1.6 }}>
           All content is personal experience. Fix It does not verify accuracy — use as a starting point, not a final source.
         </p>
       </div>
@@ -351,10 +351,10 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
           <div style={{ flex: 1, position: 'relative' }}>
-            <svg className="w-3.5 h-3.5" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'rgba(24,24,49,0.3)', pointerEvents: 'none' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <svg className="w-3.5 h-3.5" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'rgba(24,24,49,0.82)', pointerEvents: 'none' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803a7.5 7.5 0 0010.607 10.607z" />
             </svg>
-            <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search…" style={{ width: '100%', paddingLeft: 30, paddingRight: 10, paddingTop: 8, paddingBottom: 8, borderRadius: 10, border: '1px solid #eef0f3', background: 'white', fontSize: 12, fontWeight: 300, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box' }} />
+            <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search…" style={{ width: '100%', paddingLeft: 30, paddingRight: 10, paddingTop: 8, paddingBottom: 8, borderRadius: 10, border: '1px solid #eef0f3', background: 'white', fontSize: 12, fontWeight: 400, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box' }} />
           </div>
           <button
             onClick={() => setShowForm(true)}
@@ -376,10 +376,10 @@ export default function CommunityFeed({ countrySlug, universitySlug, compact }: 
             </div>
           ) : filtered.length === 0 ? (
             <div style={{ borderRadius: 16, padding: '48px 24px', textAlign: 'center', background: 'rgba(12,77,134,0.03)', border: '1px dashed rgba(12,77,134,0.12)' }}>
-              <p style={{ fontSize: 14, color: 'rgba(24,24,49,0.5)', fontWeight: 300, marginBottom: 4 }}>
+              <p style={{ fontSize: 14, color: 'rgba(24,24,49,0.75)', fontWeight: 400, marginBottom: 4 }}>
                 {search || activeCountry || activeCategory ? 'No matching questions.' : 'No questions yet.'}
               </p>
-              <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>Be the first to ask something.</p>
+              <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>Be the first to ask something.</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>

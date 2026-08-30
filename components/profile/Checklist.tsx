@@ -55,7 +55,7 @@ export default function Checklist({ userId }: { userId: string }) {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="text-base text-navy" style={{ fontWeight: 300 }}>
+        <h2 className="text-base text-navy" style={{ fontWeight: 400 }}>
           Application checklist
         </h2>
         <span className="text-sm text-gray-400">{completed}/{total}</span>
@@ -98,7 +98,7 @@ export default function Checklist({ userId }: { userId: string }) {
 
       {completed === total && (
         <div className="mt-4 p-4 rounded-xl text-center" style={{ background: 'rgba(81,231,76,0.08)' }}>
-          <p className="text-sm" style={{ color: '#181831', fontWeight: 300 }}>
+          <p className="text-sm" style={{ color: '#181831', fontWeight: 400 }}>
             All done. Now go find your university.
           </p>
         </div>

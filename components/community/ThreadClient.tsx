@@ -167,27 +167,27 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
       <div style={{ background: 'white', borderRadius: 20, padding: '24px 28px', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', marginBottom: 6 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
           {question.category && (
-            <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 20, background: 'rgba(12,77,134,0.08)', color: '#0c4d86', fontWeight: 300 }}>
+            <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 20, background: 'rgba(12,77,134,0.08)', color: '#0c4d86', fontWeight: 400 }}>
               {question.category}
             </span>
           )}
-          {country && <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 20, background: 'rgba(24,24,49,0.05)', color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>{country.name}</span>}
+          {country && <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 20, background: 'rgba(24,24,49,0.05)', color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>{country.name}</span>}
           {question.university_slug && (
-            <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>{question.university_slug}</span>
+            <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>{question.university_slug}</span>
           )}
         </div>
 
-        <p style={{ fontSize: 16, color: '#181831', fontWeight: 300, lineHeight: 1.7, marginBottom: 16 }}>
+        <p style={{ fontSize: 16, color: '#181831', fontWeight: 400, lineHeight: 1.7, marginBottom: 16 }}>
           {question.content}
         </p>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+            <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
               {question.author_alias ?? 'Anonymous'}
             </span>
-            <span style={{ color: 'rgba(24,24,49,0.2)', fontSize: 10 }}>·</span>
-            <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>
+            <span style={{ color: 'rgba(24,24,49,0.78)', fontSize: 10 }}>·</span>
+            <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
               {timeAgo(question.created_at)}
             </span>
           </div>
@@ -197,7 +197,7 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
 
       {/* Answers header */}
       <div style={{ padding: '16px 4px 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+        <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
           {answers.length} {answers.length === 1 ? 'answer' : 'answers'}
         </p>
       </div>
@@ -205,7 +205,7 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
       {/* Answer cards */}
       {answers.length === 0 ? (
         <div style={{ borderRadius: 16, padding: '28px 24px', textAlign: 'center', background: 'rgba(12,77,134,0.03)', border: '1px dashed rgba(12,77,134,0.12)', marginBottom: 16 }}>
-          <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>No answers yet. Be the first to help.</p>
+          <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>No answers yet. Be the first to help.</p>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
@@ -217,16 +217,16 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
               <div key={a.id}>
                 {/* Answer */}
                 <div style={{ background: 'white', borderRadius: 16, padding: '18px 22px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', borderLeft: '3px solid #51e74c' }}>
-                  <p style={{ fontSize: 13, color: '#181831', fontWeight: 300, lineHeight: 1.7, marginBottom: 12 }}>
+                  <p style={{ fontSize: 13, color: '#181831', fontWeight: 400, lineHeight: 1.7, marginBottom: 12 }}>
                     {a.content}
                   </p>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+                      <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                         {a.author_alias ?? 'Anonymous'}
                       </span>
-                      <span style={{ color: 'rgba(24,24,49,0.2)', fontSize: 10 }}>·</span>
-                      <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.35)', fontWeight: 300 }}>
+                      <span style={{ color: 'rgba(24,24,49,0.78)', fontSize: 10 }}>·</span>
+                      <span style={{ fontSize: 12, color: 'rgba(24,24,49,0.65)', fontWeight: 400 }}>
                         {timeAgo(a.created_at)}
                       </span>
                     </div>
@@ -240,8 +240,8 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
                           }}
                           style={{
                             background: 'none', border: 'none', cursor: 'pointer',
-                            fontSize: 11, color: isReplying ? '#0c4d86' : 'rgba(24,24,49,0.35)',
-                            fontFamily: 'inherit', fontWeight: 300, padding: '2px 0',
+                            fontSize: 11, color: isReplying ? '#0c4d86' : 'rgba(24,24,49,0.65)',
+                            fontFamily: 'inherit', fontWeight: 400, padding: '2px 0',
                             display: 'flex', alignItems: 'center', gap: 4,
                           }}
                         >
@@ -253,9 +253,9 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
                       )}
                       <ReportButton postId={a.id} />
                       {userId && a.user_id === userId && (
-                        <button onClick={() => handleDeleteAnswer(a.id)} title="Delete" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'rgba(24,24,49,0.25)' }}
+                        <button onClick={() => handleDeleteAnswer(a.id)} title="Delete" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'rgba(24,24,49,0.58)' }}
                           onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#e53e3e' }}
-                          onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.25)' }}>
+                          onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.58)' }}>
                           <svg style={{ width: 13, height: 13 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                           </svg>
@@ -268,7 +268,7 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
                 {/* Inline reply form */}
                 {isReplying && (
                   <div style={{ marginLeft: 24, marginTop: 6, background: 'rgba(12,77,134,0.03)', borderRadius: 14, padding: '14px 18px', border: '1px solid rgba(12,77,134,0.1)' }}>
-                    <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.4)', fontWeight: 300, marginBottom: 8 }}>
+                    <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.7)', fontWeight: 400, marginBottom: 8 }}>
                       Replying as <strong style={{ fontWeight: 400 }}>{alias}</strong>
                     </p>
                     <textarea
@@ -277,19 +277,19 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
                       placeholder={`Reply to ${a.author_alias ?? 'this answer'}…`}
                       rows={3}
                       autoFocus
-                      style={{ width: '100%', padding: '10px 13px', borderRadius: 10, border: '1px solid #eef0f3', background: 'white', fontSize: 13, fontWeight: 300, fontFamily: 'inherit', outline: 'none', resize: 'none', boxSizing: 'border-box', lineHeight: 1.6, marginBottom: 8 }}
+                      style={{ width: '100%', padding: '10px 13px', borderRadius: 10, border: '1px solid #eef0f3', background: 'white', fontSize: 13, fontWeight: 400, fontFamily: 'inherit', outline: 'none', resize: 'none', boxSizing: 'border-box', lineHeight: 1.6, marginBottom: 8 }}
                     />
                     <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
                       <button
                         onClick={() => { setReplyingTo(null); setReplyContent('') }}
-                        style={{ padding: '7px 14px', borderRadius: 9, background: '#f8f9fb', color: 'rgba(24,24,49,0.55)', fontSize: 12, fontWeight: 300, border: '1px solid #eef0f3', cursor: 'pointer', fontFamily: 'inherit' }}
+                        style={{ padding: '7px 14px', borderRadius: 9, background: '#f8f9fb', color: 'rgba(24,24,49,0.78)', fontSize: 12, fontWeight: 400, border: '1px solid #eef0f3', cursor: 'pointer', fontFamily: 'inherit' }}
                       >
                         Cancel
                       </button>
                       <button
                         onClick={() => submitReply(a.id)}
                         disabled={submittingReply || !replyContent.trim()}
-                        style={{ padding: '7px 16px', borderRadius: 9, background: '#0c4d86', color: 'white', fontSize: 12, fontWeight: 300, border: 'none', cursor: 'pointer', fontFamily: 'inherit', opacity: !replyContent.trim() || submittingReply ? 0.5 : 1 }}
+                        style={{ padding: '7px 16px', borderRadius: 9, background: '#0c4d86', color: 'white', fontSize: 12, fontWeight: 400, border: 'none', cursor: 'pointer', fontFamily: 'inherit', opacity: !replyContent.trim() || submittingReply ? 0.5 : 1 }}
                       >
                         {submittingReply ? 'Posting…' : 'Post reply'}
                       </button>
@@ -302,25 +302,25 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
                   <div style={{ marginLeft: 24, marginTop: 6, display: 'flex', flexDirection: 'column', gap: 6 }}>
                     {answerReplies.map(r => (
                       <div key={r.id} style={{ background: '#f8f9fb', borderRadius: 13, padding: '13px 18px', borderLeft: '2px solid #eef0f3', position: 'relative' }}>
-                        <p style={{ fontSize: 12, color: '#181831', fontWeight: 300, lineHeight: 1.7, marginBottom: 8 }}>
+                        <p style={{ fontSize: 12, color: '#181831', fontWeight: 400, lineHeight: 1.7, marginBottom: 8 }}>
                           {r.content}
                         </p>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.45)', fontWeight: 300 }}>
+                            <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.72)', fontWeight: 400 }}>
                               {r.author_alias ?? 'Anonymous'}
                             </span>
-                            <span style={{ color: 'rgba(24,24,49,0.2)', fontSize: 9 }}>·</span>
-                            <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.3)', fontWeight: 300 }}>
+                            <span style={{ color: 'rgba(24,24,49,0.78)', fontSize: 9 }}>·</span>
+                            <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>
                               {timeAgo(r.created_at)}
                             </span>
                           </div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                             <ReportButton postId={r.id} />
                             {userId && r.user_id === userId && (
-                              <button onClick={() => handleDeleteReply(r.id, a.id)} title="Delete" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 3, color: 'rgba(24,24,49,0.22)' }}
+                              <button onClick={() => handleDeleteReply(r.id, a.id)} title="Delete" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 3, color: 'rgba(24,24,49,0.78)' }}
                                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#e53e3e' }}
-                                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.22)' }}>
+                                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(24,24,49,0.78)' }}>
                                 <svg style={{ width: 12, height: 12 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                 </svg>
@@ -346,12 +346,12 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
 
         {aliasStep === 'not_logged_in' && (
           <div style={{ textAlign: 'center', padding: '8px 0' }}>
-            <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.5)', fontWeight: 300, marginBottom: 12 }}>
+            <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.75)', fontWeight: 400, marginBottom: 12 }}>
               Log in to write an answer
             </p>
             <Link
               href="/login"
-              style={{ display: 'inline-block', background: '#181831', color: 'white', padding: '9px 22px', borderRadius: 10, fontSize: 13, fontWeight: 300, textDecoration: 'none' }}
+              style={{ display: 'inline-block', background: '#181831', color: 'white', padding: '9px 22px', borderRadius: 10, fontSize: 13, fontWeight: 400, textDecoration: 'none' }}
             >
               Log in
             </Link>
@@ -360,8 +360,8 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
 
         {aliasStep === 'needs_alias' && (
           <div>
-            <p style={{ fontSize: 14, color: '#181831', fontWeight: 300, marginBottom: 6 }}>Pick a community name to answer</p>
-            <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.45)', fontWeight: 300, marginBottom: 14, lineHeight: 1.5 }}>
+            <p style={{ fontSize: 14, color: '#181831', fontWeight: 400, marginBottom: 6 }}>Pick a community name to answer</p>
+            <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.72)', fontWeight: 400, marginBottom: 14, lineHeight: 1.5 }}>
               Anonymous but recognisable — first name, nickname, whatever you like.
             </p>
             <div style={{ display: 'flex', gap: 8 }}>
@@ -372,7 +372,7 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
                 onKeyDown={e => { if (e.key === 'Enter') saveAlias() }}
                 placeholder="e.g. Ana from Skopje"
                 maxLength={24}
-                style={{ flex: 1, padding: '9px 14px', borderRadius: 10, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 300, fontFamily: 'inherit', outline: 'none' }}
+                style={{ flex: 1, padding: '9px 14px', borderRadius: 10, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 400, fontFamily: 'inherit', outline: 'none' }}
               />
               <button
                 onClick={saveAlias}
@@ -388,7 +388,7 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
         {aliasStep === 'ready' && !showForm && (
           <button
             onClick={() => setShowForm(true)}
-            style={{ width: '100%', padding: '12px 16px', borderRadius: 12, background: '#f8f9fb', border: '1px solid #eef0f3', textAlign: 'left', fontSize: 13, color: 'rgba(24,24,49,0.4)', fontWeight: 300, fontFamily: 'inherit', cursor: 'text' }}
+            style={{ width: '100%', padding: '12px 16px', borderRadius: 12, background: '#f8f9fb', border: '1px solid #eef0f3', textAlign: 'left', fontSize: 13, color: 'rgba(24,24,49,0.7)', fontWeight: 400, fontFamily: 'inherit', cursor: 'text' }}
           >
             Write an answer…
           </button>
@@ -396,7 +396,7 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
 
         {aliasStep === 'ready' && showForm && (
           <div>
-            <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, marginBottom: 10 }}>
+            <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, marginBottom: 10 }}>
               Answering as <strong style={{ fontWeight: 400 }}>{alias}</strong>
             </p>
             <textarea
@@ -405,12 +405,12 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
               placeholder="Share what you know or experienced…"
               rows={4}
               autoFocus
-              style={{ width: '100%', padding: '12px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 300, fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6, marginBottom: 10 }}
+              style={{ width: '100%', padding: '12px 14px', borderRadius: 12, border: '1px solid #eef0f3', background: '#f8f9fb', fontSize: 13, fontWeight: 400, fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6, marginBottom: 10 }}
             />
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
               <button
                 onClick={() => { setShowForm(false); setContent('') }}
-                style={{ padding: '9px 16px', borderRadius: 10, background: '#f8f9fb', color: 'rgba(24,24,49,0.55)', fontSize: 13, fontWeight: 300, border: '1px solid #eef0f3', cursor: 'pointer', fontFamily: 'inherit' }}
+                style={{ padding: '9px 16px', borderRadius: 10, background: '#f8f9fb', color: 'rgba(24,24,49,0.78)', fontSize: 13, fontWeight: 400, border: '1px solid #eef0f3', cursor: 'pointer', fontFamily: 'inherit' }}
               >
                 Cancel
               </button>
@@ -422,7 +422,7 @@ export default function ThreadClient({ question, initialAnswers }: Props) {
                 {submitting ? 'Posting…' : 'Post answer →'}
               </button>
             </div>
-            <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.3)', fontWeight: 300, marginTop: 10 }}>
+            <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.82)', fontWeight: 400, marginTop: 10 }}>
               Be respectful. Misleading answers can be reported and removed.
             </p>
           </div>

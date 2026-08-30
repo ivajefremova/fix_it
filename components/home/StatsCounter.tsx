@@ -53,7 +53,7 @@ export default function StatsCounter() {
           <p className="text-3xl text-navy mb-1" style={{ fontWeight: 100, letterSpacing: '-0.02em' }}>
             <Counter target={s.value} suffix={s.suffix} />
           </p>
-          <p className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+          <p className="text-xs uppercase tracking-widest" style={{ color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
             {s.label}
           </p>
         </div>

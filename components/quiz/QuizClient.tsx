@@ -425,7 +425,7 @@ export default function QuizClient({ countries, universities }: { countries: Cou
           <h1 style={{ fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 200, color: '#181831', lineHeight: 1.15, marginBottom: 16 }}>
             Find your perfect study destination.
           </h1>
-          <p style={{ fontSize: 16, color: 'rgba(24,24,49,0.5)', fontWeight: 300, lineHeight: 1.7, marginBottom: 40, maxWidth: 420, margin: '0 auto 40px' }}>
+          <p style={{ fontSize: 16, color: 'rgba(24,24,49,0.75)', fontWeight: 400, lineHeight: 1.7, marginBottom: 40, maxWidth: 420, margin: '0 auto 40px' }}>
             Answer 9 quick questions and we'll rank all 10 countries we cover from best to least suitable for you — plus your top 10 matching universities.
           </p>
           <button
@@ -451,7 +451,7 @@ export default function QuizClient({ countries, universities }: { countries: Cou
           {/* Header */}
           <p style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#51e74c', marginBottom: 10 }}>Your results</p>
           <h1 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 200, color: '#181831', marginBottom: 6 }}>Your best matches</h1>
-          <p style={{ fontSize: 15, color: 'rgba(24,24,49,0.45)', fontWeight: 300, marginBottom: 52 }}>
+          <p style={{ fontSize: 15, color: 'rgba(24,24,49,0.72)', fontWeight: 400, marginBottom: 52 }}>
             Based on your answers — your top destinations and universities.
           </p>
 
@@ -464,14 +464,14 @@ export default function QuizClient({ countries, universities }: { countries: Cou
                 <p style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#51e74c' }}>
                   Top universities for you
                 </p>
-                <Link href="/universities" style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, textDecoration: 'none' }}>
+                <Link href="/universities" style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, textDecoration: 'none' }}>
                   Browse all →
                 </Link>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {results.topUnis.length === 0 ? (
-                  <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+                  <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
                     No universities matched your language and subject filters. Try broadening your selections.
                   </p>
                 ) : results.topUnis.map((u, i) => (
@@ -486,16 +486,16 @@ export default function QuizClient({ countries, universities }: { countries: Cou
                   >
                     {/* Rank number */}
                     <div style={{ width: 40, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRight: '1px solid #f0f2f5' }}>
-                      <span style={{ fontSize: 12, fontWeight: 300, color: 'rgba(24,24,49,0.25)' }}>{i + 1}</span>
+                      <span style={{ fontSize: 12, fontWeight: 400, color: 'rgba(24,24,49,0.58)' }}>{i + 1}</span>
                     </div>
                     {/* Info */}
                     <div style={{ flex: 1, padding: '14px 16px' }}>
-                      <p style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(24,24,49,0.35)', marginBottom: 4 }}>
+                      <p style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(24,24,49,0.65)', marginBottom: 4 }}>
                         {u.country} · {u.city}
                       </p>
                       <p style={{ fontSize: 15, fontWeight: i === 0 ? 400 : 300, color: '#181831', lineHeight: 1.3 }}>{u.name}</p>
                       {u.explanation && (
-                        <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.38)', fontWeight: 300, marginTop: 5, lineHeight: 1.5 }}>{u.explanation}</p>
+                        <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.38)', fontWeight: 400, marginTop: 5, lineHeight: 1.5 }}>{u.explanation}</p>
                       )}
                     </div>
                     {/* CTA */}
@@ -538,16 +538,16 @@ export default function QuizClient({ countries, universities }: { countries: Cou
                       onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#51e74c'; el.style.boxShadow = '0 2px 10px rgba(81,231,76,0.1)' }}
                       onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = i === 0 ? '#51e74c' : '#eef0f3'; el.style.boxShadow = 'none' }}
                     >
-                      <span style={{ fontSize: 11, color: i === 0 ? '#0c4d86' : 'rgba(24,24,49,0.25)', fontWeight: 300, width: 16, flexShrink: 0, textAlign: 'right', paddingTop: 1 }}>{i + 1}</span>
+                      <span style={{ fontSize: 11, color: i === 0 ? '#0c4d86' : 'rgba(24,24,49,0.58)', fontWeight: 400, width: 16, flexShrink: 0, textAlign: 'right', paddingTop: 1 }}>{i + 1}</span>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <p style={{ fontSize: 14, fontWeight: i === 0 ? 400 : 300, color: '#181831', margin: 0 }}>{c.name}</p>
-                        {c.explanation && <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.38)', fontWeight: 300, margin: '3px 0 0', lineHeight: 1.4 }}>{c.explanation}</p>}
+                        {c.explanation && <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.38)', fontWeight: 400, margin: '3px 0 0', lineHeight: 1.4 }}>{c.explanation}</p>}
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4, flexShrink: 0, paddingTop: 2 }}>
                         <div style={{ width: 52, height: 3, borderRadius: 3, background: '#f0f2f5' }}>
                           <div style={{ height: '100%', borderRadius: 3, width: `${c.pct}%`, background: i === 0 ? '#51e74c' : i < 3 ? 'rgba(12,77,134,0.4)' : 'rgba(12,77,134,0.15)' }} />
                         </div>
-                        <span style={{ fontSize: 10, fontWeight: 300, color: i === 0 ? '#51e74c' : 'rgba(24,24,49,0.35)' }}>{c.pct}%</span>
+                        <span style={{ fontSize: 10, fontWeight: 400, color: i === 0 ? '#51e74c' : 'rgba(24,24,49,0.65)' }}>{c.pct}%</span>
                       </div>
                     </div>
                   </Link>
@@ -593,7 +593,7 @@ export default function QuizClient({ countries, universities }: { countries: Cou
             {q.question}
           </h2>
           {q.hint && (
-            <p style={{ fontSize: 14, color: 'rgba(24,24,49,0.4)', fontWeight: 300, marginBottom: 24 }}>{q.hint}</p>
+            <p style={{ fontSize: 14, color: 'rgba(24,24,49,0.7)', fontWeight: 400, marginBottom: 24 }}>{q.hint}</p>
           )}
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -638,7 +638,7 @@ export default function QuizClient({ countries, universities }: { countries: Cou
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 32 }}>
             <button
               onClick={goBack}
-              style={{ background: 'transparent', border: '1px solid rgba(12,77,134,0.2)', borderRadius: 12, padding: '12px 24px', fontSize: 14, fontWeight: 300, color: '#0c4d86', fontFamily: 'inherit', cursor: 'pointer', transition: 'border-color 0.15s' }}
+              style={{ background: 'transparent', border: '1px solid rgba(12,77,134,0.2)', borderRadius: 12, padding: '12px 24px', fontSize: 14, fontWeight: 400, color: '#0c4d86', fontFamily: 'inherit', cursor: 'pointer', transition: 'border-color 0.15s' }}
               onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(12,77,134,0.4)')}
               onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(12,77,134,0.2)')}
             >
@@ -650,7 +650,7 @@ export default function QuizClient({ countries, universities }: { countries: Cou
                 disabled={!hasAnswer}
                 style={{
                   background: hasAnswer ? '#51e74c' : '#f0f2f5',
-                  color: hasAnswer ? '#181831' : 'rgba(24,24,49,0.3)',
+                  color: hasAnswer ? '#181831' : 'rgba(24,24,49,0.82)',
                   border: 'none', borderRadius: 12, padding: '12px 28px',
                   fontSize: 14, fontWeight: 400, fontFamily: 'inherit',
                   cursor: hasAnswer ? 'pointer' : 'not-allowed', transition: 'background 0.15s',

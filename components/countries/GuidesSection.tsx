@@ -35,10 +35,10 @@ export default function GuidesSection({ countries }: { countries: Country[] }) {
         {/* ── RIGHT: heading + list — fills remaining width ────────────── */}
         <div className="flex flex-col justify-center flex-1 px-12 py-10">
           <p className="text-xs uppercase tracking-widest mb-3" style={{ color: '#51e74c' }}>Guides</p>
-          <h2 className="mb-2" style={{ color: '#181831', fontWeight: 300, fontSize: 'clamp(18px, 2vw, 28px)' }}>
+          <h2 className="mb-2" style={{ color: '#181831', fontWeight: 400, fontSize: 'clamp(18px, 2vw, 28px)' }}>
             Want to study abroad?
           </h2>
-          <p className="mb-8" style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300 }}>
+          <p className="mb-8" style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400 }}>
             Click any country to explore its full guide.
           </p>
           <ul className="flex flex-col" style={{ maxWidth: 480 }}>
@@ -48,7 +48,7 @@ export default function GuidesSection({ countries }: { countries: Country[] }) {
                 className="flex items-baseline justify-between gap-6"
                 style={{ borderBottom: '1px solid #f0f2f5', padding: '10px 0' }}
               >
-                <span style={{ fontSize: 13, color: 'rgba(24,24,49,0.65)', fontWeight: 300, lineHeight: 1.4 }}>{item}</span>
+                <span style={{ fontSize: 13, color: 'rgba(24,24,49,0.65)', fontWeight: 400, lineHeight: 1.4 }}>{item}</span>
                 <span style={{ color: '#51e74c', flexShrink: 0, fontSize: 14 }}>—</span>
               </li>
             ))}

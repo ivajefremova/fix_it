@@ -35,7 +35,7 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
   return (
     <section
       className="bg-white relative overflow-hidden"
-      style={{ borderBottom: '1px solid #e4ebf3' }}
+      style={{}}
     >
       {/* Hero image — right side, gradient fade out on left */}
       <div
@@ -68,7 +68,7 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
       </div>
 
       {/* Content — right half, image shows on the left */}
-      <div className="max-w-[90%] mx-auto pt-8 pb-14 sm:pt-10 sm:pb-20 relative">
+      <div className="max-w-[90%] mx-auto pt-5 pb-8 sm:pt-6 sm:pb-10 relative">
         <div style={{ marginLeft: 'auto', width: '50%' }}>
           <div
             style={{
@@ -77,7 +77,7 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
               transition: 'opacity 0.22s ease, transform 0.22s ease',
             }}
           >
-            <p className="text-xs uppercase tracking-widest mb-6" style={{ color: 'rgba(24,24,49,0.3)', fontWeight: 300 }}>
+            <p className="text-xs uppercase tracking-widest mb-6" style={{ color: 'rgba(24,24,49,0.82)', fontWeight: 400 }}>
               {active + 1} / {countries.length}
             </p>
             <h2
@@ -87,7 +87,7 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
               {c.name}
             </h2>
             {c.tagline && (
-              <p className="mb-10 max-w-sm leading-relaxed text-base" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+              <p className="mb-10 max-w-sm leading-relaxed text-base" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
                 {c.tagline}
               </p>
             )}
@@ -104,7 +104,7 @@ export default function CountryCarousel({ countries, active, onActiveChange }: P
           </div>
 
           {/* Controls */}
-          <div className="flex items-center gap-5 mt-12">
+          <div className="flex items-center gap-5 mt-6">
             <button
               onClick={prev}
               aria-label="Previous"

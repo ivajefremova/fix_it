@@ -81,7 +81,7 @@ function DeadlineCard({ d, color }: { d: AnyDeadline; color: string }) {
   const parts = fmtShort(d.date).split(' ')
   const isCustom = 'is_custom' in d && d.is_custom
   const textOnColor = color === DEFAULT_COLOR ? '#181831' : '#fff'
-  const subOnColor  = color === DEFAULT_COLOR ? 'rgba(24,24,49,0.5)' : 'rgba(255,255,255,0.7)'
+  const subOnColor  = color === DEFAULT_COLOR ? 'rgba(24,24,49,0.75)' : 'rgba(255,255,255,0.7)'
 
   return (
     <div style={{ background: '#f8f9fb', border: '1px solid #eef0f3', borderRadius: 12, padding: '10px 12px', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
@@ -91,20 +91,20 @@ function DeadlineCard({ d, color }: { d: AnyDeadline; color: string }) {
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6 }}>
-          <p style={{ fontSize: 12, fontWeight: 400, color: '#181831', lineHeight: 1.4, margin: 0 }}>{d.label}</p>
+          <p style={{ fontSize: 14, fontWeight: 600, color: '#181831', lineHeight: 1.4, margin: 0 }}>{d.label}</p>
           {isCustom && (
-            <span style={{ background: 'rgba(24,24,49,0.06)', color: 'rgba(24,24,49,0.4)', fontWeight: 300, fontSize: 9, borderRadius: 20, padding: '2px 6px', flexShrink: 0 }}>
+            <span style={{ background: 'rgba(24,24,49,0.06)', color: 'rgba(24,24,49,0.7)', fontWeight: 400, fontSize: 9, borderRadius: 20, padding: '2px 6px', flexShrink: 0 }}>
               personal
             </span>
           )}
         </div>
-        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.4)', fontWeight: 300, margin: '2px 0 0' }}>{d.university_name}</p>
+        <p style={{ fontSize: 13, color: 'rgba(24,24,49,0.75)', fontWeight: 500, margin: '2px 0 0' }}>{d.university_name}</p>
         {d.notes && (
-          <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.4)', fontWeight: 300, margin: '4px 0 0', lineHeight: 1.5 }}>{d.notes}</p>
+          <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.7)', fontWeight: 400, margin: '4px 0 0', lineHeight: 1.5 }}>{d.notes}</p>
         )}
         {d.link && (
           <a href={d.link} target="_blank" rel="noopener noreferrer"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: 11, color: '#0c4d86', fontWeight: 300, marginTop: 4, textDecoration: 'none', opacity: 1, transition: 'opacity 0.15s' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: 11, color: '#0c4d86', fontWeight: 400, marginTop: 4, textDecoration: 'none', opacity: 1, transition: 'opacity 0.15s' }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
             Portal
@@ -125,7 +125,7 @@ function DeadlineFormFields({ label, date, notes, color, setLabel, setDate, setN
   setLabel: (v: string) => void; setDate: (v: string) => void
   setNotes: (v: string) => void; setColor: (v: string) => void
 }) {
-  const inputStyle = { background: '#fff', border: '1px solid #e4ebf3', borderRadius: 8, padding: '7px 10px', fontFamily: 'inherit', fontWeight: 300, color: '#181831', fontSize: 12, width: '100%', boxSizing: 'border-box' as const, outline: 'none' }
+  const inputStyle = { background: '#fff', border: '1px solid #e4ebf3', borderRadius: 8, padding: '7px 10px', fontFamily: 'inherit', fontWeight: 400, color: '#181831', fontSize: 12, width: '100%', boxSizing: 'border-box' as const, outline: 'none' }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -135,7 +135,7 @@ function DeadlineFormFields({ label, date, notes, color, setLabel, setDate, setN
       <input type="text" placeholder="Note (optional)" value={notes}
         onChange={e => setNotes(e.target.value)} style={inputStyle} />
       <div>
-        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.4)', fontWeight: 300, margin: '0 0 6px' }}>Colour</p>
+        <p style={{ fontSize: 11, color: 'rgba(24,24,49,0.7)', fontWeight: 400, margin: '0 0 6px' }}>Colour</p>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {COLOR_OPTIONS.map(c => (
             <button key={c} onClick={() => setColor(c)} style={{
@@ -170,16 +170,16 @@ function AddDeadlineForm({ onAdd, onClose, initialDate = '' }: {
 
   return (
     <div style={{ background: '#f8f9fb', border: '1px solid #eef0f3', borderRadius: 14, padding: 16, marginBottom: 16 }}>
-      <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 12px' }}>New deadline</p>
+      <p style={{ fontSize: 12, fontWeight: 700, color: '#0c4d86', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 12px' }}>New deadline</p>
       <DeadlineFormFields label={label} date={date} notes={notes} color={color}
         setLabel={setLabel} setDate={setDate} setNotes={setNotes} setColor={setColor} />
       <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
         <button onClick={submit} disabled={!label.trim() || !date}
-          style={{ background: '#181831', color: '#fff', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 300, cursor: 'pointer', opacity: !label.trim() || !date ? 0.4 : 1, fontFamily: 'inherit', transition: 'opacity 0.15s' }}>
+          style={{ background: '#181831', color: '#fff', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 400, cursor: 'pointer', opacity: !label.trim() || !date ? 0.4 : 1, fontFamily: 'inherit', transition: 'opacity 0.15s' }}>
           Add
         </button>
         <button onClick={onClose}
-          style={{ background: '#ebebef', color: 'rgba(24,24,49,0.55)', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 300, cursor: 'pointer', fontFamily: 'inherit' }}>
+          style={{ background: '#ebebef', color: 'rgba(24,24,49,0.78)', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 400, cursor: 'pointer', fontFamily: 'inherit' }}>
           Cancel
         </button>
       </div>
@@ -211,11 +211,11 @@ function EditDeadlineForm({ deadline, onSave, onClose }: {
         setLabel={setLabel} setDate={setDate} setNotes={setNotes} setColor={setColor} />
       <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
         <button onClick={submit} disabled={!label.trim() || !date}
-          style={{ background: '#0c4d86', color: '#fff', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 300, cursor: 'pointer', opacity: !label.trim() || !date ? 0.4 : 1, fontFamily: 'inherit', transition: 'opacity 0.15s' }}>
+          style={{ background: '#0c4d86', color: '#fff', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 400, cursor: 'pointer', opacity: !label.trim() || !date ? 0.4 : 1, fontFamily: 'inherit', transition: 'opacity 0.15s' }}>
           Save
         </button>
         <button onClick={onClose}
-          style={{ background: '#ebebef', color: 'rgba(24,24,49,0.55)', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 300, cursor: 'pointer', fontFamily: 'inherit' }}>
+          style={{ background: '#ebebef', color: 'rgba(24,24,49,0.78)', border: 'none', borderRadius: 9, padding: '6px 16px', fontSize: 12, fontWeight: 400, cursor: 'pointer', fontFamily: 'inherit' }}>
           Cancel
         </button>
       </div>
@@ -280,7 +280,7 @@ function ColorPickerPopup({
       {/* Colour section — only for purchase deadlines */}
       {hasColorSection && (
         <>
-          <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 10px' }}>
+          <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.65)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 10px' }}>
             Pick a colour
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
@@ -291,7 +291,7 @@ function ColorPickerPopup({
                   outline: picked === c ? '2.5px solid #181831' : 'none', outlineOffset: 2,
                   boxShadow: picked === c ? `0 2px 8px ${c}88` : 'none', transition: 'outline 0.1s',
                 }} />
-                <div style={{ width: 4, height: 4, borderRadius: '50%', background: c === currentColor ? 'rgba(24,24,49,0.35)' : 'transparent' }} />
+                <div style={{ width: 4, height: 4, borderRadius: '50%', background: c === currentColor ? 'rgba(24,24,49,0.65)' : 'transparent' }} />
               </div>
             ))}
           </div>
@@ -308,7 +308,7 @@ function ColorPickerPopup({
             )}
             <button
               onClick={() => { onApplyToDate(dateStr, picked); toast.success('Colour applied to this date'); onClose() }}
-              style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.6)', border: 'none', cursor: 'pointer', borderRadius: 9, padding: '7px 10px', fontFamily: 'inherit', fontWeight: 300, fontSize: 12, textAlign: 'left', transition: 'opacity 0.15s' }}
+              style={{ background: '#f0f2f5', color: 'rgba(24,24,49,0.82)', border: 'none', cursor: 'pointer', borderRadius: 9, padding: '7px 10px', fontFamily: 'inherit', fontWeight: 400, fontSize: 12, textAlign: 'left', transition: 'opacity 0.15s' }}
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')}
               onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >
@@ -321,22 +321,22 @@ function ColorPickerPopup({
       {/* Personal deadlines section — edit / remove */}
       {personalItems.length > 0 && (
         <div style={{ borderTop: hasColorSection ? '1px solid #f0f2f5' : 'none', marginTop: hasColorSection ? 10 : 0, paddingTop: hasColorSection ? 10 : 0 }}>
-          <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 8px' }}>
+          <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.65)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 8px' }}>
             Personal
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {personalItems.map(p => (
               <div key={p.id} style={{ background: '#f8f9fb', borderRadius: 9, padding: '7px 9px' }}>
-                <p style={{ fontSize: 12, fontWeight: 300, color: '#181831', margin: '0 0 6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.label}</p>
+                <p style={{ fontSize: 12, fontWeight: 400, color: '#181831', margin: '0 0 6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.label}</p>
                 <div style={{ display: 'flex', gap: 5 }}>
                   <button
                     onClick={() => { onEditPersonal(p.id) }}
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(12,77,134,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#0c4d86', fontSize: 11, fontFamily: 'inherit', fontWeight: 300 }}>
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(12,77,134,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#0c4d86', fontSize: 11, fontFamily: 'inherit', fontWeight: 400 }}>
                     <EditIcon /> edit
                   </button>
                   <button
                     onClick={() => { onRemovePersonal(p.id); onClose() }}
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(239,68,68,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#ef4444', fontSize: 11, fontFamily: 'inherit', fontWeight: 300 }}>
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(239,68,68,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#ef4444', fontSize: 11, fontFamily: 'inherit', fontWeight: 400 }}>
                     <TrashIcon /> remove
                   </button>
                 </div>
@@ -390,12 +390,12 @@ function DeadlineCardRow({ d, color, editingId, onEdit, onRemove, onSave, onCanc
         }}>
           <button
             onClick={() => onEdit(d.id)}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: 'rgba(12,77,134,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#0c4d86', fontSize: 10, fontFamily: 'inherit', fontWeight: 300 }}>
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: 'rgba(12,77,134,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#0c4d86', fontSize: 10, fontFamily: 'inherit', fontWeight: 400 }}>
             <EditIcon /> edit
           </button>
           <button
             onClick={() => onRemove(d.id)}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: 'rgba(239,68,68,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#ef4444', fontSize: 10, fontFamily: 'inherit', fontWeight: 300 }}>
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: 'rgba(239,68,68,0.1)', border: 'none', cursor: 'pointer', borderRadius: 6, padding: '3px 8px', color: '#ef4444', fontSize: 10, fontFamily: 'inherit', fontWeight: 400 }}>
             <TrashIcon /> remove
           </button>
         </div>
@@ -637,7 +637,7 @@ export default function DeadlineCalendar({
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
-          <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.35)', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>
+          <p style={{ fontSize: 12, fontWeight: 700, color: '#0c4d86', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>
             Deadline Calendar
           </p>
           <button
@@ -645,9 +645,9 @@ export default function DeadlineCalendar({
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               background: showAddForm ? '#f0f2f5' : '#181831',
-              color: showAddForm ? 'rgba(24,24,49,0.55)' : '#fff',
+              color: showAddForm ? 'rgba(24,24,49,0.78)' : '#fff',
               border: 'none', cursor: 'pointer', borderRadius: 10, padding: '6px 14px',
-              fontFamily: 'inherit', fontWeight: 300, fontSize: 12, transition: 'background 0.15s',
+              fontFamily: 'inherit', fontWeight: 400, fontSize: 12, transition: 'background 0.15s',
             }}
           >
             {showAddForm ? 'Cancel' : (
@@ -668,15 +668,15 @@ export default function DeadlineCalendar({
 
             {/* Month nav */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-              <button onClick={prevMonth} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px 10px', color: 'rgba(24,24,49,0.3)', lineHeight: 0 }}>
+              <button onClick={prevMonth} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px 10px', color: '#0c4d86', lineHeight: 0 }}>
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
               </button>
-              <p style={{ fontWeight: 200, letterSpacing: '-0.02em', color: '#181831', fontSize: 'clamp(17px, 2.5vw, 24px)', margin: 0 }}>
-                {MONTHS[month]} <span style={{ color: 'rgba(24,24,49,0.28)' }}>{year}</span>
+              <p style={{ fontWeight: 600, letterSpacing: '-0.02em', color: '#181831', fontSize: 'clamp(22px, 3vw, 32px)', margin: 0 }}>
+                {MONTHS[month]} <span style={{ color: 'rgba(24,24,49,0.65)' }}>{year}</span>
               </p>
-              <button onClick={nextMonth} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px 10px', color: 'rgba(24,24,49,0.3)', lineHeight: 0 }}>
+              <button onClick={nextMonth} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px 10px', color: '#0c4d86', lineHeight: 0 }}>
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
@@ -686,7 +686,7 @@ export default function DeadlineCalendar({
             {/* Day headers */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', marginBottom: 6 }}>
               {DAYS.map(d => (
-                <div key={d} style={{ textAlign: 'center', fontSize: 11, padding: '4px 0', color: 'rgba(24,24,49,0.22)', fontWeight: 400, letterSpacing: '0.05em' }}>
+                <div key={d} style={{ textAlign: 'center', fontSize: 13, padding: '4px 0', color: 'rgba(24,24,49,0.82)', fontWeight: 700, letterSpacing: '0.05em' }}>
                   {d}
                 </div>
               ))}
@@ -767,8 +767,8 @@ export default function DeadlineCalendar({
                     }}
                   >
                     <span style={{
-                      fontSize: hasDeadline ? 17 : 14,
-                      fontWeight: hasDeadline ? 600 : isToday ? 500 : 300,
+                      fontSize: hasDeadline ? 22 : 17,
+                      fontWeight: hasDeadline ? 700 : isToday ? 600 : 500,
                       color: isSelected
                         ? '#51e74c'
                         : hasDeadline
@@ -776,8 +776,8 @@ export default function DeadlineCalendar({
                           : isToday
                             ? '#0c4d86'
                             : isHovered
-                              ? 'rgba(24,24,49,0.7)'
-                              : 'rgba(24,24,49,0.55)',
+                              ? 'rgba(24,24,49,0.85)'
+                              : 'rgba(24,24,49,0.7)',
                       lineHeight: 1,
                       letterSpacing: '-0.02em',
                     }}>
@@ -786,7 +786,7 @@ export default function DeadlineCalendar({
 
                     {/* Count badge */}
                     {hasDeadline && !isSelected && count > 1 && (
-                      <span style={{ fontSize: 9, fontWeight: 500, color: cellColor === DEFAULT_COLOR ? 'rgba(24,24,49,0.5)' : 'rgba(255,255,255,0.7)', letterSpacing: '0.03em', lineHeight: 1 }}>
+                      <span style={{ fontSize: 9, fontWeight: 500, color: cellColor === DEFAULT_COLOR ? 'rgba(24,24,49,0.75)' : 'rgba(255,255,255,0.7)', letterSpacing: '0.03em', lineHeight: 1 }}>
                         {count}
                       </span>
                     )}
@@ -803,7 +803,7 @@ export default function DeadlineCalendar({
                         fontSize: 13, lineHeight: 1,
                         color: 'rgba(81,231,76,0.7)',
                         animation: 'addPulse 1.4s ease-in-out infinite',
-                        fontWeight: 300,
+                        fontWeight: 400,
                       }}>+</span>
                     )}
                   </button>
@@ -813,7 +813,7 @@ export default function DeadlineCalendar({
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 18 }}>
               <span style={{ width: 11, height: 11, borderRadius: 4, background: DEFAULT_COLOR, display: 'inline-block', flexShrink: 0, boxShadow: '0 2px 6px rgba(81,231,76,0.4)' }} />
-              <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.3)', fontWeight: 300 }}>
+              <span style={{ fontSize: 11, color: 'rgba(24,24,49,0.75)', fontWeight: 500 }}>
                 Click any date — highlighted days have details &amp; colour options
               </span>
             </div>
@@ -855,7 +855,7 @@ export default function DeadlineCalendar({
             {/* Selected day */}
             {!showAddForm && selectedDeadlines.length > 0 && (
               <>
-                <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                <p style={{ fontSize: 12, fontWeight: 700, color: '#0c4d86', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 12px' }}>
                   {selected ? fmtFull(selected) : ''}
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -875,7 +875,7 @@ export default function DeadlineCalendar({
 
                 <button
                   onClick={() => openAddForDate(selected!)}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 5, marginTop: 12, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', fontWeight: 300, fontSize: 12, color: '#0c4d86', opacity: 1, transition: 'opacity 0.15s' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 5, marginTop: 12, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', fontWeight: 400, fontSize: 12, color: '#0c4d86', opacity: 1, transition: 'opacity 0.15s' }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
                   onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
                 >
@@ -887,7 +887,7 @@ export default function DeadlineCalendar({
 
                 <button
                   onClick={() => { setSelected(null); closePicker() }}
-                  style={{ display: 'block', marginTop: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', fontWeight: 300, fontSize: 12, color: 'rgba(24,24,49,0.35)', opacity: 1, transition: 'opacity 0.15s' }}
+                  style={{ display: 'block', marginTop: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', fontWeight: 400, fontSize: 12, color: 'rgba(24,24,49,0.65)', opacity: 1, transition: 'opacity 0.15s' }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
                   onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
                 >
@@ -899,7 +899,7 @@ export default function DeadlineCalendar({
             {/* Upcoming */}
             {!showAddForm && !selected && upcoming.length > 0 && (
               <>
-                <p style={{ fontSize: 10, fontWeight: 400, color: 'rgba(24,24,49,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 12px' }}>Upcoming</p>
+                <p style={{ fontSize: 12, fontWeight: 700, color: '#0c4d86', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 12px' }}>Upcoming</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {upcoming.map(d => (
                     <DeadlineCardRow
@@ -918,17 +918,17 @@ export default function DeadlineCalendar({
             )}
 
             {!showAddForm && !selected && upcoming.length === 0 && allDeadlines.length > 0 && (
-              <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.3)', fontWeight: 300, margin: 0 }}>
+              <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.82)', fontWeight: 400, margin: 0 }}>
                 No deadlines in the next 90 days. Navigate forward to see future dates.
               </p>
             )}
 
             {!showAddForm && !selected && allDeadlines.length === 0 && (
               <div style={{ textAlign: 'center', padding: '16px 0' }}>
-                <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.4)', fontWeight: 300, margin: '0 0 10px' }}>
+                <p style={{ fontSize: 12, color: 'rgba(24,24,49,0.7)', fontWeight: 400, margin: '0 0 10px' }}>
                   No deadlines yet. Add your own or purchase a guide.
                 </p>
-                <Link href="/services" style={{ fontSize: 12, color: '#0c4d86', fontWeight: 300, textDecoration: 'none', opacity: 1, transition: 'opacity 0.15s' }}
+                <Link href="/services" style={{ fontSize: 12, color: '#0c4d86', fontWeight: 400, textDecoration: 'none', opacity: 1, transition: 'opacity 0.15s' }}
                   onMouseEnter={e => ((e.target as HTMLElement).style.opacity = '0.6')}
                   onMouseLeave={e => ((e.target as HTMLElement).style.opacity = '1')}>
                   Browse guides →

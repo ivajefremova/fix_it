@@ -125,7 +125,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(24,24,49,0.5)', fontWeight: 300 }}>
+          <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(24,24,49,0.75)', fontWeight: 400 }}>
             Alumni-verified guides across 8 European countries.
           </p>
 
@@ -215,7 +215,7 @@ function HeroText({ done, visible, idx }: { done: boolean; visible: boolean; idx
             background: 'rgba(255,255,255,0.18)',
             border: '1px solid rgba(255,255,255,0.55)',
             boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-            fontWeight: 300,
+            fontWeight: 400,
             margin: 0,
             borderRadius: '0 20px 20px 0',
           }}

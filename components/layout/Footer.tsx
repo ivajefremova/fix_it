@@ -32,7 +32,7 @@ export default function Footer() {
                 fix it<span style={{ color: '#51e74c' }}>.</span>
               </span>
             </Link>
-            <p className="text-sm leading-relaxed text-white/40 mb-6" style={{ fontWeight: 300 }}>
+            <p className="text-sm leading-relaxed text-white/40 mb-6" style={{ fontWeight: 400 }}>
               Alumni-verified guidance for Macedonian students applying to European universities.
             </p>
           </div>
@@ -43,7 +43,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {platform.map(link => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-white/55 hover:text-white transition-colors" style={{ fontWeight: 300 }}>
+                  <Link href={link.href} className="text-sm text-white/55 hover:text-white transition-colors" style={{ fontWeight: 400 }}>
                     {link.label}
                   </Link>
                 </li>
@@ -57,7 +57,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {account.map(link => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-white/55 hover:text-white transition-colors" style={{ fontWeight: 300 }}>
+                  <Link href={link.href} className="text-sm text-white/55 hover:text-white transition-colors" style={{ fontWeight: 400 }}>
                     {link.label}
                   </Link>
                 </li>
@@ -74,7 +74,7 @@ export default function Footer() {
                   <Link
                     href={`/countries/${c.toLowerCase().replace(' ', '-')}`}
                     className="text-sm text-white/55 hover:text-white transition-colors"
-                    style={{ fontWeight: 300 }}
+                    style={{ fontWeight: 400 }}
                   >
                     {c}
                   </Link>
@@ -90,14 +90,14 @@ export default function Footer() {
               <a
                 href="mailto:contactfixit@gmail.com"
                 className="flex items-start gap-2.5 text-sm text-white/55 hover:text-white transition-colors"
-                style={{ fontWeight: 300 }}
+                style={{ fontWeight: 400 }}
               >
                 <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
                 contactfixit@gmail.com
               </a>
-              <p className="text-xs text-white/30 leading-relaxed" style={{ fontWeight: 300 }}>
+              <p className="text-xs text-white/30 leading-relaxed" style={{ fontWeight: 400 }}>
                 We typically respond within 24 hours.
               </p>
             </div>
@@ -106,7 +106,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30" style={{ fontWeight: 300 }}>
+          <p className="text-xs text-white/30" style={{ fontWeight: 400 }}>
             © {new Date().getFullYear()} Fix It. Built for Macedonian students.
           </p>
           <div className="flex items-center gap-6">
